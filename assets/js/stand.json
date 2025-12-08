@@ -1,0 +1,110 @@
+[
+  {
+    "ID": 1,
+    "Nom": "Star Platinum",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/star_platinum.png",
+    "Première Apparition": "Épisode 1 SC / Chapitre 114",
+    "Description": "Une figure musclée au regard perçant, ornée de touches dorées et d'un foulard violet, capable de lancer une pluie de coups si rapide qu'on dirait que le temps s'arrête autour d'elle.",
+    "Utilisateur": 1
+  },
+  {
+    "ID": 2,
+    "Nom": "The World",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/the_world.jpg",
+    "Première Apparition": "Épisode 7 SC / Chapitre 210",
+    "Description": "Une silhouette massive et menaçante, capable d'arrêter le temps lui-même quelques instants pour frapper avec une précision terrifiante.",
+    "Utilisateur": 2
+  },
+  {
+    "ID": 3,
+    "Nom": "Crazy Diamond",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 1 DU / Chapitre 266",
+    "Description": "Un corps puissant et agile, dont les poings peuvent frapper avec une force incroyable, mais qui possède surtout un étrange pouvoir de réparer et restaurer ce qui est brisé.",
+    "Utilisateur": 3
+  },
+  {
+    "ID": 4,
+    "Nom": "Gold Experience",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 1 GW / Chapitre 440",
+    "Description": "Un Stand élégant aux motifs d'insectes, capable de transformer des objets inanimés en êtres vivants et de donner la vie à la matière inerte.",
+    "Utilisateur": 4
+  },
+  {
+    "ID": 5,
+    "Nom": "Hermit Purple",
+    "Portée": "Moyenne portée",
+    "CarteTarot": "assets/tarot/hermit_purple.jpg",
+    "Première Apparition": "Épisode 1 SC / Chapitre 117",
+    "Description": "Des lianes violettes épineuses qui peuvent créer des images par clairvoyance et servir d'arme polyvalente pour saisir ou frapper.",
+    "Utilisateur": 5
+  },
+  {
+    "ID": 6,
+    "Nom": "Stone Free",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 1 SO / Chapitre 595",
+    "Description": "Un Stand humanoid capable de défaire son corps et celui de son utilisatrice en fils résistants pour créer des pièges, étendre sa portée ou se protéger.",
+    "Utilisateur": 6
+  },
+  {
+    "ID": 7,
+    "Nom": "Silver Chariot",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/silver_chariot.webp",
+    "Première Apparition": "Épisode 4 SC / Chapitre 124",
+    "Description": "Un chevalier en armure maniant une rapière avec une vitesse et une précision extraordinaires, capable de retirer son armure pour gagner encore en rapidité.",
+    "Utilisateur": 7
+  },
+  {
+    "ID": 8,
+    "Nom": "Hierophant Green",
+    "Portée": "Longue portée",
+    "CarteTarot": "assets/tarot/hierophant_green.jpg",
+    "Première Apparition": "Épisode 2 SC / Chapitre 118",
+    "Description": "Un Stand vert serpentin qui peut se décomposer en tentacules pour attaquer à distance, créer des barrières, ou lancer son attaque signature Emerald Splash.",
+    "Utilisateur": 8
+  },
+  {
+    "ID": 9,
+    "Nom": "Killer Queen",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 21 DU / Chapitre 345",
+    "Description": "Un Stand félin élégant capable de transformer tout ce qu'il touche en bombe mortelle, effaçant complètement ses victimes sans laisser de traces.",
+    "Utilisateur": 9
+  },
+  {
+    "ID": 10,
+    "Nom": "Sticky Fingers",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 1 GW / Chapitre 444",
+    "Description": "Un Stand puissant capable de créer des fermetures éclair sur n'importe quelle surface, permettant de passer à travers les murs, de séparer des objets ou de détacher des parties du corps.",
+    "Utilisateur": 10
+  },
+  {
+    "ID": 11,
+    "Nom": "Heaven's Door",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 14 DU / Chapitre 319",
+    "Description": "Un Stand qui transforme les gens en livres ouverts, permettant de lire leurs mémoires et d'écrire des commandes qui deviennent réalité dans leur comportement.",
+    "Utilisateur": 11
+  },
+  {
+    "ID": 12,
+    "Nom": "November Rain",
+    "Portée": "Longue portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Chapitre 1 JL",
+    "Description": "Un Stand capable de créer des gouttes de pluie qui tombent vers le haut, permettant de déplacer de petits objets vers le ciel et de créer des effets surprenants.",
+    "Utilisateur": 12
+  }
+]

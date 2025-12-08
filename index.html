@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JojoDLE - Devine le personnage JoJo !</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Page d'accueil -->
+        <div id="homepage">
+            <div class="logo-container">
+                <img src="assets/autres/lg1.png" alt="JojoDLE Logo" class="logo">
+            </div>
+
+            <div class="menu-container">
+                <button class="game-button classique-btn" onclick="showMode('classique')">
+                    Classique
+                    <span class="button-subtitle">Devinez le personnage</span>
+                </button>
+                <button class="game-button stand-btn" onclick="showMode('stand')">
+                    Stand
+                    <span class="button-subtitle">Devinez avec un nom de Stand</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode Classique (caché par défaut) -->
+        <div id="classique-mode" class="game-mode">
+            <!-- Titre et description -->
+            <div class="game-header">
+                <h1 class="game-title">MODE CLASSIQUE</h1>
+                <p class="game-subtitle" id="subtitle">Devinez le personnage de JoJo's Bizarre Adventure !</p>
+            </div>
+
+            <!-- Boutons d'indices -->
+            <div class="hint-buttons-container"></div>
+
+            <!-- Barre de recherche -->
+            <div class="search-container">
+                <input type="text" id="searchInputClassique" placeholder="Entrez un nom de personnage..." autocomplete="off">
+                <button class="search-btn">🔍</button>
+                <div id="suggestionsClassique" class="suggestions"></div>
+            </div>
+
+            <!-- Zone d'affichage des personnages sélectionnés -->
+            <div id="selectedPersonnagesClassique"></div>
+
+            <!-- Bouton retour -->
+            <button class="back-btn" onclick="showHome()">← Retour au menu</button>
+        </div>
+
+        <!-- Mode Stand (caché par défaut) -->
+        <div id="stand-mode" class="game-mode">
+            <h1 class="game-title">🎴 MODE STAND 🎴</h1>
+            <p class="game-subtitle">À venir prochainement...</p>
+            <button class="back-btn" onclick="showHome()">← Retour au menu</button>
+        </div>
+        
+    </div>
+    
+    <!-- Chargement du script -->
+    <script src="assets/js/classique.js"></script>
+    
+    <script>
+        // Variable pour éviter la réinitialisation multiple
+        let classiqueInitialized = false;
+        
+        function showMode(mode) {
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById(mode + '-mode').classList.add('active');
+            
+            // Initialiser le mode classique seulement une fois
+            if (mode === 'classique' && !classiqueInitialized) {
+                classiqueInitialized = true;
+                // Attendre que le DOM soit complètement chargé
+                setTimeout(() => {
+                    if (typeof initClassiqueMode === 'function') {
+                        initClassiqueMode();
+                    } else {
+                        console.error('initClassiqueMode non trouvée !');
+                    }
+                }, 100);
+            }
+        }
+        
+        function showHome() {
+            document.getElementById('homepage').style.display = 'block';
+            document.querySelectorAll('.game-mode').forEach(mode => {
+                mode.classList.remove('active');
+            });
+        }
+        
+        // Création d'étoiles scintillantes aléatoires
+        function createSparkles() {
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(sparkle);
+            }
+        }
+        createSparkles();
+    </script>
+</body>
+</html>
