@@ -4,6 +4,17 @@ let personnagesSelectionnes = [];
 let personnageDuJour = null;
 let stands = [];
 
+let userStats = {
+    gamesPlayed: 0,
+    gamesWon: 0,
+    currentStreak: 0,
+    maxStreak: 0,
+    averageAttempts: 0,
+    totalAttempts: 0
+};
+
+let enabledParties = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // Par défaut toutes les parties sont activées
+
 // ===== SYSTÈME D'INDICES =====
 let hintButtonsClassique = {
     apparition: { unlockAt: 5, visible: false, unlocked: false, revealed: false },
@@ -28,6 +39,21 @@ async function loadPersonnages() {
         
         console.log(`${personnages.length} personnages chargés`);
         console.log(`${stands.length} stands chargés`);
+        
+        // AJOUTEZ CES VÉRIFICATIONS :
+        console.log('🔍 Vérification des PartieNumero:');
+        let hasError = false;
+        personnages.forEach(p => {
+            if (!p.PartieNumero) {
+                console.error(`❌ ${p.NOM} n'a pas de PartieNumero!`);
+                hasError = true;
+            }
+        });
+        
+        if (!hasError) {
+            console.log('✅ Tous les personnages ont un PartieNumero');
+        }
+        
     } catch (error) {
         console.error('Erreur lors du chargement:', error);
     }
@@ -88,12 +114,30 @@ function selectDailyPersonnage() {
         return null;
     }
     
+    // NE PAS recharger depuis localStorage, utiliser la variable globale
+    
+    // Filtrer les personnages selon les parties activées
+    const filteredPersonnages = personnages.filter(p => {
+        return enabledParties.includes(p.PartieNumero);
+    });
+    
+    console.log('🔍 Filtrage:', filteredPersonnages.length, 'personnages sur', personnages.length);
+    console.log('📚 Parties actives:', enabledParties);
+    
+    if (filteredPersonnages.length === 0) {
+        console.warn('⚠️ Aucun personnage disponible - Réactivation de toutes les parties');
+        enabledParties = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        saveEnabledParties();
+        // Refiltrer avec toutes les parties
+        return selectDailyPersonnage();
+    }
+    
     const seed = getDailySeed();
     const randomValue = seededRandom(seed);
-    const index = Math.floor(randomValue * personnages.length);
-    personnageDuJour = personnages[index];
+    const index = Math.floor(randomValue * filteredPersonnages.length);
+    personnageDuJour = filteredPersonnages[index];
     
-    console.log('Personnage du jour:', personnageDuJour);
+    console.log('✅ Personnage du jour:', personnageDuJour.NOM, '- Partie', personnageDuJour.PartieNumero);
     return personnageDuJour;
 }
 
@@ -287,18 +331,28 @@ function showVictoryBoxClassique() {
     
     setInterval(updateCountdown, 1000);
     saveGameStateClassique();
+    updateStatsOnWin();
 }
 
 // ===== RECHERCHE =====
 function searchPersonnages(query) {
     if (!query || query.length < 1) return [];
+    
     const normalizedQuery = removeAccents(query.toLowerCase());
-    return personnages.filter(perso => 
-        removeAccents(perso.NOM.toLowerCase()).includes(normalizedQuery) &&
-        !personnagesSelectionnes.some(selected => selected.ID === perso.ID)
-    ).slice(0, 8);
+    
+    return personnages.filter(perso => {
+        // Vérifier que le personnage correspond à la recherche
+        const matchesSearch = removeAccents(perso.NOM.toLowerCase()).includes(normalizedQuery);
+        
+        // Vérifier que le personnage n'est pas déjà sélectionné
+        const notSelected = !personnagesSelectionnes.some(selected => selected.ID === perso.ID);
+        
+        // Vérifier que le personnage est dans une partie activée
+        const partieEnabled = enabledParties.includes(perso.PartieNumero);
+        
+        return matchesSearch && notSelected && partieEnabled;
+    }).slice(0, 8);
 }
-
 function showSuggestionsClassique(personnages) {
     const suggestionsContainer = document.getElementById('suggestionsClassique');
     
@@ -741,11 +795,21 @@ function loadGameStateClassique() {
     try {
         const state = JSON.parse(saved);
 
+        // Vérifier que c'est le même jour
         if (state.date !== getDailySeed()) {
             localStorage.removeItem("jojoClassiqueState");
             return;
         }
 
+        // Vérifier que le personnage du jour est dans une partie activée
+        if (personnageDuJour && !enabledParties.includes(personnageDuJour.PartieNumero)) {
+            console.log('⚠️ Personnage sauvegardé dans partie désactivée, réinitialisation...');
+            localStorage.removeItem("jojoClassiqueState");
+            selectDailyPersonnage();
+            return;
+        }
+
+        // Charger les tentatives
         state.attempts.forEach(id => {
             const perso = personnages.find(p => p.ID === id);
             if (perso) personnagesSelectionnes.push(perso);
@@ -766,14 +830,314 @@ function loadGameStateClassique() {
 // ===== INITIALISATION =====
 async function initClassiqueMode() {
     console.log("Initialisation du mode Classique...");
+    
     await loadPersonnages();
+    
+    // Charger les parties activées depuis localStorage
+    loadEnabledParties();
+    console.log('📚 Parties chargées depuis localStorage:', enabledParties);
+    
+    // Sélectionner le personnage du jour
     selectDailyPersonnage();
+    
+    // Rendre les boutons d'indices
     renderHintButtonsClassique();
+    
+    // Charger l'état de la partie sauvegardée
     loadGameStateClassique();
+    
+    // Initialiser les événements
     initClassiqueEvents();
+    
     console.log("Mode Classique prêt !");
 }
 
 // ===== POINT D'ENTRÉE : appelé depuis index.html =====
 window.initClassiqueMode = initClassiqueMode;
 window.toggleHintClassique = toggleHintClassique;
+
+// ===== GESTION DU MENU DÉROULANT MODES =====
+function toggleModesDropdown() {
+    const dropdown = document.getElementById('modes-dropdown');
+    dropdown.classList.toggle('show');
+    
+    // Fermer si on clique ailleurs
+    document.addEventListener('click', function closeDropdown(e) {
+        if (!e.target.closest('.menu-btn')) {
+            dropdown.classList.remove('show');
+            document.removeEventListener('click', closeDropdown);
+        }
+    });
+}
+
+function switchToMode(mode) {
+    if (mode === 'classique') {
+        // Déjà sur ce mode
+        alert('Vous êtes déjà en mode Classique !');
+    } else if (mode === 'stand') {
+        alert('Le mode Stand arrive bientôt ! 🎴');
+    }
+    document.getElementById('modes-dropdown').classList.remove('show');
+}
+
+// ===== GESTION DES STATISTIQUES =====
+function loadUserStats() {
+    const saved = localStorage.getItem('jojoStats');
+    if (saved) {
+        userStats = JSON.parse(saved);
+    }
+}
+
+function saveUserStats() {
+    localStorage.setItem('jojoStats', JSON.stringify(userStats));
+}
+
+function updateStatsOnWin() {
+    userStats.gamesPlayed++;
+    userStats.gamesWon++;
+    userStats.currentStreak++;
+    userStats.maxStreak = Math.max(userStats.maxStreak, userStats.currentStreak);
+    userStats.totalAttempts += personnagesSelectionnes.length;
+    userStats.averageAttempts = Math.round(userStats.totalAttempts / userStats.gamesWon * 10) / 10;
+    saveUserStats();
+}
+
+function updateStatsOnLoss() {
+    userStats.currentStreak = 0;
+    saveUserStats();
+}
+
+function openStatsModal() {
+    loadUserStats();
+    document.getElementById('stat-played').textContent = userStats.gamesPlayed;
+    document.getElementById('stat-won').textContent = userStats.gamesWon;
+    
+    const winrate = userStats.gamesPlayed > 0 
+        ? Math.round((userStats.gamesWon / userStats.gamesPlayed) * 100) 
+        : 0;
+    document.getElementById('stat-winrate').textContent = winrate + '%';
+    
+    document.getElementById('stat-current-streak').textContent = userStats.currentStreak;
+    document.getElementById('stat-max-streak').textContent = userStats.maxStreak;
+    document.getElementById('stat-avg-attempts').textContent = userStats.averageAttempts;
+    
+    document.getElementById('stats-modal').style.display = 'flex';
+}
+
+function closeStatsModal() {
+    document.getElementById('stats-modal').style.display = 'none';
+}
+
+// ===== GESTION DES PARTIES =====
+function loadEnabledParties() {
+    const saved = localStorage.getItem('jojoEnabledParties');
+    if (saved) {
+        enabledParties = JSON.parse(saved);
+    }
+}
+
+function saveEnabledParties() {
+    localStorage.setItem('jojoEnabledParties', JSON.stringify(enabledParties));
+}
+
+function togglePartie(partieNum) {
+    const index = enabledParties.indexOf(partieNum);
+    if (index > -1) {
+        enabledParties.splice(index, 1);
+    } else {
+        enabledParties.push(partieNum);
+    }
+}
+
+function applyPartiesFilter() {
+    if (enabledParties.length === 0) {
+        alert('⚠️ Vous devez activer au moins une partie !');
+        return;
+    }
+    
+    console.log('📚 Application des filtres - Parties actives:', enabledParties);
+    
+    // Sauvegarder AVANT de changer le personnage
+    saveEnabledParties();
+    
+    // Vérifier si le personnage actuel est dans une partie désactivée
+    const partieNum = personnageDuJour?.PartieNumero || 0;
+    console.log('🎯 Personnage actuel:', personnageDuJour?.NOM, '- Partie', partieNum);
+    
+    if (!enabledParties.includes(partieNum)) {
+        console.log('🔄 Personnage dans partie désactivée, sélection d\'un nouveau...');
+        
+        // Réinitialiser le jeu
+        personnagesSelectionnes = [];
+        hintButtonsClassique = {
+            apparition: { unlockAt: 5, visible: false, unlocked: false, revealed: false },
+            etat_vital: { unlockAt: 9, visible: false, unlocked: false, revealed: false },
+            stand_info: { unlockAt: 13, visible: false, unlocked: false, revealed: false }
+        };
+        
+        // Sélectionner un nouveau personnage
+        selectDailyPersonnage();
+        
+        // Réafficher
+        renderPersonnagesResponsive();
+        renderHintButtonsClassique();
+        
+        // Supprimer la victory box si elle existe
+        const victoryBox = document.getElementById('victory-box-classique');
+        if (victoryBox) victoryBox.remove();
+        
+        // Réactiver l'input
+        const searchInput = document.getElementById('searchInputClassique');
+        if (searchInput) {
+            searchInput.disabled = false;
+            searchInput.placeholder = "Entrez un nom de personnage...";
+        }
+        
+        // Supprimer la sauvegarde de la partie
+        localStorage.removeItem('jojoClassiqueState');
+        
+        alert(`✅ Filtres appliqués ! Nouveau personnage`);
+    } else {
+        console.log('✅ Personnage OK avec les filtres');
+        alert('✅ Filtres appliqués ! Le personnage actuel correspond à vos critères.');
+    }
+    
+    closePartiesModal();
+}
+
+
+function debugParties() {
+    console.log('=== DEBUG PARTIES ===');
+    console.log('📚 Parties activées:', enabledParties);
+    console.log('🎯 Personnage du jour:', personnageDuJour?.NOM, '- Partie', personnageDuJour?.PartieNumero);
+    console.log('✅ Personnage du jour dans partie activée:', enabledParties.includes(personnageDuJour?.PartieNumero));
+    
+    console.log('\n📋 Personnages disponibles pour la recherche:');
+    const available = personnages.filter(p => enabledParties.includes(p.PartieNumero));
+    available.forEach(p => {
+        console.log(`  ${p.NOM} - Partie ${p.PartieNumero}`);
+    });
+    console.log(`Total: ${available.length}/${personnages.length} personnages`);
+    
+    console.log('\n🚫 Personnages masqués (parties désactivées):');
+    const hidden = personnages.filter(p => !enabledParties.includes(p.PartieNumero));
+    hidden.forEach(p => {
+        console.log(`  ${p.NOM} - Partie ${p.PartieNumero}`);
+    });
+}
+
+
+function testSearch(query) {
+    console.log(`\n🔍 Recherche: "${query}"`);
+    const results = searchPersonnages(query);
+    console.log('Résultats:', results.length);
+    results.forEach(p => {
+        console.log(`  - ${p.NOM} (Partie ${p.PartieNumero})`);
+    });
+    return results;
+}
+
+
+function resetAllParties() {
+    enabledParties = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    document.querySelectorAll('.partie-checkbox').forEach(checkbox => {
+        checkbox.checked = true;
+    });
+}
+
+function openPartiesModal() {
+    loadEnabledParties();
+    
+    // Mettre à jour les checkboxes
+    document.querySelectorAll('.partie-checkbox').forEach(checkbox => {
+        const partieNum = parseInt(checkbox.value);
+        checkbox.checked = enabledParties.includes(partieNum);
+    });
+    
+    document.getElementById('parties-modal').style.display = 'flex';
+}
+
+function closePartiesModal() {
+    document.getElementById('parties-modal').style.display = 'none';
+}
+
+// ===== GESTION MODAL AIDE =====
+function openHelpModal() {
+    document.getElementById('help-modal').style.display = 'flex';
+}
+
+function closeHelpModal() {
+    document.getElementById('help-modal').style.display = 'none';
+}
+
+// ===== GESTION MODAL À PROPOS =====
+function openAboutModal() {
+    document.getElementById('about-modal').style.display = 'flex';
+}
+
+function closeAboutModal() {
+    document.getElementById('about-modal').style.display = 'none';
+}
+
+// ===== FERMETURE DES MODALS AU CLIC EN DEHORS =====
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
+
+// ===== MODIFICATION DE selectDailyPersonnage() =====
+// Remplacer la fonction existante par celle-ci :
+function selectDailyPersonnage() {
+    if (personnages.length === 0) {
+        console.error('Aucun personnage chargé');
+        return null;
+    }
+    
+    loadEnabledParties();
+    
+    // Filtrer les personnages selon les parties activées
+    const filteredPersonnages = personnages.filter(p => 
+        enabledParties.includes(parseInt(p.PartieNumero))
+    );
+    
+    if (filteredPersonnages.length === 0) {
+        console.warn('Aucun personnage disponible avec les parties sélectionnées - Réactivation de toutes les parties');
+        // Réinitialiser toutes les parties
+        enabledParties = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        saveEnabledParties();
+        // Utiliser TOUS les personnages maintenant
+        const seed = getDailySeed();
+        const randomValue = seededRandom(seed);
+        const index = Math.floor(randomValue * personnages.length);
+        personnageDuJour = personnages[index];
+        console.log('Personnage du jour (après réinitialisation):', personnageDuJour);
+        return personnageDuJour;
+    }
+    
+    const seed = getDailySeed();
+    const randomValue = seededRandom(seed);
+    const index = Math.floor(randomValue * filteredPersonnages.length);
+    personnageDuJour = filteredPersonnages[index];
+    
+    console.log('Personnage du jour:', personnageDuJour);
+    console.log('Parties activées:', enabledParties);
+    return personnageDuJour;
+}
+
+// ===== EXPORTS DES FONCTIONS =====
+window.openStatsModal = openStatsModal;
+window.closeStatsModal = closeStatsModal;
+window.toggleModesDropdown = toggleModesDropdown;
+window.switchToMode = switchToMode;
+window.openPartiesModal = openPartiesModal;
+window.closePartiesModal = closePartiesModal;
+window.togglePartie = togglePartie;
+window.applyPartiesFilter = applyPartiesFilter;
+window.resetAllParties = resetAllParties;
+window.openHelpModal = openHelpModal;
+window.closeHelpModal = closeHelpModal;
+window.openAboutModal = openAboutModal;
+window.closeAboutModal = closeAboutModal;
+window.debugParties = debugParties;
+window.testSearch = testSearch;

@@ -9,6 +9,7 @@
     "Taille": "195",
     "Lieu d'apparition": "Tokyo",
     "Partie": "Stardust Crusaders",
+    "PartieNumero": 3,
     "Apparition": "Épisode 1 SC / Chapitre 114",
     "EtatVital": "Vivant",
     "NomStand": 1
@@ -23,6 +24,7 @@
     "Taille": "195",
     "Lieu d'apparition": "Londres",
     "Partie": "Phantom <br>Blood",
+    "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
     "NomStand": 2
@@ -37,6 +39,7 @@
     "Taille": "180",
     "Lieu d'apparition": "Morioh",
     "Partie": "Diamond <br>is <br>Unbreakable",
+    "PartieNumero": 4,
     "Apparition": "Épisode 1 DU / Chapitre 266",
     "EtatVital": "Vivant",
     "NomStand": 3
@@ -51,6 +54,7 @@
     "Taille": "172",
     "Lieu d'apparition": "Naples",
     "Partie": "Golden Wind",
+    "PartieNumero": 5,
     "Apparition": "Épisode 1 GW / Chapitre 440",
     "EtatVital": "Vivant",
     "NomStand": 4
@@ -65,6 +69,7 @@
     "Taille": "195",
     "Lieu d'apparition": "New York",
     "Partie": "Battle <br>Tendency",
+    "PartieNumero": 2,
     "Apparition": "Épisode 10 PB / Chapitre 45",
     "EtatVital": "Vivant",
     "NomStand": 5
@@ -79,6 +84,7 @@
     "Taille": "174",
     "Lieu d'apparition": "Floride",
     "Partie": "Stone Ocean",
+    "PartieNumero": 6,
     "Apparition": "Épisode 1 SO / Chapitre 595",
     "EtatVital": "Mort",
     "NomStand": 6
@@ -93,6 +99,7 @@
     "Taille": "185",
     "Lieu d'apparition": "Hong Kong",
     "Partie": "Stardust Crusaders",
+    "PartieNumero": 3,
     "Apparition": "Épisode 7 SC / Chapitre 124",
     "EtatVital": "Vivant",
     "NomStand": 7
@@ -107,6 +114,7 @@
     "Taille": "178",
     "Lieu d'apparition": "Tokyo",
     "Partie": "Stardust Crusaders",
+    "PartieNumero": 3,
     "Apparition": "Épisode 2 SC / Chapitre 117",
     "EtatVital": "Mort",
     "NomStand": 8
@@ -121,6 +129,7 @@
     "Taille": "175",
     "Lieu d'apparition": "Morioh",
     "Partie": "Diamond <br>is <br>Unbreakable",
+    "PartieNumero": 4,
     "Apparition": "Épisode 12 DU / Chapitre 319",
     "EtatVital": "Mort",
     "NomStand": 9
@@ -135,6 +144,7 @@
     "Taille": "178",
     "Lieu d'apparition": "Naples",
     "Partie": "Golden Wind",
+    "PartieNumero": 5,
     "Apparition": "Épisode 2 GW / Chapitre 443",
     "EtatVital": "Mort",
     "NomStand": 10
@@ -149,6 +159,7 @@
     "Taille": "168",
     "Lieu d'apparition": "Morioh",
     "Partie": "Diamond <br>is <br>Unbreakable",
+    "PartieNumero": 4,
     "Apparition": "Épisode 11 DU / Chapitre 314",
     "EtatVital": "Vivant",
     "NomStand": 11
@@ -163,9 +174,9 @@
     "Taille": "175",
     "Lieu d'apparition": "Hawaï",
     "Partie": "The JOJOLands",
+    "PartieNumero": 9,
     "Apparition": "Chapitre 1 JL",
     "EtatVital": "Vivant",
     "NomStand": 12
   }
 ]
-

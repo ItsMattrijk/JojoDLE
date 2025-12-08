@@ -26,13 +26,219 @@
             </div>
         </div>
 
-        <!-- Mode Classique (caché par défaut) -->
+        <!-- Mode Classique -->
         <div id="classique-mode" class="game-mode">
             <!-- Titre et description -->
             <div class="game-header">
                 <h1 class="game-title">MODE CLASSIQUE</h1>
                 <p class="game-subtitle" id="subtitle">Devinez le personnage de JoJo's Bizarre Adventure !</p>
             </div>
+
+<!-- Menu de boutons -->
+<div class="game-menu">
+    <button class="menu-btn" onclick="openStatsModal()">
+        📊 Statistiques
+    </button>
+    <button class="menu-btn" onclick="toggleModesDropdown()">
+        🎮 Modes
+        <div id="modes-dropdown" class="modes-dropdown">
+            <div class="mode-option" onclick="switchToMode('classique')">🎯 Mode Classique</div>
+            <div class="mode-option disabled" onclick="switchToMode('stand')">⭐ Mode Stand (Bientôt)</div>
+        </div>
+    </button>
+    <button class="menu-btn" onclick="openPartiesModal()">
+        📚 Parties
+    </button>
+    <button class="menu-btn" onclick="openHelpModal()">
+        ❓ Aide
+    </button>
+    <button class="menu-btn" onclick="openAboutModal()">
+        ℹ️ À propos
+    </button>
+</div>
+
+<!-- Modal Statistiques -->
+<div id="stats-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeStatsModal()">&times;</span>
+        <h2 class="modal-title">📊 VOS STATISTIQUES</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" id="stat-played">0</div>
+                <div class="stat-label">Parties jouées</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-won">0</div>
+                <div class="stat-label">Victoires</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-winrate">0%</div>
+                <div class="stat-label">Taux de réussite</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-current-streak">0</div>
+                <div class="stat-label">Série actuelle</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-max-streak">0</div>
+                <div class="stat-label">Meilleure série</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-avg-attempts">0</div>
+                <div class="stat-label">Essais moyens</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Parties -->
+<div id="parties-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closePartiesModal()">&times;</span>
+        <h2 class="modal-title">📚 SÉLECTION DES PARTIES</h2>
+        <p class="modal-description">Désactivez les parties que vous n'avez pas vues. Le personnage du jour sera choisi parmi vos parties activées.</p>
+        <div class="parties-list">
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="1" checked onchange="togglePartie(1)">
+                    <span class="partie-name">Partie 1 - Phantom Blood</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="2" checked onchange="togglePartie(2)">
+                    <span class="partie-name">Partie 2 - Battle Tendency</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="3" checked onchange="togglePartie(3)">
+                    <span class="partie-name">Partie 3 - Stardust Crusaders</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="4" checked onchange="togglePartie(4)">
+                    <span class="partie-name">Partie 4 - Diamond is Unbreakable</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="5" checked onchange="togglePartie(5)">
+                    <span class="partie-name">Partie 5 - Golden Wind</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="6" checked onchange="togglePartie(6)">
+                    <span class="partie-name">Partie 6 - Stone Ocean</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="7" checked onchange="togglePartie(7)">
+                    <span class="partie-name">Partie 7 - Steel Ball Run</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="8" checked onchange="togglePartie(8)">
+                    <span class="partie-name">Partie 8 - JoJolion</span>
+                </label>
+            </div>
+            <div class="partie-item">
+                <label class="partie-label">
+                    <input type="checkbox" class="partie-checkbox" value="9" checked onchange="togglePartie(9)">
+                    <span class="partie-name">Partie 9 - The JOJOLands</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn primary" onclick="applyPartiesFilter()">✅ Appliquer</button>
+            <button class="modal-btn secondary" onclick="resetAllParties()">🔄 Tout réactiver</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Aide -->
+<div id="help-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeHelpModal()">&times;</span>
+        <h2 class="modal-title">❓ COMMENT JOUER</h2>
+        <div class="help-content">
+            <div class="help-section">
+                <h3>🎯 Objectif</h3>
+                <p>Devinez le personnage de JoJo's Bizarre Adventure du jour en utilisant les indices.</p>
+            </div>
+            <div class="help-section">
+                <h3>🔍 Comment jouer</h3>
+                <ol>
+                    <li>Tapez un nom de personnage dans la barre de recherche</li>
+                    <li>Sélectionnez le personnage dans les suggestions</li>
+                    <li>Observez les catégories qui s'affichent :</li>
+                </ol>
+                <ul class="help-list">
+                    <li><span class="help-correct">🟩 Vert</span> = Information correcte</li>
+                    <li><span class="help-incorrect">🟥 Rouge</span> = Information incorrecte</li>
+                    <li><span class="help-arrow">⬆️ Flèche</span> = Le personnage à deviner a une valeur plus haute/basse</li>
+                </ul>
+            </div>
+            <div class="help-section">
+                <h3>💡 Indices</h3>
+                <p>Débloquez des indices au fur et à mesure de vos essais :</p>
+                <ul class="help-list">
+                    <li><strong>5 essais</strong> : Première Apparition</li>
+                    <li><strong>9 essais</strong> : État Vital</li>
+                    <li><strong>13 essais</strong> : Informations sur le Stand</li>
+                </ul>
+            </div>
+            <div class="help-section">
+                <h3>📚 Filtrer les parties</h3>
+                <p>Utilisez le bouton "Parties" pour désactiver les parties que vous n'avez pas encore vues. Le personnage du jour sera adapté à votre sélection !</p>
+            </div>
+            <div class="help-section">
+                <h3>⏰ Un nouveau personnage chaque jour</h3>
+                <p>Un nouveau personnage à deviner apparaît chaque jour à minuit. Revenez demain pour un nouveau défi !</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal À propos -->
+<div id="about-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+        <h2 class="modal-title">ℹ️ À PROPOS DE JOJODLE</h2>
+        <div class="about-content">
+            <div class="about-section">
+                <h3>🎮 Qu'est-ce que JojoDLE ?</h3>
+                <p>JojoDLE est un jeu de devinettes quotidien inspiré de l'univers de <strong>JoJo's Bizarre Adventure</strong>. Chaque jour, un nouveau personnage de la saga est à deviner en vous basant sur différentes caractéristiques.</p>
+            </div>
+            <div class="about-section">
+                <h3>✨ Fonctionnalités</h3>
+                <ul class="about-list">
+                    <li><strong>Mode Classique</strong> : Devinez le personnage grâce à ses caractéristiques</li>
+                    <li><strong>Mode Stand</strong> : Bientôt disponible - Devinez via le nom du Stand</li>
+                    <li><strong>Système d'indices</strong> : Débloquez des indices progressivement</li>
+                    <li><strong>Filtrage des parties</strong> : Adaptez le jeu à votre progression dans la série</li>
+                    <li><strong>Statistiques</strong> : Suivez vos performances et vos séries de victoires</li>
+                </ul>
+            </div>
+            <div class="about-section">
+                <h3>🎯 Inspiré par</h3>
+                <p>Ce jeu s'inspire de jeux comme Wordle, mais adapté à l'univers flamboyant de JoJo's Bizarre Adventure créé par <strong>Hirohiko Araki</strong>.</p>
+            </div>
+            <div class="about-section">
+                <h3>⚠️ Note</h3>
+                <p>JojoDLE est un projet fan-made non officiel créé par des fans pour des fans. Tous les droits sur JoJo's Bizarre Adventure appartiennent à leurs propriétaires respectifs.</p>
+            </div>
+            <div class="about-section">
+                <h3>💝 Amusez-vous bien !</h3>
+                <p>Que votre aventure soit aussi bizarre et merveilleuse que celle des Joestar ! 🌟</p>
+            </div>
+        </div>
+    </div>
+</div>
 
             <!-- Boutons d'indices -->
             <div class="hint-buttons-container"></div>
