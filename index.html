@@ -35,26 +35,33 @@
             </div>
 
 <!-- Menu de boutons -->
-<div class="game-menu">
-    <button class="menu-btn" onclick="openStatsModal()">
-        📊 Statistiques
-    </button>
-    <button class="menu-btn" onclick="toggleModesDropdown()">
-        🎮 Modes
-        <div id="modes-dropdown" class="modes-dropdown">
-            <div class="mode-option" onclick="switchToMode('classique')">🎯 Mode Classique</div>
-            <div class="mode-option disabled" onclick="switchToMode('stand')">⭐ Mode Stand (Bientôt)</div>
-        </div>
-    </button>
-    <button class="menu-btn" onclick="openPartiesModal()">
-        📚 Parties
-    </button>
-    <button class="menu-btn" onclick="openHelpModal()">
-        ❓ Aide
-    </button>
-    <button class="menu-btn" onclick="openAboutModal()">
-        ℹ️ À propos
-    </button>
+<div class="game-menu-wrapper">
+    <div class="game-menu">
+        <button class="menu-btn" onclick="openStatsModal()">
+            <span class="menu-icon">📊</span>
+            <span class="menu-text">Statistiques</span>
+        </button>
+        <button class="menu-btn" onclick="toggleModesDropdown()">
+            <span class="menu-icon">🎮</span>
+            <span class="menu-text">Modes</span>
+            <div id="modes-dropdown" class="modes-dropdown">
+                <div class="mode-option" onclick="switchToMode('classique')">🎯 Mode Classique</div>
+                <div class="mode-option disabled" onclick="switchToMode('stand')">⭐ Mode Stand (Bientôt)</div>
+            </div>
+        </button>
+        <button class="menu-btn" onclick="openPartiesModal()">
+            <span class="menu-icon">📚</span>
+            <span class="menu-text">Parties</span>
+        </button>
+        <button class="menu-btn" onclick="openHelpModal()">
+            <span class="menu-icon">❓</span>
+            <span class="menu-text">Aide</span>
+        </button>
+        <button class="menu-btn" onclick="openAboutModal()">
+            <span class="menu-icon">ℹ️</span>
+            <span class="menu-text">À propos</span>
+        </button>
+    </div>
 </div>
 
 <!-- Modal Statistiques -->

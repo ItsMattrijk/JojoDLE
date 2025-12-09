@@ -145,10 +145,19 @@ function compareWithDailyPersonnage(perso) {
     if (!personnageDuJour) return null;
     
     const compareValue = (val1, val2) => {
-        // Extraire les nombres des tailles (ex: "195 cm" -> 195)
-        const num1 = parseInt(val1);
-        const num2 = parseInt(val2);
+        // Convertir "Inconnu" en 0
+        const num1 = val1 === "Inconnu" ? 0 : parseInt(val1);
+        const num2 = val2 === "Inconnu" ? 0 : parseInt(val2);
         
+        // Si les deux sont invalides (NaN), comparer les textes
+        if (isNaN(num1) && isNaN(num2)) {
+            return {
+                status: val1 === val2 ? 'correct' : 'incorrect',
+                direction: null
+            };
+        }
+        
+        // Maintenant num1 et num2 sont toujours des nombres (0 si "Inconnu")
         return {
             status: num1 === num2 ? 'correct' : 'incorrect',
             direction: num1 < num2 ? 'up' : (num1 > num2 ? 'down' : null)
@@ -159,12 +168,15 @@ function compareWithDailyPersonnage(perso) {
         genre: perso.Genre === personnageDuJour.Genre ? 'correct' : 'incorrect',
         origine: perso.Origine === personnageDuJour.Origine ? 'correct' : 'incorrect',
         stand: perso.Stand === personnageDuJour.Stand ? 'correct' : 'incorrect',
+        naissance: compareValue(perso.Naissance, personnageDuJour.Naissance),
+        poids: compareValue(perso.Poids, personnageDuJour.Poids),
         taille: compareValue(perso.Taille, personnageDuJour.Taille),
         lieu_apparition: perso["Lieu d'apparition"] === personnageDuJour["Lieu d'apparition"] ? 'correct' : 'incorrect',
         partie: perso.Partie === personnageDuJour.Partie ? 'correct' : 'incorrect',
         isCorrectPersonnage: perso.ID === personnageDuJour.ID
     };
 }
+
 
 // ===== SYSTÈME D'INDICES =====
 function updateHintButtonsClassique() {
@@ -432,6 +444,8 @@ function displaySelectedPersonnages() {
             <div class="category-header-item">Genre</div>
             <div class="category-header-item">Origine</div>
             <div class="category-header-item">Stand</div>
+            <div class="category-header-item">Naissance</div>
+            <div class="category-header-item">Poids</div>
             <div class="category-header-item">Taille</div>
             <div class="category-header-item">Apparition</div>
             <div class="category-header-item">Partie</div>
@@ -466,6 +480,18 @@ function displaySelectedPersonnages() {
                     <div class="category ${c.stand}">
                         <div class="category-content">
                             <span class="category-value">${perso.Stand}</span>
+                        </div>
+                    </div>
+                    <div class="category ${c.naissance.status}">
+                        <div class="category-content">
+                            ${c.naissance.direction ? getArrowIcon(c.naissance.direction) : ''}
+                            <span class="category-value">${perso.Naissance}</span>
+                        </div>
+                    </div>
+                    <div class="category ${c.poids.status}">
+                        <div class="category-content">
+                            ${c.poids.direction ? getArrowIcon(c.poids.direction) : ''}
+                            <span class="category-value">${perso.Poids}</span>
                         </div>
                     </div>
                     <div class="category ${c.taille.status}">
@@ -549,6 +575,8 @@ function displaySelectedPersonnagesMobile() {
               <div class="category-header-item">Genre</div>
               <div class="category-header-item">Origine</div>
               <div class="category-header-item">Stand</div>
+              <div class="category-header-item">Naissance</div>
+              <div class="category-header-item">Poids</div>
               <div class="category-header-item">Taille</div>
               <div class="category-header-item">Lieu</div>
               <div class="category-header-item">Partie</div>
@@ -584,6 +612,20 @@ function displaySelectedPersonnagesMobile() {
             <div class="category ${c.stand ?? ''}">
               <div class="category-content">
                 <span class="category-value">${perso.Stand ?? '—'}</span>
+              </div>
+            </div>
+
+            <div class="category ${c.naissance?.status ?? ''}">
+              <div class="category-content">
+                ${c.naissance?.direction ? getArrowIcon(c.naissance.direction) : ''}
+                <span class="category-value">${perso.Naissance ?? '—'}</span>
+              </div>
+            </div>
+
+            <div class="category ${c.poids?.status ?? ''}">
+              <div class="category-content">
+                ${c.poids?.direction ? getArrowIcon(c.poids.direction) : ''}
+                <span class="category-value">${perso.Poids ?? '—'}</span>
               </div>
             </div>
 
