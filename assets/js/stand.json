@@ -101,10 +101,120 @@
   {
     "ID": 12,
     "Nom": "November Rain",
-    "Portée": "Longue portée",
+    "Portée": "Courte portée",
     "CarteTarot": "Aucun",
-    "Première Apparition": "Chapitre 1 JL",
+    "Première Apparition": "Chapitre 958",
     "Description": "Un Stand capable de créer des gouttes de pluie qui tombent vers le haut, permettant de déplacer de petits objets vers le ciel et de créer des effets surprenants.",
     "Utilisateur": 12
-  }
+  },
+  {
+ 	 "ID": 13,
+ 	 "Nom": "Magician's Red",
+ 	 "Portée": "Courte portée",
+ 	 "CarteTarot": "assets/tarot/magicians_red.jpg",
+ 	 "Première Apparition": "Épisode 1 SC / Chapitre 115",
+ 	 "Description": "Un Stand flamboyant et ailé qui manipule le feu et la chaleur à volonté, capable de lancer des projectiles enflammés (Crossfire Hurricane) ou d'attaquer au corps à corps.",
+ 	 "Utilisateur": 17
+ },
+ {
+ 	 "ID": 14,
+ 	 "Nom": "Sex Pistols",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Épisode 7 GW / Chapitre 462",
+ 	 "Description": "Six petites créatures autonomes numérotées qui vivent dans un revolver et peuvent chevaucher, détourner et contrôler les trajectoires des balles tirées par l'utilisateur.",
+ 	 "Utilisateur": 18
+ },
+ {
+ 	 "ID": 15,
+ 	 "Nom": "Echoes",
+ 	 "Portée": "Variable", 	 
+   "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Épisode 4 DU / Chapitre 279",
+ 	 "Description": "Un Stand évolutif (Act 1, 2 et 3) qui peut imprimer des sons sur des objets (Act 1), modifier l'environnement avec des effets sonores (Act 2) ou alourdir les ennemis (Act 3).",
+	 "Utilisateur": 19
+ },
+ {
+ 	 "ID": 16,
+ 	 "Nom": "Aerosmith",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Épisode 9 GW / Chapitre 470",
+ 	 "Description": "Un petit avion de chasse téléguidé capable de tirer des mitrailleuses, de lancer des bombes, et de localiser ses cibles grâce à un radar à dioxyde de carbone (CO₂).",
+ 	 "Utilisateur": 20
+ },
+ {
+ 	 "ID": 17,
+ 	 "Nom": "King Crimson",
+ 	 "Portée": "Courte portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Épisode 19 GW / Chapitre 516",
+ 	 "Description": "Un Stand humanoïde qui peut effacer des laps de temps (jusqu'à 10 secondes), ne laissant que les conséquences de ces événements, rendant les actions prévisibles et imparables.",
+ 	 "Utilisateur": 21
+ },
+ {
+ 	 "ID": 18,
+ 	 "Nom": "Whitesnake",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Épisode 4 SO / Chapitre 610",
+ 	 "Description": "Un Stand humanoïde capable de voler des 'Disques' de mémoire ou de Stand, neutralisant les capacités et la personnalité de la victime. Il peut aussi générer un brouillard hypnotique.",
+ 	 "Utilisateur": 22
+ },
+ {
+ 	 "ID": 19,
+ 	 "Nom": "Tusk",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 2 SBR",
+ 	 "Description": "Un Stand évolutif (Act 1 à 4) qui utilise l'énergie de la Rotation pour lancer des ongles (Act 1) ou créer des trous sans fin dans l'espace (Act 4), avec une puissance phénoménale.",
+ 	 "Utilisateur": 23
+ },
+ {
+ 	 "ID": 20,
+ 	 "Nom": "Dirty Deeds Done Dirt Cheap (D4C)",
+ 	 "Portée": "Courte portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 813",
+ 	 "Description": "Un Stand capable de se téléporter, ainsi que son utilisateur, entre des univers parallèles en se faufilant entre deux objets. Il peut amener des 'doubles' dans le monde principal.",
+ 	 "Utilisateur": 25
+ },
+ {
+ 	 "ID": 21,
+	 "Nom": "Soft & Wet",
+ 	 "Portée": "Courte portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 848",
+ 	 "Description": "Un Stand qui peut générer des bulles capables de voler une caractéristique d'un objet ou d'une personne (comme la friction, l'eau, ou le son), les rendant inoffensifs ou inutiles.",
+ 	 "Utilisateur": 26
+ },
+ {
+ 	 "ID": 22,
+ 	 "Nom": "Paisley Park",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 859",
+ 	 "Description": "Un Stand capable de guider son utilisateur, ou d'autres personnes, vers la meilleure issue possible en utilisant les technologies (téléphones, GPS, ordinateurs) comme interface.",
+ 	 "Utilisateur": 27
+ },
+ {
+ 	 "ID": 23,
+ 	 "Nom": "Cream Starter",
+ 	 "Portée": "Portée sans importance",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 785",
+ 	 "Description": "Un Stand en forme de vaporisateur capable de transformer tout ce qu'il pulvérise en un type de viande ou de chair. Il est principalement utilisé pour soigner les blessures.",
+ 	 "Utilisateur": 28
+ },
+
+  {
+ 	 "ID": 24,
+ 	 "Nom": "Ball Breaker",
+ 	 "Portée": "Longue portée",
+ 	 "CarteTarot": "Aucun",
+ 	 "Première Apparition": "Chapitre 835",
+ 	 "Description": "Un Stand lié à la technique de la Rotation ultime (Golden Spin). Il peut générer une énergie rotative parfaite capable de traverser toute matière et d’imposer des effets irréversibles sur ses cibles, tels que le vieillissement accéléré ou la désintégration progressive. Il se manifeste lorsque l’utilisateur atteint la rotation parfaite grâce à la technique des Steel Balls.",
+ 	 "Utilisateur": 24
+ }
+
 ]

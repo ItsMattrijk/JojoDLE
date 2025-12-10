@@ -214,7 +214,7 @@ function renderHintButtonsClassique() {
     if (personnageDuJour && personnageDuJour.NomStand) {
         const stand = stands.find(s => s.ID === personnageDuJour.NomStand);
         if (stand) {
-            standInfo = `${stand.Nom} (${stand.Portée})`;
+            standInfo = `${stand.Nom}`;
         }
     }
     
@@ -222,7 +222,7 @@ function renderHintButtonsClassique() {
         {
             type: 'apparition',
             icon: '📅',
-            label: 'Première Apparition',
+            label: 'Apparition',
             value: personnageDuJour?.Apparition || 'N/A',
             unlockAt: 5
         },
@@ -518,19 +518,22 @@ function displaySelectedPersonnages() {
     html += `</div>`;
     container.innerHTML = html;
     
-    setTimeout(() => {
-        document.querySelectorAll('.category-value, .category-header-item').forEach(el => {
-            const textLength = el.textContent.trim().length;
-            el.setAttribute('data-length', textLength);
-        });
+setTimeout(() => {
+    document.querySelectorAll('.category-value, .category-header-item').forEach(el => {
+        const textLength = el.textContent.trim().length;
+        el.setAttribute('data-length', textLength);
+    });
 
-        autoResizeCategoryText();
+    autoResizeCategoryText();
 
-        const newPersoEl = document.querySelector('#selectedPersonnagesClassique .selected-player.new-player');
-        if (newPersoEl) {
+    // Retirer la classe après que TOUTE l'animation soit terminée
+    const newPersoEl = document.querySelector('#selectedPersonnagesClassique .selected-player.new-player');
+    if (newPersoEl) {
+        setTimeout(() => {
             newPersoEl.classList.remove('new-player');
-        }
-    }, 50);
+        }, 2600); // 1 seconde = temps pour que toutes les catégories apparaissent
+    }
+}, 50);
 }
 
 function autoResizeCategoryText() {
@@ -675,8 +678,9 @@ function displaySelectedPersonnagesMobile() {
         if (newPersoEl) {
             setTimeout(() => {
                 newPersoEl.classList.remove('new-player');
-            }, 2000);
+            }, 1000); // Uniformiser avec le desktop
         }
+        
     }, 50);
 }
 
@@ -894,6 +898,8 @@ async function initClassiqueMode() {
     console.log("Mode Classique prêt !");
 }
 
+
+
 // ===== POINT D'ENTRÉE : appelé depuis index.html =====
 window.initClassiqueMode = initClassiqueMode;
 window.toggleHintClassique = toggleHintClassique;
@@ -951,24 +957,26 @@ function updateStatsOnLoss() {
 
 function openStatsModal() {
     loadUserStats();
-    document.getElementById('stat-played').textContent = userStats.gamesPlayed;
-    document.getElementById('stat-won').textContent = userStats.gamesWon;
-    
+
+    document.getElementById('stat-played-classique').textContent = userStats.gamesPlayed;
+    document.getElementById('stat-won-classique').textContent = userStats.gamesWon;
+
     const winrate = userStats.gamesPlayed > 0 
         ? Math.round((userStats.gamesWon / userStats.gamesPlayed) * 100) 
         : 0;
-    document.getElementById('stat-winrate').textContent = winrate + '%';
-    
-    document.getElementById('stat-current-streak').textContent = userStats.currentStreak;
-    document.getElementById('stat-max-streak').textContent = userStats.maxStreak;
-    document.getElementById('stat-avg-attempts').textContent = userStats.averageAttempts;
-    
-    document.getElementById('stats-modal').style.display = 'flex';
+
+    document.getElementById('stat-winrate-classique').textContent = winrate + '%';
+    document.getElementById('stat-current-streak-classique').textContent = userStats.currentStreak;
+    document.getElementById('stat-max-streak-classique').textContent = userStats.maxStreak;
+    document.getElementById('stat-avg-attempts-classique').textContent = userStats.averageAttempts;
+
+    document.getElementById('stats-modal-classique').style.display = 'flex';
 }
 
 function closeStatsModal() {
-    document.getElementById('stats-modal').style.display = 'none';
+    document.getElementById('stats-modal-classique').style.display = 'none';
 }
+
 
 // ===== GESTION DES PARTIES =====
 function loadEnabledParties() {
@@ -1090,26 +1098,26 @@ function resetAllParties() {
 function openPartiesModal() {
     loadEnabledParties();
     
-    // Mettre à jour les checkboxes
-    document.querySelectorAll('.partie-checkbox').forEach(checkbox => {
+    document.querySelectorAll('.partie-checkbox-classique').forEach(checkbox => {
         const partieNum = parseInt(checkbox.value);
         checkbox.checked = enabledParties.includes(partieNum);
     });
     
-    document.getElementById('parties-modal').style.display = 'flex';
+    document.getElementById('parties-modal-classique').style.display = 'flex';
 }
 
 function closePartiesModal() {
-    document.getElementById('parties-modal').style.display = 'none';
+    document.getElementById('parties-modal-classique').style.display = 'none';
 }
+
 
 // ===== GESTION MODAL AIDE =====
 function openHelpModal() {
-    document.getElementById('help-modal').style.display = 'flex';
+    document.getElementById('help-modal-classique').style.display = 'flex';
 }
 
 function closeHelpModal() {
-    document.getElementById('help-modal').style.display = 'none';
+    document.getElementById('help-modal-classique').style.display = 'none';
 }
 
 // ===== GESTION MODAL À PROPOS =====
@@ -1183,3 +1191,136 @@ window.openAboutModal = openAboutModal;
 window.closeAboutModal = closeAboutModal;
 window.debugParties = debugParties;
 window.testSearch = testSearch;
+
+// ===== FONCTIONS MODALES POUR LE MODE STAND =====
+
+function openStatsModalStand() {
+    loadUserStatsStand();
+    document.getElementById('stat-played-stand').textContent = userStatsStand.gamesPlayed;
+    document.getElementById('stat-won-stand').textContent = userStatsStand.gamesWon;
+    
+    const winrate = userStatsStand.gamesPlayed > 0 
+        ? Math.round((userStatsStand.gamesWon / userStatsStand.gamesPlayed) * 100) 
+        : 0;
+    document.getElementById('stat-winrate-stand').textContent = winrate + '%';
+    
+    document.getElementById('stat-current-streak-stand').textContent = userStatsStand.currentStreak;
+    document.getElementById('stat-max-streak-stand').textContent = userStatsStand.maxStreak;
+    document.getElementById('stat-avg-attempts-stand').textContent = userStatsStand.averageAttempts;
+    
+    document.getElementById('stats-modal-stand').style.display = 'flex';
+}
+
+function closeStatsModalStand() {
+    document.getElementById('stats-modal-stand').style.display = 'none';
+}
+
+function openPartiesModalStand() {
+    loadEnabledPartiesStand();
+    
+    document.querySelectorAll('.partie-checkbox-stand').forEach(checkbox => {
+        const partieNum = parseInt(checkbox.value);
+        checkbox.checked = enabledPartiesStand.includes(partieNum);
+    });
+    
+    document.getElementById('parties-modal-stand').style.display = 'flex';
+}
+
+function closePartiesModalStand() {
+    document.getElementById('parties-modal-stand').style.display = 'none';
+}
+
+function togglePartieStand(partieNum) {
+    const index = enabledPartiesStand.indexOf(partieNum);
+    if (index > -1) {
+        enabledPartiesStand.splice(index, 1);
+    } else {
+        enabledPartiesStand.push(partieNum);
+    }
+}
+
+function applyPartiesFilterStand() {
+    if (enabledPartiesStand.length === 0) {
+        alert('⚠️ Vous devez activer au moins une partie !');
+        return;
+    }
+    
+    console.log('📚 Application des filtres - Parties actives:', enabledPartiesStand);
+    
+    saveEnabledPartiesStand();
+    
+    const partieNum = personnageDuJourStand?.PartieNumero || 0;
+    console.log('🎯 Stand actuel:', standDuJour?.Nom, '- Partie', partieNum);
+    
+    if (!enabledPartiesStand.includes(partieNum)) {
+        console.log('🔄 Stand dans partie désactivée, sélection d\'un nouveau...');
+        
+        personnagesSelectionnesStand = [];
+        hintButtonsStand = {
+            portee: { unlockAt: 4, visible: false, unlocked: false, revealed: false },
+            apparition: { unlockAt: 7, visible: false, unlocked: false, revealed: false },
+            explication: { unlockAt: 11, visible: false, unlocked: false, revealed: false }
+        };
+        
+        selectDailyStand();
+        
+        // Mettre à jour l'affichage du stand
+        document.getElementById('stand-name').textContent = standDuJour.Nom;
+        
+        displaySelectedPersonnagesStand();
+        renderHintButtonsStand();
+        
+        const victoryBox = document.getElementById('victory-box-stand');
+        if (victoryBox) victoryBox.remove();
+        
+        const searchInput = document.getElementById('searchInputStand');
+        if (searchInput) {
+            searchInput.disabled = false;
+            searchInput.placeholder = "Entrez un nom de personnage...";
+        }
+        
+        localStorage.removeItem('jojoStandState');
+        
+        alert(`✅ Filtres appliqués ! Nouveau Stand`);
+    } else {
+        console.log('✅ Stand OK avec les filtres');
+        alert('✅ Filtres appliqués ! Le stand actuel correspond à vos critères.');
+    }
+    
+    closePartiesModalStand();
+}
+
+function resetAllPartiesStand() {
+    enabledPartiesStand = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    document.querySelectorAll('.partie-checkbox-stand').forEach(checkbox => {
+        checkbox.checked = true;
+    });
+}
+
+function openHelpModalStand() {
+    document.getElementById('help-modal-stand').style.display = 'flex';
+}
+
+function closeHelpModalStand() {
+    document.getElementById('help-modal-stand').style.display = 'none';
+}
+
+function toggleModesDropdown() {
+    const dropdown = document.getElementById("modes-dropdown-stand");
+    dropdown.classList.toggle("show");
+}
+
+// ===== EXPORTS =====
+window.initStandMode = initStandMode;
+window.toggleHintStand = toggleHintStand;
+window.standDuJour = standDuJour;
+window.openStatsModalStand = openStatsModalStand;
+window.closeStatsModalStand = closeStatsModalStand;
+window.openPartiesModalStand = openPartiesModalStand;
+window.closePartiesModalStand = closePartiesModalStand;
+window.togglePartieStand = togglePartieStand;
+window.applyPartiesFilterStand = applyPartiesFilterStand;
+window.resetAllPartiesStand = resetAllPartiesStand;
+window.openHelpModalStand = openHelpModalStand;
+window.closeHelpModalStand = closeHelpModalStand;
+
