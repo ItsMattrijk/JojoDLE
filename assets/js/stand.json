@@ -215,6 +215,26 @@
  	 "Première Apparition": "Chapitre 835",
  	 "Description": "Un Stand lié à la technique de la Rotation ultime (Golden Spin). Il peut générer une énergie rotative parfaite capable de traverser toute matière et d’imposer des effets irréversibles sur ses cibles, tels que le vieillissement accéléré ou la désintégration progressive. Il se manifeste lorsque l’utilisateur atteint la rotation parfaite grâce à la technique des Steel Balls.",
  	 "Utilisateur": 24
- }
+ },
+
+  {
+    "ID": 25,
+    "Nom": "The Fool",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/the_fool.png",
+    "Première Apparition": "Épisode 25 SC / Chapitre 183",
+    "Description": "Un Stand lié au sable, capable de prendre n'importe quelle forme et de manipuler le sable à volonté. Il est presque invincible et ne peut être endommagé que si son utilisateur est blessé.",
+    "Utilisateur": 29
+  },
+  {
+    "ID": 26,
+    "Nom": "Cream",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 42 SC / Chapitre 238",
+    "Description": "Un Stand humanoïde à l'apparence démoniaque, doté d'une force de frappe suffisante pour la décapitation. Sa capacité principale lui permet de se dévorer lui-même et son utilisateur, se transformant en une sphère invisible, invulnérable et dévoreuse qui agit comme un portail vers une dimension de vide, effaçant toute matière sur son passage.",
+    "Utilisateur": 30
+  }
+
 
 ]

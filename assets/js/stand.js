@@ -519,17 +519,14 @@ async function initStandMode() {
     console.log("Initialisation du mode Stand...");
     
     await loadDataStand();
-    
     loadEnabledPartiesStand();
-    console.log('📚 Parties chargées depuis localStorage:', enabledPartiesStand);
-    
     selectDailyStand();
-    
     renderHintButtonsStand();
-    
     loadGameStateStand();
-    
     initStandEvents();
+    
+    // ✅ AJOUT : Exporter le stand pour qu'il soit accessible
+    window.standDuJour = standDuJour;
     
     console.log("Mode Stand prêt !");
 }

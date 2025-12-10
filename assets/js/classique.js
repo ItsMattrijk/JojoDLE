@@ -904,28 +904,18 @@ async function initClassiqueMode() {
 window.initClassiqueMode = initClassiqueMode;
 window.toggleHintClassique = toggleHintClassique;
 
-// ===== GESTION DU MENU DÉROULANT MODES =====
-function toggleModesDropdown() {
-    const dropdown = document.getElementById('modes-dropdown');
-    dropdown.classList.toggle('show');
-    
-    // Fermer si on clique ailleurs
-    document.addEventListener('click', function closeDropdown(e) {
-        if (!e.target.closest('.menu-btn')) {
-            dropdown.classList.remove('show');
-            document.removeEventListener('click', closeDropdown);
-        }
-    });
-}
 
 function switchToMode(mode) {
+    // Fermer tous les dropdowns
+    document.querySelectorAll('.modes-dropdown').forEach(d => d.classList.remove('show'));
+    
     if (mode === 'classique') {
-        // Déjà sur ce mode
-        alert('Vous êtes déjà en mode Classique !');
+        showHome();
+        setTimeout(() => showMode('classique'), 100);
     } else if (mode === 'stand') {
-        alert('Le mode Stand arrive bientôt ! 🎴');
+        showHome();
+        setTimeout(() => showMode('stand'), 100);
     }
-    document.getElementById('modes-dropdown').classList.remove('show');
 }
 
 // ===== GESTION DES STATISTIQUES =====
@@ -990,71 +980,6 @@ function saveEnabledParties() {
     localStorage.setItem('jojoEnabledParties', JSON.stringify(enabledParties));
 }
 
-function togglePartie(partieNum) {
-    const index = enabledParties.indexOf(partieNum);
-    if (index > -1) {
-        enabledParties.splice(index, 1);
-    } else {
-        enabledParties.push(partieNum);
-    }
-}
-
-function applyPartiesFilter() {
-    if (enabledParties.length === 0) {
-        alert('⚠️ Vous devez activer au moins une partie !');
-        return;
-    }
-    
-    console.log('📚 Application des filtres - Parties actives:', enabledParties);
-    
-    // Sauvegarder AVANT de changer le personnage
-    saveEnabledParties();
-    
-    // Vérifier si le personnage actuel est dans une partie désactivée
-    const partieNum = personnageDuJour?.PartieNumero || 0;
-    console.log('🎯 Personnage actuel:', personnageDuJour?.NOM, '- Partie', partieNum);
-    
-    if (!enabledParties.includes(partieNum)) {
-        console.log('🔄 Personnage dans partie désactivée, sélection d\'un nouveau...');
-        
-        // Réinitialiser le jeu
-        personnagesSelectionnes = [];
-        hintButtonsClassique = {
-            apparition: { unlockAt: 5, visible: false, unlocked: false, revealed: false },
-            etat_vital: { unlockAt: 9, visible: false, unlocked: false, revealed: false },
-            stand_info: { unlockAt: 13, visible: false, unlocked: false, revealed: false }
-        };
-        
-        // Sélectionner un nouveau personnage
-        selectDailyPersonnage();
-        
-        // Réafficher
-        renderPersonnagesResponsive();
-        renderHintButtonsClassique();
-        
-        // Supprimer la victory box si elle existe
-        const victoryBox = document.getElementById('victory-box-classique');
-        if (victoryBox) victoryBox.remove();
-        
-        // Réactiver l'input
-        const searchInput = document.getElementById('searchInputClassique');
-        if (searchInput) {
-            searchInput.disabled = false;
-            searchInput.placeholder = "Entrez un nom de personnage...";
-        }
-        
-        // Supprimer la sauvegarde de la partie
-        localStorage.removeItem('jojoClassiqueState');
-        
-        alert(`✅ Filtres appliqués ! Nouveau personnage`);
-    } else {
-        console.log('✅ Personnage OK avec les filtres');
-        alert('✅ Filtres appliqués ! Le personnage actuel correspond à vos critères.');
-    }
-    
-    closePartiesModal();
-}
-
 
 function debugParties() {
     console.log('=== DEBUG PARTIES ===');
@@ -1088,9 +1013,67 @@ function testSearch(query) {
 }
 
 
-function resetAllParties() {
+// ===== GESTION DES PARTIES MODE CLASSIQUE =====
+function togglePartieClassique(partieNum) {
+    const index = enabledParties.indexOf(partieNum);
+    if (index > -1) {
+        enabledParties.splice(index, 1);
+    } else {
+        enabledParties.push(partieNum);
+    }
+}
+
+function applyPartiesFilterClassique() {
+    if (enabledParties.length === 0) {
+        alert('⚠️ Vous devez activer au moins une partie !');
+        return;
+    }
+    
+    console.log('📚 Application des filtres - Parties actives:', enabledParties);
+    
+    saveEnabledParties();
+    
+    const partieNum = personnageDuJour?.PartieNumero || 0;
+    console.log('🎯 Personnage actuel:', personnageDuJour?.NOM, '- Partie', partieNum);
+    
+    if (!enabledParties.includes(partieNum)) {
+        console.log('🔄 Personnage dans partie désactivée, sélection d\'un nouveau...');
+        
+        personnagesSelectionnes = [];
+        hintButtonsClassique = {
+            apparition: { unlockAt: 5, visible: false, unlocked: false, revealed: false },
+            etat_vital: { unlockAt: 9, visible: false, unlocked: false, revealed: false },
+            stand_info: { unlockAt: 13, visible: false, unlocked: false, revealed: false }
+        };
+        
+        selectDailyPersonnage();
+        
+        renderPersonnagesResponsive();
+        renderHintButtonsClassique();
+        
+        const victoryBox = document.getElementById('victory-box-classique');
+        if (victoryBox) victoryBox.remove();
+        
+        const searchInput = document.getElementById('searchInputClassique');
+        if (searchInput) {
+            searchInput.disabled = false;
+            searchInput.placeholder = "Entrez un nom de personnage...";
+        }
+        
+        localStorage.removeItem('jojoClassiqueState');
+        
+        alert(`✅ Filtres appliqués ! Nouveau personnage`);
+    } else {
+        console.log('✅ Personnage OK avec les filtres');
+        alert('✅ Filtres appliqués ! Le personnage actuel correspond à vos critères.');
+    }
+    
+    closePartiesModal();
+}
+
+function resetAllPartiesClassique() {
     enabledParties = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    document.querySelectorAll('.partie-checkbox').forEach(checkbox => {
+    document.querySelectorAll('.partie-checkbox-classique').forEach(checkbox => {
         checkbox.checked = true;
     });
 }
@@ -1174,23 +1157,6 @@ function selectDailyPersonnage() {
     console.log('Parties activées:', enabledParties);
     return personnageDuJour;
 }
-
-// ===== EXPORTS DES FONCTIONS =====
-window.openStatsModal = openStatsModal;
-window.closeStatsModal = closeStatsModal;
-window.toggleModesDropdown = toggleModesDropdown;
-window.switchToMode = switchToMode;
-window.openPartiesModal = openPartiesModal;
-window.closePartiesModal = closePartiesModal;
-window.togglePartie = togglePartie;
-window.applyPartiesFilter = applyPartiesFilter;
-window.resetAllParties = resetAllParties;
-window.openHelpModal = openHelpModal;
-window.closeHelpModal = closeHelpModal;
-window.openAboutModal = openAboutModal;
-window.closeAboutModal = closeAboutModal;
-window.debugParties = debugParties;
-window.testSearch = testSearch;
 
 // ===== FONCTIONS MODALES POUR LE MODE STAND =====
 
@@ -1305,15 +1271,72 @@ function closeHelpModalStand() {
     document.getElementById('help-modal-stand').style.display = 'none';
 }
 
+
+// ===== GESTION DU MENU DÉROULANT MODES (VERSION FINALE) =====
 function toggleModesDropdown() {
-    const dropdown = document.getElementById("modes-dropdown-stand");
-    dropdown.classList.toggle("show");
+    console.log('🔍 toggleModesDropdown appelé');
+    
+    // Fermer tous les dropdowns d'abord
+    document.querySelectorAll('.modes-dropdown').forEach(d => d.classList.remove('show'));
+    
+    // Détecter quel mode est actif
+    const classiqueMode = document.getElementById('classique-mode');
+    const standMode = document.getElementById('stand-mode');
+    
+    let dropdownToOpen = null;
+    
+    if (classiqueMode && classiqueMode.classList.contains('active')) {
+        dropdownToOpen = document.getElementById('modes-dropdown');
+        console.log('📂 Mode Classique détecté - ouverture modes-dropdown');
+    } else if (standMode && standMode.classList.contains('active')) {
+        dropdownToOpen = document.getElementById('modes-dropdown-stand');
+        console.log('📂 Mode Stand détecté - ouverture modes-dropdown-stand');
+    } else {
+        console.error('❌ Aucun mode actif trouvé');
+        console.log('Classique:', classiqueMode?.classList.contains('active'));
+        console.log('Stand:', standMode?.classList.contains('active'));
+        return;
+    }
+    
+    // Ouvrir le bon dropdown
+    if (dropdownToOpen) {
+        dropdownToOpen.classList.add('show');
+        console.log('✅ Dropdown ouvert:', dropdownToOpen.id);
+        
+        // Fermer au clic extérieur
+        setTimeout(() => {
+            const closeHandler = function(e) {
+                if (!e.target.closest('.menu-btn')) {
+                    console.log('🔒 Fermeture des dropdowns');
+                    document.querySelectorAll('.modes-dropdown').forEach(d => d.classList.remove('show'));
+                    document.removeEventListener('click', closeHandler);
+                }
+            };
+            document.addEventListener('click', closeHandler);
+        }, 100);
+    } else {
+        console.error('❌ dropdownToOpen est null');
+    }
 }
 
-// ===== EXPORTS =====
-window.initStandMode = initStandMode;
-window.toggleHintStand = toggleHintStand;
-window.standDuJour = standDuJour;
+// ===== EXPORTS DES FONCTIONS MODE CLASSIQUE =====
+window.openStatsModal = openStatsModal;
+window.closeStatsModal = closeStatsModal;
+window.toggleModesDropdown = toggleModesDropdown;
+window.switchToMode = switchToMode;
+window.openPartiesModal = openPartiesModal;
+window.closePartiesModal = closePartiesModal;
+window.togglePartieClassique = togglePartieClassique;  // ✅ Correction ici
+window.applyPartiesFilterClassique = applyPartiesFilterClassique;  // ✅ Correction ici
+window.resetAllPartiesClassique = resetAllPartiesClassique;  // ✅ Correction ici
+window.openHelpModal = openHelpModal;
+window.closeHelpModal = closeHelpModal;
+window.openAboutModal = openAboutModal;
+window.closeAboutModal = closeAboutModal;
+window.debugParties = debugParties;
+window.testSearch = testSearch;
+
+// ===== EXPORTS DES FONCTIONS MODE STAND =====
 window.openStatsModalStand = openStatsModalStand;
 window.closeStatsModalStand = closeStatsModalStand;
 window.openPartiesModalStand = openPartiesModalStand;
@@ -1323,4 +1346,3 @@ window.applyPartiesFilterStand = applyPartiesFilterStand;
 window.resetAllPartiesStand = resetAllPartiesStand;
 window.openHelpModalStand = openHelpModalStand;
 window.closeHelpModalStand = closeHelpModalStand;
-

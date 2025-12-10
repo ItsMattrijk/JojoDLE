@@ -41,14 +41,14 @@
                     <span class="menu-icon">📊</span>
                     <span class="menu-text">Statistiques</span>
                 </button>
-                <button class="menu-btn" onclick="toggleModesDropdown()">
-                    <span class="menu-icon">🎮</span>
-                    <span class="menu-text">Modes</span>
-                    <div id="modes-dropdown" class="modes-dropdown">
-                        <div class="mode-option" onclick="switchToMode('classique')">🎯 Mode Classique</div>
-                        <div class="mode-option" onclick="switchToMode('stand')">⭐ Mode Stand</div>
-                    </div>
-                </button>
+        <button class="menu-btn" onclick="toggleModesDropdown(event)">
+            <span class="menu-icon">🎮</span>
+            <span class="menu-text">Modes</span>
+            <div id="modes-dropdown" class="modes-dropdown">
+                <div class="mode-option" onclick="switchToMode('classique')">🎯 Mode Classique</div>
+                <div class="mode-option" onclick="switchToMode('stand')">⭐ Mode Stand</div>
+            </div>
+        </button>
                 <button class="menu-btn" onclick="openPartiesModal()">
                     <span class="menu-icon">📚</span>
                     <span class="menu-text">Parties</span>
@@ -486,40 +486,51 @@
         let classiqueInitialized = false;
         let standInitialized = false;
         
-        function showMode(mode) {
-            document.getElementById('homepage').style.display = 'none';
-            document.querySelectorAll('.game-mode').forEach(m => m.classList.remove('active'));
-            document.getElementById(mode + '-mode').classList.add('active');
-            
-            // Initialiser le mode classique seulement une fois
-            if (mode === 'classique' && !classiqueInitialized) {
-                classiqueInitialized = true;
-                setTimeout(() => {
-                    if (typeof initClassiqueMode === 'function') {
-                        initClassiqueMode();
-                    } else {
-                        console.error('initClassiqueMode non trouvée !');
-                    }
-                }, 100);
-            }
-            
-            // Initialiser le mode stand seulement une fois
-            if (mode === 'stand' && !standInitialized) {
-                standInitialized = true;
-                setTimeout(() => {
-                    if (typeof initStandMode === 'function') {
-                        initStandMode().then(() => {
-                            // Afficher le nom du stand
-                            if (window.standDuJour) {
-                                document.getElementById('stand-name').textContent = window.standDuJour.Nom;
-                            }
-                        });
-                    } else {
-                        console.error('initStandMode non trouvée !');
-                    }
-                }, 100);
-            }
+// Dans index.html, remplace la section du script showMode par ceci :
+
+    function showMode(mode) {
+        document.getElementById('homepage').style.display = 'none';
+        document.querySelectorAll('.game-mode').forEach(m => m.classList.remove('active'));
+        document.getElementById(mode + '-mode').classList.add('active');
+        
+        // Initialiser le mode classique seulement une fois
+        if (mode === 'classique' && !classiqueInitialized) {
+            classiqueInitialized = true;
+            setTimeout(() => {
+                if (typeof initClassiqueMode === 'function') {
+                    initClassiqueMode();
+                } else {
+                    console.error('initClassiqueMode non trouvée !');
+                }
+            }, 100);
         }
+        
+        // Initialiser le mode stand seulement une fois
+        if (mode === 'stand' && !standInitialized) {
+            standInitialized = true;
+            setTimeout(() => {
+                if (typeof initStandMode === 'function') {
+                    initStandMode().then(() => {
+                        // ✅ CORRECTION : Afficher le nom du stand APRÈS l'initialisation
+                        if (window.standDuJour && window.standDuJour.Nom) {
+                            document.getElementById('stand-name').textContent = window.standDuJour.Nom;
+                        } else {
+                            console.error('❌ Stand du jour non disponible');
+                        }
+                    });
+                } else {
+                    console.error('initStandMode non trouvée !');
+                }
+            }, 100);
+        }
+        
+        // ✅ AJOUT : Si le mode Stand est déjà initialisé, afficher quand même le nom
+        if (mode === 'stand' && standInitialized && window.standDuJour) {
+            setTimeout(() => {
+                document.getElementById('stand-name').textContent = window.standDuJour.Nom;
+            }, 50);
+        }
+}
         
         function showHome() {
             document.getElementById('homepage').style.display = 'block';
