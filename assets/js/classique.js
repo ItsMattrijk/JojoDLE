@@ -3,6 +3,8 @@ let personnages = [];
 let personnagesSelectionnes = [];
 let personnageDuJour = null;
 let stands = [];
+let citationInitialized = false;
+let ostInitialized = false;
 
 let userStats = {
     gamesPlayed: 0,
@@ -1272,7 +1274,7 @@ function closeHelpModalStand() {
 }
 
 
-// ===== GESTION DU MENU DÉROULANT MODES (VERSION FINALE) =====
+// ===== GESTION DU MENU DÉROULANT MODES=====
 function toggleModesDropdown() {
     console.log('🔍 toggleModesDropdown appelé');
     

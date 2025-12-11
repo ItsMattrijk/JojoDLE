@@ -1,0 +1,98 @@
+[
+  {
+    "ID": 1,
+    "Nom": "Jotaro's Theme",
+    "Fichier": "assets/ost/JotaroTheme.mp3",
+    "PersonnageID": 1,
+    "Partie": "Stardust Crusaders",
+    "PartieNumero": 3
+  },
+  {
+    "ID": 2,
+    "Nom": "Dio's Theme",
+    "Fichier": "assets/ost/DioTheme.mp3",
+    "PersonnageID": 2,
+    "Partie": "Phantom Blood",
+    "PartieNumero": 1
+  },
+  {
+    "ID": 3,
+    "Nom": "Josuke's Theme",
+    "Fichier": "assets/ost/JosukeTheme.mp3",
+    "PersonnageID": 3,
+    "Partie": "Diamond is Unbreakable",
+    "PartieNumero": 4
+  },
+  {
+    "ID": 4,
+    "Nom": "Giorno's Theme (Il vento d'oro)",
+    "Fichier": "assets/ost/GiornoTheme.mp3",
+    "PersonnageID": 4,
+    "Partie": "Golden Wind",
+    "PartieNumero": 5
+  },
+  {
+    "ID": 5,
+    "Nom": "Joseph's Theme",
+    "Fichier": "assets/ost/JosephTheme.mp3",
+    "PersonnageID": 5,
+    "Partie": "Battle Tendency",
+    "PartieNumero": 2
+  },
+  {
+    "ID": 6,
+    "Nom": "Jolyne's Theme",
+    "Fichier": "assets/ost/JolyneTheme.mp3",
+    "PersonnageID": 6,
+    "Partie": "Stone Ocean",
+    "PartieNumero": 6
+  },
+  {
+    "ID": 7,
+    "Nom": "Polnareff's Theme",
+    "Fichier": "assets/ost/PolnareffTheme.mp3",
+    "PersonnageID": 7,
+    "Partie": "Stardust Crusaders",
+    "PartieNumero": 3
+  },
+  {
+    "ID": 8,
+    "Nom": "Yoshikage Kira's Theme",
+    "Fichier": "assets/ost/KiraTheme.mp3",
+    "PersonnageID": 9,
+    "Partie": "Diamond is Unbreakable",
+    "PartieNumero": 4
+  },
+  {
+    "ID": 9,
+    "Nom": "Bruno Bucciarati's Theme",
+    "Fichier": "assets/ost/BucciaratiTheme.mp3",
+    "PersonnageID": 10,
+    "Partie": "Golden Wind",
+    "PartieNumero": 5
+  },
+  {
+    "ID": 10,
+    "Nom": "Diavolo's Theme",
+    "Fichier": "assets/ost/DiavoloTheme.mp3",
+    "PersonnageID": 21,
+    "Partie": "Golden Wind",
+    "PartieNumero": 5
+  },
+  {
+    "ID": 11,
+    "Nom": "Jonathan's Theme",
+    "Fichier": "assets/ost/JonathanTheme.mp3",
+    "PersonnageID": 13,
+    "Partie": "Phantom Blood",
+    "PartieNumero": 1
+  },
+  {
+    "ID": 12,
+    "Nom": "Will A. Zeppeli's Theme",
+    "Fichier": "assets/ost/WAZeppeliTheme.mp3",
+    "PersonnageID": 31,
+    "Partie": "Phantom Blood",
+    "PartieNumero": 1
+  }
+]
