@@ -132,6 +132,45 @@
         .stand-btn:active {
             transform: translateY(-2px) scale(0.98);
         }
+
+        .ost-btn {
+            background: linear-gradient(135deg, #00E5FF 0%, #0033FF 100%);
+            box-shadow: 0 8px 30px rgba(0, 229, 255, 0.6),
+                        inset 0 -3px 12px rgba(0, 0, 0, 0.4),
+                        0 0 10px #00E5FF;
+            border: 4px solid #FFD700;
+            color: #FFFFFF;
+        }
+        .ost-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 45px rgba(0, 229, 255, 0.85),
+                        inset 0 -3px 12px rgba(0, 0, 0, 0.4),
+                        0 0 15px #00E5FF;
+        }
+        .ost-btn:active {
+            transform: translateY(-2px) scale(0.97);
+        }
+
+
+        .citation-btn {
+            background: linear-gradient(135deg, #8A00FF 0%, #FF00D4 100%);
+            box-shadow: 0 8px 30px rgba(138, 0, 255, 0.6),
+                        inset 0 -3px 12px rgba(0, 0, 0, 0.4),
+                        0 0 12px #FF00D4;
+            border: 4px solid #FFD700;
+            color: #FFFFFF;
+        }
+        .citation-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 45px rgba(138, 0, 255, 0.85),
+                        inset 0 -3px 12px rgba(0, 0, 0, 0.4),
+                        0 0 18px #FF00D4;
+        }
+        .citation-btn:active {
+            transform: translateY(-2px) scale(0.97);
+        }
+
+
         .button-subtitle {
             display: block;
             font-size: 1rem;
