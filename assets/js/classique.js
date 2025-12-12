@@ -1275,8 +1275,13 @@ function closeHelpModalStand() {
 
 
 // ===== GESTION DU MENU DÉROULANT MODES=====
-function toggleModesDropdown() {
+function toggleModesDropdown(event) {
     console.log('🔍 toggleModesDropdown appelé');
+    
+    // Empêcher la propagation pour éviter la fermeture immédiate
+    if (event) {
+        event.stopPropagation();
+    }
     
     // Fermer tous les dropdowns d'abord
     document.querySelectorAll('.modes-dropdown').forEach(d => d.classList.remove('show'));
@@ -1284,6 +1289,8 @@ function toggleModesDropdown() {
     // Détecter quel mode est actif
     const classiqueMode = document.getElementById('classique-mode');
     const standMode = document.getElementById('stand-mode');
+    const citationMode = document.getElementById('Citation-mode');
+    const ostMode = document.getElementById('OST-mode');
     
     let dropdownToOpen = null;
     
@@ -1293,10 +1300,18 @@ function toggleModesDropdown() {
     } else if (standMode && standMode.classList.contains('active')) {
         dropdownToOpen = document.getElementById('modes-dropdown-stand');
         console.log('📂 Mode Stand détecté - ouverture modes-dropdown-stand');
+    } else if (citationMode && citationMode.classList.contains('active')) {
+        dropdownToOpen = document.getElementById('modes-dropdown-citation');
+        console.log('📂 Mode Citation détecté - ouverture modes-dropdown-citation');
+    } else if (ostMode && ostMode.classList.contains('active')) {
+        dropdownToOpen = document.getElementById('modes-dropdown-ost');
+        console.log('📂 Mode OST détecté - ouverture modes-dropdown-ost');
     } else {
         console.error('❌ Aucun mode actif trouvé');
         console.log('Classique:', classiqueMode?.classList.contains('active'));
         console.log('Stand:', standMode?.classList.contains('active'));
+        console.log('Citation:', citationMode?.classList.contains('active'));
+        console.log('OST:', ostMode?.classList.contains('active'));
         return;
     }
     

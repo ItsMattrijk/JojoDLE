@@ -249,14 +249,13 @@
             <!-- Titre et description -->
             <div class="game-header">
                 <h1 class="game-title">⭐ MODE STAND ⭐</h1>
-                <p class="game-subtitle" id="subtitle-stand">Quel personnage possède ce Stand ?</p>
             </div>
 
             <!-- Stand du jour -->
             <div class="stand-display" id="stand-display">
                 <div class="stand-card">
                     <div class="stand-card-header">
-                        <span class="stand-card-label">STAND DU JOUR</span>
+                        <span class="stand-card-label">Quel personnage possède ce Stand ?</span>
                     </div>
                     <div class="stand-card-name" id="stand-name">Chargement...</div>
                 </div>
@@ -460,14 +459,13 @@
     <!-- Titre et description -->
     <div class="game-header">
         <h1 class="game-title">💬 MODE CITATION 💬</h1>
-        <p class="game-subtitle" id="subtitle-citation">Quel personnage a dit cette citation ?</p>
     </div>
 
     <!-- Citation du jour -->
     <div class="citation-display" id="citation-display">
         <div class="citation-card">
             <div class="citation-card-header">
-                <span class="citation-card-label">CITATION DU JOUR</span>
+                <span class="citation-card-label">Quel personnage a dit cette citation ?</span>
             </div>
             <div class="citation-card-text" id="citation-text">Chargement...</div>
         </div>
@@ -480,7 +478,7 @@
                 <span class="menu-icon">📊</span>
                 <span class="menu-text">Statistiques</span>
             </button>
-            <button class="menu-btn" onclick="toggleModesDropdown()">
+            <button class="menu-btn" onclick="toggleModesDropdown(event)">
                 <span class="menu-icon">🎮</span>
                 <span class="menu-text">Modes</span>
                 <div id="modes-dropdown-citation" class="modes-dropdown">
@@ -670,14 +668,13 @@
     <!-- Titre et description -->
     <div class="game-header">
         <h1 class="game-title">🎵 MODE OST 🎵</h1>
-        <p class="game-subtitle" id="subtitle-ost">À quel personnage appartient cet OST ?</p>
     </div>
 
     <!-- OST du jour -->
     <div class="ost-display" id="ost-display">
         <div class="ost-card">
             <div class="ost-card-header">
-                <span class="ost-card-label">OST DU JOUR</span>
+                <span class="ost-card-label">À quel personnage appartient cet OST ?</span>
             </div>
             <div class="ost-player" id="ost-player">
                 <audio id="ost-audio" controls>
@@ -685,7 +682,6 @@
                     Votre navigateur ne supporte pas l'audio.
                 </audio>
             </div>
-            <div class="ost-card-name" id="ost-name">Chargement...</div>
         </div>
     </div>
 
@@ -696,7 +692,7 @@
                 <span class="menu-icon">📊</span>
                 <span class="menu-text">Statistiques</span>
             </button>
-            <button class="menu-btn" onclick="toggleModesDropdown()">
+            <button class="menu-btn" onclick="toggleModesDropdown(event)">
                 <span class="menu-icon">🎮</span>
                 <span class="menu-text">Modes</span>
                 <div id="modes-dropdown-ost" class="modes-dropdown">

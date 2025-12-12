@@ -16,30 +16,27 @@ let userStatsCitation = {
 
 let enabledPartiesCitation = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+// ===== SYSTÈME D'INDICES =====
+let hintButtonsCitation = {
+    partie: { unlockAt: 4, visible: false, unlocked: false, revealed: false },
+    apparition: { unlockAt: 7, visible: false, unlocked: false, revealed: false },
+    stand: { unlockAt: 11, visible: false, unlocked: false, revealed: false }
+};
+
 // ===== CHARGEMENT DES DONNÉES =====
 async function loadDataCitation() {
     try {
-        const persoResponse = await fetch('assets/js/perso.json');
+        const [persoResponse, citationResponse] = await Promise.all([
+            fetch('assets/js/perso.json'),
+            fetch('assets/js/citation.json')
+        ]);
         
-        if (!persoResponse.ok) {
+        if (!persoResponse.ok || !citationResponse.ok) {
             throw new Error('Erreur de chargement des données');
         }
         
         personnagesCitation = await persoResponse.json();
-        
-        // Créer des citations fictives pour la démo
-        citationsCitation = [
-            { ID: 1, Citation: "Yare Yare Daze...", PersonnageID: 1, Contexte: "Expression emblématique de Jotaro" },
-            { ID: 2, Citation: "You thought your first kiss would be with JoJo, but it was me, Dio!", PersonnageID: 2, Contexte: "Scène iconique avec Erina" },
-            { ID: 3, Citation: "What did you just say about my hair?!", PersonnageID: 3, Contexte: "Réaction violente de Josuke" },
-            { ID: 4, Citation: "I, Giorno Giovanna, have a dream.", PersonnageID: 4, Contexte: "Déclaration de Giorno" },
-            { ID: 5, Citation: "Your next line is...", PersonnageID: 5, Contexte: "Technique de prédiction de Joseph" },
-            { ID: 6, Citation: "Stone Free!", PersonnageID: 6, Contexte: "Invocation du Stand de Jolyne" },
-            { ID: 7, Citation: "Polnareff Land!", PersonnageID: 7, Contexte: "Rêve de Polnareff" },
-            { ID: 8, Citation: "My name is Yoshikage Kira. I'm 33 years old.", PersonnageID: 9, Contexte: "Présentation de Kira" },
-            { ID: 9, Citation: "Arrivederci.", PersonnageID: 10, Contexte: "Phrase signature de Bucciarati" },
-            { ID: 10, Citation: "I refuse!", PersonnageID: 11, Contexte: "Refus catégorique de Rohan" }
-        ];
+        citationsCitation = await citationResponse.json();
         
         console.log(`${personnagesCitation.length} personnages chargés`);
         console.log(`${citationsCitation.length} citations chargées`);
@@ -96,8 +93,9 @@ function selectDailyCitation() {
         return null;
     }
     
+    // Filtrer les citations selon les parties activées
     const filteredCitations = citationsCitation.filter(citation => {
-        const perso = personnagesCitation.find(p => p.ID === citation.PersonnageID);
+        const perso = personnagesCitation.find(p => p.ID === citation.perso_ID);
         return perso && enabledPartiesCitation.includes(perso.PartieNumero);
     });
     
@@ -115,9 +113,9 @@ function selectDailyCitation() {
     const index = Math.floor(randomValue * filteredCitations.length);
     citationDuJour = filteredCitations[index];
     
-    personnageDuJourCitation = personnagesCitation.find(p => p.ID === citationDuJour.PersonnageID);
+    personnageDuJourCitation = personnagesCitation.find(p => p.ID === citationDuJour.perso_ID);
     
-    console.log('✅ Citation du jour:', citationDuJour.Citation, '- Personnage:', personnageDuJourCitation?.NOM);
+    console.log('✅ Citation du jour:', citationDuJour.citation, '- Personnage:', personnageDuJourCitation?.NOM);
     return citationDuJour;
 }
 
@@ -127,6 +125,109 @@ function compareWithDailyCitation(perso) {
     return {
         isCorrectPersonnage: perso.ID === personnageDuJourCitation.ID
     };
+}
+
+// ===== SYSTÈME D'INDICES =====
+function updateHintButtonsCitation() {
+    const attempts = personnagesSelectionnesCitation.length;
+    
+    if (attempts >= 1) {
+        hintButtonsCitation.partie.visible = true;
+        hintButtonsCitation.apparition.visible = true;
+        hintButtonsCitation.stand.visible = true;
+    }
+    
+    if (attempts >= 4) hintButtonsCitation.partie.unlocked = true;
+    if (attempts >= 7) hintButtonsCitation.apparition.unlocked = true;
+    if (attempts >= 11) hintButtonsCitation.stand.unlocked = true;
+    
+    renderHintButtonsCitation();
+}
+
+function toggleHintCitation(hintType) {
+    const config = hintButtonsCitation[hintType];
+    if (!config || !config.unlocked) return;
+    
+    config.revealed = !config.revealed;
+    renderHintButtonsCitation();
+}
+
+function renderHintButtonsCitation() {
+    const container = document.querySelector('#Citation-mode .hint-buttons-container');
+    if (!container) return;
+    
+    const attempts = personnagesSelectionnesCitation.length;
+    
+    const hints = [
+        {
+            type: 'partie',
+            icon: '📚',
+            label: 'Partie',
+            value: personnageDuJourCitation?.Partie || 'N/A',
+            unlockAt: 4
+        },
+        {
+            type: 'apparition',
+            icon: '📅',
+            label: 'Apparition',
+            value: personnageDuJourCitation?.Apparition || 'N/A',
+            unlockAt: 7
+        },
+        {
+            type: 'stand',
+            icon: '⭐',
+            label: 'Stand',
+            value: personnageDuJourCitation?.Stand || 'N/A',
+            unlockAt: 11
+        }
+    ];
+    
+    const previousStates = {};
+    container.querySelectorAll('.hint-button').forEach(btn => {
+        const type = btn.getAttribute('data-hint');
+        previousStates[type] = {
+            visible: btn.classList.contains('visible'),
+            unlocked: btn.classList.contains('unlocked'),
+            revealed: btn.classList.contains('active')
+        };
+    });
+    
+    container.innerHTML = hints.map(hint => {
+        const config = hintButtonsCitation[hint.type];
+        const isVisible = config.visible;
+        const isUnlocked = config.unlocked;
+        const attemptsNeeded = hint.unlockAt - attempts;
+        
+        const wasVisible = previousStates[hint.type]?.visible || false;
+        const isFirstReveal = isVisible && !wasVisible;
+        
+        return `
+            <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}" 
+                 data-hint="${hint.type}"
+                 ${isUnlocked ? `onclick="toggleHintCitation('${hint.type}')"` : ''}>
+                <div class="hint-icon">${hint.icon}</div>
+                <div class="hint-label">${hint.label}</div>
+                ${!isUnlocked ? `
+                    <div class="hint-lock">
+                        🔒
+                        <span class="hint-unlock-text">
+                            ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
+                        </span>
+                    </div>
+                ` : `
+                    <div class="hint-value ${config.revealed ? 'revealed' : ''}">
+                        ${hint.value}
+                    </div>
+                `}
+            </div>
+        `;
+    }).join('');
+    
+    setTimeout(() => {
+        container.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
+            btn.classList.remove('first-reveal');
+        });
+    }, 500);
 }
 
 // ===== VICTOIRE =====
@@ -473,11 +574,11 @@ function applyPartiesFilterCitation() {
         hintButtonsCitation = {
             partie: { unlockAt: 4, visible: false, unlocked: false, revealed: false },
             apparition: { unlockAt: 7, visible: false, unlocked: false, revealed: false },
-            contexte: { unlockAt: 11, visible: false, unlocked: false, revealed: false }
+            stand: { unlockAt: 11, visible: false, unlocked: false, revealed: false }
         };
         
         selectDailyCitation();
-        document.getElementById('citation-text').textContent = citationDuJour.Citation;
+        document.getElementById('citation-text').textContent = citationDuJour.citation;
         
         displaySelectedPersonnagesCitation();
         renderHintButtonsCitation();
@@ -524,7 +625,7 @@ async function initCitationMode() {
     selectDailyCitation();
     
     // Afficher la citation
-    document.getElementById('citation-text').textContent = citationDuJour.Citation;
+    document.getElementById('citation-text').textContent = citationDuJour.citation;
     
     renderHintButtonsCitation();
     loadGameStateCitation();

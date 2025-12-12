@@ -1,0 +1,233 @@
+[
+    { "comment": "Jotaro Kujo (ID: 1)" },
+    {
+        "perso_ID": 1,
+        "citation": "Yare Yare Daze. (Bon sang de bonsoir.)"
+    },
+    {
+        "perso_ID": 1,
+        "citation": "Mon Stand, Star Platinum, et son poing vous puniront !"
+    },
+
+    { "comment": "Dio Brando (ID: 2)" },
+    {
+        "perso_ID": 2,
+        "citation": "Muda Muda Muda Muda ! (Inutile, Inutile, Inutile !)"
+    },
+    {
+        "perso_ID": 2,
+        "citation": "Je rejette mon humanité, JoJo !"
+    },
+    {
+        "perso_ID": 2,
+        "citation": "The World ! Arrête le temps !"
+    },
+
+    { "comment": "Josuke Higashikata (ID: 3)" },
+    {
+        "perso_ID": 3,
+        "citation": "Qu'est-ce que tu viens de dire à propos de mes cheveux ?!"
+    },
+    {
+        "perso_ID": 3,
+        "citation": "Dora Dora Dora Dora ! (Crazy Diamond !)"
+    },
+
+    { "comment": "Giorno Giovanna (ID: 4)" },
+    {
+        "perso_ID": 4,
+        "citation": "J'ai un rêve."
+    },
+    {
+        "perso_ID": 4,
+        "citation": "Muda Muda Muda Muda Muda ! (Golden Wind !)"
+    },
+
+    { "comment": "Joseph Joestar (ID: 5)" },
+    {
+        "perso_ID": 5,
+        "citation": "Ta prochaine phrase sera : 'Et alors ?'"
+    },
+    {
+        "perso_ID": 5,
+        "citation": "Oh mon Dieu !"
+    },
+    {
+        "perso_ID": 5,
+        "citation": "Niiiice !"
+    },
+
+    { "comment": "Jolyne Cujoh (ID: 6)" },
+    {
+        "perso_ID": 6,
+        "citation": "Yare Yare Dawa. (Bon sang de bonsoir, version féminine.)"
+    },
+    {
+        "perso_ID": 6,
+        "citation": "Stone Free !"
+    },
+
+    { "comment": "Jean Pierre Polnareff (ID: 7)" },
+    {
+        "perso_ID": 7,
+        "citation": "J'ai la chair de poule !"
+    },
+    {
+        "perso_ID": 7,
+        "citation": "Silver Chariot !"
+    },
+
+    { "comment": "Noriaki Kakyoin (ID: 8)" },
+    {
+        "perso_ID": 8,
+        "citation": "Personne n'échappe au rayon d'émeraude ! Emerald Splash !"
+    },
+
+    { "comment": "Yoshikage Kira (ID: 9)" },
+    {
+        "perso_ID": 9,
+        "citation": "Je veux juste vivre une vie tranquille."
+    },
+    {
+        "perso_ID": 9,
+        "citation": "Killer Queen a déjà touché ce poteau de signalisation."
+    },
+
+    { "comment": "Bruno Bucciarati (ID: 10)" },
+    {
+        "perso_ID": 10,
+        "citation": "Arrivederci."
+    },
+    {
+        "perso_ID": 10,
+        "citation": "Ce goût... c'est le goût d'un menteur !"
+    },
+
+    { "comment": "Rohan Kishibe (ID: 11)" },
+    {
+        "perso_ID": 11,
+        "citation": "Mais je refuse."
+    },
+    {
+        "perso_ID": 11,
+        "citation": "Heaven's Door !"
+    },
+
+    { "comment": "Jodio Joestar (ID: 12)" },
+    {
+        "perso_ID": 12,
+        "citation": "C'est l'histoire de la façon dont je suis devenu riche."
+    },
+
+    { "comment": "Jonathan Joestar (ID: 13)" },
+    {
+        "perso_ID": 13,
+        "citation": "Il faut agir, pas seulement réagir !"
+    },
+    {
+        "perso_ID": 13,
+        "citation": "C'est la technique de l'onde !"
+    },
+
+    { "comment": "Robert E. O. Speedwagon (ID: 14)" },
+    {
+        "perso_ID": 14,
+        "citation": "C'est l'homme le plus noble que j'aie jamais rencontré !"
+    },
+
+    { "comment": "Caesar Antonio Zeppeli (ID: 15)" },
+    {
+        "perso_ID": 15,
+        "citation": "Je n'ai pas le temps pour ça ! Mon sang s'emballe !"
+    },
+    {
+        "perso_ID": 15,
+        "citation": "Shabon Cutter !"
+    },
+
+    { "comment": "Mohammed Abdul (ID: 17)" },
+    {
+        "perso_ID": 17,
+        "citation": "Oui, je le suis !"
+    },
+    {
+        "perso_ID": 17,
+        "citation": "Magician's Red !"
+    },
+
+    { "comment": "Guido Mista (ID: 18)" },
+    {
+        "perso_ID": 18,
+        "citation": "Je déteste le chiffre 4."
+    },
+    {
+        "perso_ID": 18,
+        "citation": "Sex Pistols, au boulot !"
+    },
+
+    { "comment": "Koichi Hirose (ID: 19)" },
+    {
+        "perso_ID": 19,
+        "citation": "Ça, c'est vraiment... bizarre !"
+    },
+
+    { "comment": "Narancia Ghirga (ID: 20)" },
+    {
+        "perso_ID": 20,
+        "citation": "Vola Vola Vola Vola ! (Aerosmith !)"
+    },
+
+    { "comment": "Enrico Pucci (ID: 22)" },
+    {
+        "perso_ID": 22,
+        "citation": "Faites avancer le temps... faites avancer le temps !"
+    },
+    {
+        "perso_ID": 22,
+        "citation": "Je cherche le Paradis."
+    },
+
+    { "comment": "Funny Valentine (ID: 25)" },
+    {
+        "perso_ID": 25,
+        "citation": "Dojyaan~ !"
+    },
+    {
+        "perso_ID": 25,
+        "citation": "L'Amérique n'est pas ce que l'on voit, ce que l'on mange, ou ce que l'on combat. L'Amérique, c'est l'endroit où le Président se tient."
+    },
+
+    { "comment": "Josuke Higashikata (Part 8) (ID: 26)" },
+    {
+        "perso_ID": 26,
+        "citation": "Qui suis-je ?"
+    },
+    {
+        "perso_ID": 26,
+        "citation": "Soft & Wet !"
+    },
+
+    { "comment": "Will A. Zeppeli (ID: 31)" },
+    {
+        "perso_ID": 31,
+        "citation": "Bravo, JoJo ! C'est ce que j'appelle un véritable entraînement !"
+    },
+
+    { "comment": "Rudol von Stroheim (ID: 32)" },
+    {
+        "perso_ID": 32,
+        "citation": "La science allemande est la meilleure du monde !"
+    },
+
+    { "comment": "Kars (ID: 33)" },
+    {
+        "perso_ID": 33,
+        "citation": "Je vais devenir la forme de vie ultime !"
+    },
+
+    { "comment": "Wamuu (ID: 35)" },
+    {
+        "perso_ID": 35,
+        "citation": "Je suis un guerrier de l'honneur."
+    }
+]
