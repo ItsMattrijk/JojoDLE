@@ -55,9 +55,11 @@ function getPersonnagePhotoUrlStand(perso) {
 
 function getDailySeedStand() {
     const today = new Date();
-    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const baseSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_stand') || '0');
+    return baseSeed + (resetCounter * 123456);
 }
-
 function seededRandomStand(seed) {
     const x = Math.sin(seed) * 10000;
     return x - Math.floor(x);

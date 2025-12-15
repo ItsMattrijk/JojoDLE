@@ -55,7 +55,10 @@ function getPersonnagePhotoUrlCitation(perso) {
 
 function getDailySeedCitation() {
     const today = new Date();
-    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const baseSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_citation') || '0');
+    return baseSeed + (resetCounter * 123456);
 }
 
 function seededRandomCitation(seed) {

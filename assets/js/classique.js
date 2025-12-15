@@ -70,7 +70,11 @@ function getPersonnagePhotoUrl(perso) {
 
 function getDailySeed() {
     const today = new Date();
-    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const baseSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    // Ajouter le compteur de reset pour avoir un seed différent à chaque reset
+    const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_classique') || '0');
+    return baseSeed + (resetCounter * 123456); // Multiplier par un grand nombre pour bien changer le seed
 }
 
 function seededRandom(seed) {
