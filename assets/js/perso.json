@@ -672,7 +672,7 @@
     "Taille": "300",
     "Naissance": 1587,
     "Poids": "Inconnu",
-    "Lieu d'apparition": "Windknight's Lot",
+    "Lieu d'apparition": "Wind Knight",
     "Partie": "Phantom <br>Blood",
     "PartieNumero": 1,
     "Apparition": "Épisode 5 PB / Chapitre 26",
@@ -762,6 +762,23 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 17 BT / Chapitre 81",
     "EtatVital": "Vivant",
+    "NomStand": "N/A"
+  },
+    {
+    "ID": 46,
+    "Photo": "assets/perso/bruford.jpg",
+    "NOM": "Bruford",
+    "Genre": "Masculin",
+    "Origine": "Royaume-<br>Uni",
+    "Stand": "Non",
+    "Taille": "Inconnu",
+    "Naissance": "1500s",
+    "Poids": "Inconnu",
+    "Lieu d'apparition": "Wind Knight",
+    "Partie": "Phantom <br>Blood",
+    "PartieNumero": 1,
+    "Apparition": "Épisode 5 PB / Chapitre 26",
+    "EtatVital": "Mort",
     "NomStand": "N/A"
   }
 
