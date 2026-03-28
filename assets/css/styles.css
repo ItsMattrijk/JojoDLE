@@ -3258,66 +3258,92 @@
             text-align: center;
             padding: 1.5rem 1rem;
             margin: 3rem auto 2rem auto;
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
-            clear: both; /* Force à passer en dessous */
+            clear: both;
             animation: promoFadeInUp 0.8s ease-out 0.6s both;
         }
 
-        .promo-box {
-            background: linear-gradient(135deg, rgba(139, 0, 139, 0.9), rgba(75, 0, 130, 0.9));
-            border: 3px solid #FFD700;
-            border-radius: 15px;
-            padding: 1.5rem 1rem;
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
+        /* ===== PROMO BOX - JoJo Speedlines Style ===== */
+
+        @keyframes promoSpeedlinesRotate {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
         }
 
-        .promo-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            animation: promoShine 3s ease-in-out infinite;
+        @keyframes promoPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(239, 72, 160, 0.5), 0 0 30px rgba(120, 0, 200, 0.3); }
+            50%       { box-shadow: 0 0 30px rgba(239, 72, 160, 0.9), 0 0 60px rgba(120, 0, 200, 0.6); }
         }
 
         @keyframes promoShine {
-            0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
-            50% { transform: translateX(50%) translateY(50%) rotate(180deg); }
+            0%   { left: -100%; opacity: 0; }
+            30%  { opacity: 1; }
+            100% { left: 150%; opacity: 0; }
+        }
+
+        .promo-box {
+            background: #1a0030;
+            border: 3px solid #EF48A0;
+            border-radius: 16px;
+            padding: 1.8rem 1.2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            animation: promoPulse 3s ease-in-out infinite;
+        }
+
+        /* --- Speedlines SVG en fond --- */
+        .promo-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300'%3E%3Cg stroke='%23EF48A0' stroke-width='0.7' opacity='0.18'%3E%3Cline x1='300' y1='150' x2='0' y2='0'/%3E%3Cline x1='300' y1='150' x2='30' y2='0'/%3E%3Cline x1='300' y1='150' x2='60' y2='0'/%3E%3Cline x1='300' y1='150' x2='90' y2='0'/%3E%3Cline x1='300' y1='150' x2='120' y2='0'/%3E%3Cline x1='300' y1='150' x2='150' y2='0'/%3E%3Cline x1='300' y1='150' x2='180' y2='0'/%3E%3Cline x1='300' y1='150' x2='210' y2='0'/%3E%3Cline x1='300' y1='150' x2='240' y2='0'/%3E%3Cline x1='300' y1='150' x2='270' y2='0'/%3E%3Cline x1='300' y1='150' x2='300' y2='0'/%3E%3Cline x1='300' y1='150' x2='330' y2='0'/%3E%3Cline x1='300' y1='150' x2='360' y2='0'/%3E%3Cline x1='300' y1='150' x2='390' y2='0'/%3E%3Cline x1='300' y1='150' x2='420' y2='0'/%3E%3Cline x1='300' y1='150' x2='450' y2='0'/%3E%3Cline x1='300' y1='150' x2='480' y2='0'/%3E%3Cline x1='300' y1='150' x2='510' y2='0'/%3E%3Cline x1='300' y1='150' x2='540' y2='0'/%3E%3Cline x1='300' y1='150' x2='570' y2='0'/%3E%3Cline x1='300' y1='150' x2='600' y2='0'/%3E%3Cline x1='300' y1='150' x2='0' y2='300'/%3E%3Cline x1='300' y1='150' x2='30' y2='300'/%3E%3Cline x1='300' y1='150' x2='60' y2='300'/%3E%3Cline x1='300' y1='150' x2='90' y2='300'/%3E%3Cline x1='300' y1='150' x2='120' y2='300'/%3E%3Cline x1='300' y1='150' x2='150' y2='300'/%3E%3Cline x1='300' y1='150' x2='180' y2='300'/%3E%3Cline x1='300' y1='150' x2='210' y2='300'/%3E%3Cline x1='300' y1='150' x2='240' y2='300'/%3E%3Cline x1='300' y1='150' x2='270' y2='300'/%3E%3Cline x1='300' y1='150' x2='300' y2='300'/%3E%3Cline x1='300' y1='150' x2='330' y2='300'/%3E%3Cline x1='300' y1='150' x2='360' y2='300'/%3E%3Cline x1='300' y1='150' x2='390' y2='300'/%3E%3Cline x1='300' y1='150' x2='420' y2='300'/%3E%3Cline x1='300' y1='150' x2='450' y2='300'/%3E%3Cline x1='300' y1='150' x2='480' y2='300'/%3E%3Cline x1='300' y1='150' x2='510' y2='300'/%3E%3Cline x1='300' y1='150' x2='540' y2='300'/%3E%3Cline x1='300' y1='150' x2='570' y2='300'/%3E%3Cline x1='300' y1='150' x2='600' y2='300'/%3E%3Cline x1='300' y1='150' x2='0' y2='50'/%3E%3Cline x1='300' y1='150' x2='0' y2='100'/%3E%3Cline x1='300' y1='150' x2='0' y2='150'/%3E%3Cline x1='300' y1='150' x2='0' y2='200'/%3E%3Cline x1='300' y1='150' x2='0' y2='250'/%3E%3Cline x1='300' y1='150' x2='600' y2='50'/%3E%3Cline x1='300' y1='150' x2='600' y2='100'/%3E%3Cline x1='300' y1='150' x2='600' y2='150'/%3E%3Cline x1='300' y1='150' x2='600' y2='200'/%3E%3Cline x1='300' y1='150' x2='600' y2='250'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- Reflet brillant animé --- */
+        .promo-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.08),
+                transparent
+            );
+            animation: promoShine 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .promo-title {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 900;
-            color: #FFD700;
-            text-shadow: 
-                2px 2px 0 #FF1493,
-                -1px -1px 0 #8B008B,
-                0 0 15px rgba(255, 215, 0, 0.6);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow:
+                2px 2px 0 #EF48A0,
+                -2px -2px 0 #7800C8,
+                0 0 20px rgba(239, 72, 160, 0.8);
+            margin-bottom: 0.3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             position: relative;
             z-index: 1;
         }
 
         .promo-subtitle {
-            font-size: 0.95rem;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
             position: relative;
             z-index: 1;
         }
@@ -3325,7 +3351,7 @@
         .promo-games-container {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 2rem;
             flex-wrap: wrap;
             position: relative;
             z-index: 1;
@@ -3333,38 +3359,49 @@
 
         .promo-game-card {
             width: 90px;
-            height: 90px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            gap: 0.5rem;
             animation: promoFadeInUp 0.6s ease-out both;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .promo-game-card:hover {
+            transform: translateY(-4px) scale(1.06);
+            filter: drop-shadow(0 0 10px rgba(239, 72, 160, 0.8));
         }
 
         .promo-game-card:nth-child(1) { animation-delay: 1s; }
         .promo-game-card:nth-child(2) { animation-delay: 1.15s; }
         .promo-game-card:nth-child(3) { animation-delay: 1.3s; }
 
-
-
-        .promo-game-card:hover::before {
-            left: 100%;
-        }
-
         .promo-game-image {
-            width: 90%;
-            height: 90%;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
             display: block;
+            border-radius: 12px;
+            border: 2px solid rgba(239, 72, 160, 0.5);
+            background: rgba(255,255,255,0.04);
+            padding: 4px;
         }
 
         .promo-game-name {
-        margin-top: 0.6rem;
-        font-size: 0.7rem;
-        font-weight: 900;
-        color: #ffffff;
-        text-align: center;
-}
+            font-size: 0.72rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 4px rgba(239, 72, 160, 0.8);
+        }
+
+        .promo-game-subtitle {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.55);
+            text-align: center;
+            margin-top: -0.3rem;
+        }
 
 
         /* ===== RESPONSIVE ===== */
