@@ -157,11 +157,12 @@ function toggleHintOST(hintType) {
 }
 
 function renderHintButtonsOST() {
-    const container = document.querySelector('#OST-mode .hint-buttons-container');
+    const container = document.getElementById('card-hints-ost');
     if (!container) return;
-    
+
     const attempts = personnagesSelectionnesOST.length;
-    
+    if (attempts >= 1) container.classList.add('visible');
+
     const hints = [
         {
             type: 'lieu',
@@ -185,54 +186,29 @@ function renderHintButtonsOST() {
             unlockAt: 11
         }
     ];
-    
-    const previousStates = {};
-    container.querySelectorAll('.hint-button').forEach(btn => {
-        const type = btn.getAttribute('data-hint');
-        previousStates[type] = {
-            visible: btn.classList.contains('visible'),
-            unlocked: btn.classList.contains('unlocked'),
-            revealed: btn.classList.contains('active')
-        };
-    });
-    
-    container.innerHTML = hints.map(hint => {
-        const config = hintButtonsOST[hint.type];
-        const isVisible = config.visible;
-        const isUnlocked = config.unlocked;
-        const attemptsNeeded = hint.unlockAt - attempts;
-        
-        const wasVisible = previousStates[hint.type]?.visible || false;
-        const isFirstReveal = isVisible && !wasVisible;
-        
-        return `
-            <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}" 
-                 data-hint="${hint.type}"
-                 ${isUnlocked ? `onclick="toggleHintOST('${hint.type}')"` : ''}>
-                <div class="hint-icon">${hint.icon}</div>
-                <div class="hint-label">${hint.label}</div>
-                ${!isUnlocked ? `
-                    <div class="hint-lock">
-                        🔒
-                        <span class="hint-unlock-text">
-                            ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
-                        </span>
-                    </div>
-                ` : `
-                    <div class="hint-value ${config.revealed ? 'revealed' : ''}">
-                        ${hint.value}
-                    </div>
-                `}
-            </div>
-        `;
-    }).join('');
-    
-    setTimeout(() => {
-        container.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
-            btn.classList.remove('first-reveal');
-        });
-    }, 500);
+
+    container.innerHTML = `
+        <div class="card-hints-intro">— Indices —</div>
+        ${hints.map(hint => {
+            const config = hintButtonsOST[hint.type];
+            const isUnlocked = config.unlocked;
+            const isRevealed = config.revealed;
+            const attemptsNeeded = hint.unlockAt - attempts;
+            return `
+                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                     data-hint="${hint.type}"
+                     ${isUnlocked ? `onclick="toggleHintOST('${hint.type}')"` : ''}>
+                    <span class="card-hint-icon">${hint.icon}</span>
+                    <span class="card-hint-label">${hint.label}</span>
+                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                    <span class="card-hint-value">${hint.value}</span>
+                </div>
+            `;
+        }).join('')}
+    `;
 }
+
 
 // ===== VICTOIRE =====
 function showVictoryBoxOST() {
@@ -247,23 +223,30 @@ function showVictoryBoxOST() {
             <div class="box">
                 <div class="title victory-title">🎉 VICTOIRE ! 🎉</div>
                 <div class="victory-content">
+                    <span class="victory-name-tag">OST identifié</span>
+                    <br>
                     <img src="${getPersonnagePhotoUrlOST(personnageDuJourOST)}" 
                          alt="${personnageDuJourOST.NOM}" 
                          class="victory-photo"
                          onerror="this.src='https://via.placeholder.com/150x150/FFD700/8B008B?text=${personnageDuJourOST.NOM.charAt(0)}'">
                     <div class="victory-text">
-                        Bravo ! L'OST appartient à <strong>${personnageDuJourOST.NOM}</strong> !
+                        Bravo ! L'OST appartient à<br>
+                        <strong>${personnageDuJourOST.NOM}</strong>
                     </div>
                     <div class="victory-stats">
                         <div class="stat-item">
-                            <span class="stat-label">Nombre d'essais :</span>
+                            <span class="stat-label">Nombre d'essais</span>
                             <span class="stat-value">${personnagesSelectionnesOST.length}</span>
                         </div>
                         <div class="stat-item countdown-item">
-                            <span class="stat-label">OST suivant dans : </span>
+                            <span class="stat-label">OST suivant dans</span>
                             <span class="stat-value" id="countdown-timer-ost">${getTimeUntilMidnightOST()}</span>
                         </div>
                     </div>
+                    <button class="next-mode-btn" onclick="switchToMode('classique')">
+                        <span class="next-mode-icon">🎯</span>
+                        Mode suivant : Classique
+                    </button>
                 </div>
             </div>
         </div>

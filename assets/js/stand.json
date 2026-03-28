@@ -234,7 +234,188 @@
     "Première Apparition": "Épisode 42 SC / Chapitre 238",
     "Description": "Un Stand humanoïde à l'apparence démoniaque, doté d'une force de frappe suffisante pour la décapitation. Sa capacité principale lui permet de se dévorer lui-même et son utilisateur, se transformant en une sphère invisible, invulnérable et dévoreuse qui agit comme un portail vers une dimension de vide, effaçant toute matière sur son passage.",
     "Utilisateur": 30
+  },
+  {
+    "ID": 27,
+    "Nom": "The Hand",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 3 DU / Chapitre 274",
+    "Description": "Un Stand capable d'effacer l'espace avec sa main droite. Tout ce qui est supprimé disparaît de la réalité, permettant de téléporter des objets vers soi ou de réduire les distances instantanément.",
+    "Utilisateur": 47
+  },
+  {
+    "ID": 28,
+    "Nom": "Weather Report",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 10 SO / Chapitre 618",
+    "Description": "Une entité éthérée capable de contrôler la météo et l'atmosphère à une échelle locale, créant des éclairs, de la pluie, ou manipulant la concentration d'oxygène.",
+    "Utilisateur": 48
+  },
+  {
+    "ID": 29,
+    "Nom": "Spice Girl",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 16 GW / Chapitre 499",
+    "Description": "Un Stand humanoïde qui peut rendre n'importe quel objet aussi élastique et mou que du caoutchouc, le rendant indestructible face aux chocs physiques.",
+    "Utilisateur": 49
+  },
+  {
+    "ID": 30,
+    "Nom": "Foo Fighters",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 7 SO / Chapitre 620",
+    "Description": "Un Stand hybride constitué d'une colonie de plancton intelligent. Il peut habiter un corps humain, sceller des blessures et tirer des morceaux de lui-même comme des projectiles.",
+    "Utilisateur": 50
+  },
+  {
+    "ID": 31,
+    "Nom": "Moody Blues",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 5 GW / Chapitre 458",
+    "Description": "Un Stand capable de 'rejouer' le passé d'une personne ou d'un lieu comme un enregistrement vidéo, permettant d'enquêter sur des événements s'étant déroulés précédemment.",
+    "Utilisateur": 51
+  },
+  {
+    "ID": 32,
+    "Nom": "Scary Monsters",
+    "Portée": "Portée sans importance",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Chapitre 780",
+    "Description": "Un Stand qui permet à son utilisateur de se transformer en dinosaure (Deinonychus) ou de transformer d'autres êtres vivants en dinosaures sous son contrôle.",
+    "Utilisateur": 52
+  },
+  {
+    "ID": 33,
+    "Nom": "The Emperor",
+    "Portée": "Longue portée",
+    "CarteTarot": "assets/tarot/the_emperor.webp",
+    "Première Apparition": "Épisode 10 SC / Chapitre 141",
+    "Description": "Un Stand prenant la forme d'un pistolet dont les balles sont des parties du Stand lui-même, permettant à l'utilisateur d'en contrôler la trajectoire avec une précision absolue.",
+    "Utilisateur": 53
+  },
+  {
+    "ID": 34,
+    "Nom": "Diver Down",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 15 SO / Chapitre 653",
+    "Description": "Un Stand capable de 'plonger' à l'intérieur des objets ou des corps pour en modifier la structure interne ou y stocker de l'énergie cinétique pour la relâcher plus tard.",
+    "Utilisateur": 54
+  },
+  {
+    "ID": 35,
+    "Nom": "Harvest",
+    "Portée": "Longue portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 18 DU / Chapitre 335",
+    "Description": "Une armée de 500 minuscules créatures capables de fouiller une ville entière pour collecter des objets spécifiques ou d'injecter des liquides directement dans les veines d'un ennemi.",
+    "Utilisateur": 55
+  },
+  {
+    "ID": 36,
+    "Nom": "Pearl Jam",
+    "Portée": "Longue portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 10 DU / Chapitre 305",
+    "Description": "De petits Stands qui s'introduisent dans la nourriture cuisinée par l'utilisateur pour guérir instantanément les maladies et les blessures de ceux qui les mangent.",
+    "Utilisateur": 56
+  },
+  {
+    "ID": 37,
+    "Nom": "Metallica",
+    "Portée": "Moyenne portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 18 GW / Chapitre 543",
+    "Description": "Un essaim de minuscules visages résidant dans le sang de l'utilisateur, capable de manipuler le fer pour créer des objets tranchants (lames, ciseaux) à l'intérieur du corps de l'ennemi.",
+    "Utilisateur": 57
+  },
+  {
+    "ID": 38,
+    "Nom": "Speed King",
+    "Portée": "Courte portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Chapitre 884",
+    "Description": "Un Stand humanoïde capable de stocker et manipuler la chaleur intense dans des points précis, pouvant causer des hémorragies cérébrales ou faire bouillir des fluides instantanément.",
+    "Utilisateur": 58
+  },
+  {
+    "ID": 39,
+    "Nom": "Kiss",
+    "Portée": "Longue portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 6 SO / Chapitre 615",
+    "Description": "Un Stand capable de créer des autocollants qui dupliquent parfaitement n'importe quel objet. Si l'autocollant est retiré, les deux objets fusionnent violemment en s'endommageant.",
+    "Utilisateur": 59
+  },
+  {
+    "ID": 40,
+    "Nom": "Purple Haze",
+    "Portée": "Moyenne portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 12 GW / Chapitre 479",
+    "Description": "Un Stand instable qui libère un virus dévoreur de chair mortel via des capsules sur ses poings. Le virus dissout tout organisme vivant en quelques secondes.",
+    "Utilisateur": 60
+  },
+  {
+    "ID": 41,
+    "Nom": "Love Deluxe",
+    "Portée": "Moyenne portée",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 8 DU / Chapitre 294",
+    "Description": "Un Stand lié aux cheveux de l'utilisatrice, lui permettant de les allonger à l'infini, de les manipuler avec une force surhumaine et de s'en servir pour capturer ses cibles.",
+    "Utilisateur": 61
+  },
+  {
+    "ID": 42,
+    "Nom": "Holy's Stand",
+    "Portée": "Inconnue",
+    "CarteTarot": "Aucun",
+    "Première Apparition": "Épisode 3 SC / Chapitre 121",
+    "Description": "Un Stand composé de lianes avec des boutons de roses, similaire à Hermit Purple, mais qui ronge la santé de son utilisatrice car elle n'a pas la volonté de le contrôler.",
+    "Utilisateur": 64
+  },
+  {
+    "ID": 43,
+    "Nom": "Justice",
+    "Portée": "Longue portée",
+    "CarteTarot": "assets/tarot/justice.jpg",
+    "Première Apparition": "Épisode 14 SC / Chapitre 155",
+    "Description": "Un Stand de brume massive qui peut contrôler les cadavres ou les personnes blessées comme des marionnettes à travers leurs plaies.",
+    "Utilisateur": 65
+  },
+  {
+    "ID": 44,
+    "Nom": "Horus",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/horus.webp",
+    "Première Apparition": "Épisode 38 SC / Chapitre 222",
+    "Description": "Un Stand squelettique et ailé capable de générer et manipuler de la glace de manière instantanée, créant des stalactites géantes ou gelant ses adversaires.",
+    "Utilisateur": 69
+  },
+  {
+    "ID": 45,
+    "Nom": "Geb",
+    "Portée": "Longue portée",
+    "CarteTarot": "assets/tarot/geb.png",
+    "Première Apparition": "Épisode 24 SC / Chapitre 184",
+    "Description": "Un Stand composé d'eau pure, extrêmement tranchant et rapide, capable de détecter les ennemis par les vibrations du sol à grande distance.",
+    "Utilisateur": 71
+  },
+  {
+    "ID": 46,
+    "Nom": "Yellow Temperance",
+    "Portée": "Courte portée",
+    "CarteTarot": "assets/tarot/temperance.webp",
+    "Première Apparition": "Épisode 8 SC / Chapitre 136",
+    "Description": "Une substance jaune organique qui recouvre l'utilisateur, le protégeant des chocs et lui permettant de prendre n'importe quelle apparence physique. Elle dévore la matière organique au contact.",
+    "Utilisateur": 62
   }
+
 
 
 ]

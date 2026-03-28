@@ -2,25 +2,17 @@
     { "comment": "Jotaro Kujo (ID: 1)" },
     {
         "perso_ID": 1,
-        "citation": "Yare Yare Daze. (Bon sang de bonsoir.)"
-    },
-    {
-        "perso_ID": 1,
-        "citation": "Mon Stand, Star Platinum, et son poing vous puniront !"
+        "citation": "Yare Yare Daze."
     },
 
     { "comment": "Dio Brando (ID: 2)" },
     {
         "perso_ID": 2,
-        "citation": "Muda Muda Muda Muda ! (Inutile, Inutile, Inutile !)"
+        "citation": "Muda Muda Muda Muda !"
     },
     {
         "perso_ID": 2,
         "citation": "Je rejette mon humanité, JoJo !"
-    },
-    {
-        "perso_ID": 2,
-        "citation": "The World ! Arrête le temps !"
     },
 
     { "comment": "Josuke Higashikata (ID: 3)" },
@@ -34,7 +26,7 @@
     },
     {
         "perso_ID": 3,
-        "citation": "Dora Dora Dora Dora ! (Crazy Diamond !)"
+        "citation": "Dora Dora Dora Dora !"
     },
 
     { "comment": "Giorno Giovanna (ID: 4)" },

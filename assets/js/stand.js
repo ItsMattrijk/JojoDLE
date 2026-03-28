@@ -156,82 +156,58 @@ function toggleHintStand(hintType) {
 }
 
 function renderHintButtonsStand() {
-    const container = document.querySelector('#stand-mode .hint-buttons-container');
+    const container = document.getElementById('card-hints-stand');
     if (!container) return;
-    
+
     const attempts = personnagesSelectionnesStand.length;
-    
+    if (attempts >= 1) container.classList.add('visible');
+
     const hints = [
         {
             type: 'portee',
             icon: '📏',
             label: 'Portée',
             value: standDuJour?.Portée || 'N/A',
-            unlockAt: 4
+            unlockAt: 3
         },
         {
             type: 'apparition',
             icon: '📅',
             label: 'Apparition',
             value: standDuJour?.["Première Apparition"] || 'N/A',
-            unlockAt: 7
+            unlockAt: 6
         },
         {
             type: 'explication',
             icon: '📖',
             label: 'Description',
             value: standDuJour?.Description || 'N/A',
-            unlockAt: 11
+            unlockAt: 10
         }
     ];
-    
-    const previousStates = {};
-    container.querySelectorAll('.hint-button').forEach(btn => {
-        const type = btn.getAttribute('data-hint');
-        previousStates[type] = {
-            visible: btn.classList.contains('visible'),
-            unlocked: btn.classList.contains('unlocked'),
-            revealed: btn.classList.contains('active')
-        };
-    });
-    
-    container.innerHTML = hints.map(hint => {
-        const config = hintButtonsStand[hint.type];
-        const isVisible = config.visible;
-        const isUnlocked = config.unlocked;
-        const attemptsNeeded = hint.unlockAt - attempts;
-        
-        const wasVisible = previousStates[hint.type]?.visible || false;
-        const isFirstReveal = isVisible && !wasVisible;
-        
-        return `
-            <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}" 
-                 data-hint="${hint.type}"
-                 ${isUnlocked ? `onclick="toggleHintStand('${hint.type}')"` : ''}>
-                <div class="hint-icon">${hint.icon}</div>
-                <div class="hint-label">${hint.label}</div>
-                ${!isUnlocked ? `
-                    <div class="hint-lock">
-                        🔒
-                        <span class="hint-unlock-text">
-                            ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
-                        </span>
-                    </div>
-                ` : `
-                    <div class="hint-value ${config.revealed ? 'revealed' : ''} ${hint.type === 'explication' ? 'hint-value-long' : ''}">
-                        ${hint.value}
-                    </div>
-                `}
-            </div>
-        `;
-    }).join('');
-    
-    setTimeout(() => {
-        container.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
-            btn.classList.remove('first-reveal');
-        });
-    }, 500);
+
+    container.innerHTML = `
+        <div class="card-hints-intro">— Indices —</div>
+        ${hints.map(hint => {
+            const config = hintButtonsStand[hint.type];
+            const isUnlocked = config.unlocked;
+            const isRevealed = config.revealed;
+            const attemptsNeeded = hint.unlockAt - attempts;
+            return `
+                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                     data-hint="${hint.type}"
+                     ${isUnlocked ? `onclick="toggleHintStand('${hint.type}')"` : ''}>
+                    <span class="card-hint-icon">${hint.icon}</span>
+                    <span class="card-hint-label">${hint.label}</span>
+                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                    <span class="card-hint-value">${hint.value}</span>
+                </div>
+            `;
+        }).join('')}
+    `;
 }
+
 
 // ===== VICTOIRE =====
 function showVictoryBoxStand() {
@@ -246,23 +222,30 @@ function showVictoryBoxStand() {
             <div class="box">
                 <div class="title victory-title">🎉 VICTOIRE ! 🎉</div>
                 <div class="victory-content">
+                    <span class="victory-name-tag">Stand identifié</span>
+                    <br>
                     <img src="${getPersonnagePhotoUrlStand(personnageDuJourStand)}" 
                          alt="${personnageDuJourStand.NOM}" 
                          class="victory-photo"
                          onerror="this.src='https://via.placeholder.com/150x150/FFD700/8B008B?text=${personnageDuJourStand.NOM.charAt(0)}'">
                     <div class="victory-text">
-                        Bravo ! Le Stand <strong>${standDuJour.Nom}</strong> appartient à <strong>${personnageDuJourStand.NOM}</strong> !
+                        <strong>${standDuJour.Nom}</strong> appartient à<br>
+                        <strong>${personnageDuJourStand.NOM}</strong>
                     </div>
                     <div class="victory-stats">
                         <div class="stat-item">
-                            <span class="stat-label">Nombre d'essais :</span>
+                            <span class="stat-label">Nombre d'essais</span>
                             <span class="stat-value">${personnagesSelectionnesStand.length}</span>
                         </div>
                         <div class="stat-item countdown-item">
-                            <span class="stat-label">Stand suivant dans : </span>
+                            <span class="stat-label">Stand suivant dans</span>
                             <span class="stat-value" id="countdown-timer-stand">${getTimeUntilMidnightStand()}</span>
                         </div>
                     </div>
+                    <button class="next-mode-btn" onclick="switchToMode('Citation')">
+                        <span class="next-mode-icon">💬</span>
+                        Mode suivant : Citation
+                    </button>
                 </div>
             </div>
         </div>

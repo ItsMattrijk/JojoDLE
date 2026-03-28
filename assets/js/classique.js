@@ -210,20 +210,19 @@ function toggleHintClassique(hintType) {
 }
 
 function renderHintButtonsClassique() {
-    const container = document.querySelector('#classique-mode .hint-buttons-container');
-    if (!container) return;
-    
+    // Rendre aussi dans la card-hints-classique (box du jour)
+    const cardContainer = document.getElementById('card-hints-classique');
+    const oldContainer = document.querySelector('#classique-mode .hint-buttons-container');
+
     const attempts = personnagesSelectionnes.length;
-    
+
     // Récupérer les infos du Stand si nécessaire
     let standInfo = 'N/A';
     if (personnageDuJour && personnageDuJour.NomStand) {
         const stand = stands.find(s => s.ID === personnageDuJour.NomStand);
-        if (stand) {
-            standInfo = `${stand.Nom}`;
-        }
+        if (stand) standInfo = stand.Nom;
     }
-    
+
     const hints = [
         {
             type: 'apparition',
@@ -247,57 +246,84 @@ function renderHintButtonsClassique() {
             unlockAt: 13
         }
     ];
-    
-    // CORRECTION: Sauvegarder les états précédents pour éviter l'animation
-    const previousStates = {};
-    container.querySelectorAll('.hint-button').forEach(btn => {
-        const type = btn.getAttribute('data-hint');
-        previousStates[type] = {
-            visible: btn.classList.contains('visible'),
-            unlocked: btn.classList.contains('unlocked'),
-            revealed: btn.classList.contains('active')
-        };
-    });
-    
-    container.innerHTML = hints.map(hint => {
+
+    const buildCardHTML = () => hints.map(hint => {
         const config = hintButtonsClassique[hint.type];
-        const isVisible = config.visible;
         const isUnlocked = config.unlocked;
+        const isRevealed = config.revealed;
         const attemptsNeeded = hint.unlockAt - attempts;
-        
-        // Déterminer si c'est la première fois que le bouton devient visible
-        const wasVisible = previousStates[hint.type]?.visible || false;
-        const isFirstReveal = isVisible && !wasVisible;
-        
         return `
-            <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}" 
+            <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
                  data-hint="${hint.type}"
                  ${isUnlocked ? `onclick="toggleHintClassique('${hint.type}')"` : ''}>
-                <div class="hint-icon">${hint.icon}</div>
-                <div class="hint-label">${hint.label}</div>
-                ${!isUnlocked ? `
-                    <div class="hint-lock">
-                        🔒
-                        <span class="hint-unlock-text">
-                            ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
-                        </span>
-                    </div>
-                ` : `
-                    <div class="hint-value ${config.revealed ? 'revealed' : ''} ${hint.type === 'stand_info' ? 'hint-value-long' : ''}">
-                        ${hint.value}
-                    </div>
-                `}
+                <span class="card-hint-icon">${hint.icon}</span>
+                <span class="card-hint-label">${hint.label}</span>
+                <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                <span class="card-hint-value">${hint.value}</span>
             </div>
         `;
     }).join('');
-    
-    // CORRECTION: Supprimer la classe first-reveal après l'animation
-    setTimeout(() => {
-        container.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
-            btn.classList.remove('first-reveal');
+
+    // Rendre dans la card du jour
+    if (cardContainer) {
+        if (attempts >= 1) cardContainer.classList.add('visible');
+        cardContainer.innerHTML = `
+            <div class="card-hints-intro">— Indices —</div>
+            ${buildCardHTML()}
+        `;
+    }
+
+    // Garder aussi l'ancien rendu des boutons pour compatibilité (masqué)
+    if (oldContainer) {
+        const previousStates = {};
+        oldContainer.querySelectorAll('.hint-button').forEach(btn => {
+            const type = btn.getAttribute('data-hint');
+            previousStates[type] = {
+                visible: btn.classList.contains('visible'),
+                unlocked: btn.classList.contains('unlocked'),
+                revealed: btn.classList.contains('active')
+            };
         });
-    }, 500);
+
+        oldContainer.innerHTML = hints.map(hint => {
+            const config = hintButtonsClassique[hint.type];
+            const isVisible = config.visible;
+            const isUnlocked = config.unlocked;
+            const attemptsNeeded = hint.unlockAt - attempts;
+            const wasVisible = previousStates[hint.type]?.visible || false;
+            const isFirstReveal = isVisible && !wasVisible;
+
+            return `
+                <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}"
+                     data-hint="${hint.type}"
+                     ${isUnlocked ? `onclick="toggleHintClassique('${hint.type}')"` : ''}>
+                    <div class="hint-icon">${hint.icon}</div>
+                    <div class="hint-label">${hint.label}</div>
+                    ${!isUnlocked ? `
+                        <div class="hint-lock">
+                            🔒
+                            <span class="hint-unlock-text">
+                                ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
+                            </span>
+                        </div>
+                    ` : `
+                        <div class="hint-value ${config.revealed ? 'revealed' : ''} ${hint.type === 'stand_info' ? 'hint-value-long' : ''}">
+                            ${hint.value}
+                        </div>
+                    `}
+                </div>
+            `;
+        }).join('');
+
+        setTimeout(() => {
+            oldContainer.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
+                btn.classList.remove('first-reveal');
+            });
+        }, 500);
+    }
 }
+
 
 
 // ===== VICTOIRE =====
@@ -308,29 +334,35 @@ function showVictoryBoxClassique() {
     searchInput.disabled = true;
     searchInput.placeholder = "Personnage trouvé ! Revenez demain...";
     
-    // Suppression du délai
     const victoryHTML = `
         <div class="victory-container" id="victory-box-classique">
             <div class="box">
                 <div class="title victory-title">🎉 VICTOIRE ! 🎉</div>
                 <div class="victory-content">
+                    <span class="victory-name-tag">Personnage trouvé</span>
+                    <br>
                     <img src="${getPersonnagePhotoUrl(personnageDuJour)}" 
                          alt="${personnageDuJour.NOM}" 
                          class="victory-photo"
                          onerror="this.src='https://via.placeholder.com/150x150/FFD700/8B008B?text=${personnageDuJour.NOM.charAt(0)}'">
                     <div class="victory-text">
-                        Bravo ! Vous avez trouvé <strong>${personnageDuJour.NOM}</strong> !
+                        Bravo ! Vous avez trouvé<br>
+                        <strong>${personnageDuJour.NOM}</strong>
                     </div>
                     <div class="victory-stats">
                         <div class="stat-item">
-                            <span class="stat-label">Nombre d'essais :</span>
+                            <span class="stat-label">Nombre d'essais</span>
                             <span class="stat-value">${personnagesSelectionnes.length}</span>
                         </div>
                         <div class="stat-item countdown-item">
-                            <span class="stat-label">Personnage suivant dans : </span>
+                            <span class="stat-label">Personnage suivant dans</span>
                             <span class="stat-value" id="countdown-timer-classique">${getTimeUntilMidnight()}</span>
                         </div>
                     </div>
+                    <button class="next-mode-btn" onclick="switchToMode('stand')">
+                        <span class="next-mode-icon">⭐</span>
+                        Mode suivant : Stand
+                    </button>
                 </div>
             </div>
         </div>

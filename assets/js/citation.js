@@ -156,11 +156,12 @@ function toggleHintCitation(hintType) {
 }
 
 function renderHintButtonsCitation() {
-    const container = document.querySelector('#Citation-mode .hint-buttons-container');
+    const container = document.getElementById('card-hints-citation');
     if (!container) return;
-    
+
     const attempts = personnagesSelectionnesCitation.length;
-    
+    if (attempts >= 1) container.classList.add('visible');
+
     const hints = [
         {
             type: 'partie',
@@ -171,7 +172,7 @@ function renderHintButtonsCitation() {
         },
         {
             type: 'apparition',
-            icon: '📅',
+            icon: '👁️',
             label: 'Apparition',
             value: personnageDuJourCitation?.Apparition || 'N/A',
             unlockAt: 7
@@ -185,52 +186,26 @@ function renderHintButtonsCitation() {
         }
     ];
     
-    const previousStates = {};
-    container.querySelectorAll('.hint-button').forEach(btn => {
-        const type = btn.getAttribute('data-hint');
-        previousStates[type] = {
-            visible: btn.classList.contains('visible'),
-            unlocked: btn.classList.contains('unlocked'),
-            revealed: btn.classList.contains('active')
-        };
-    });
-    
-    container.innerHTML = hints.map(hint => {
-        const config = hintButtonsCitation[hint.type];
-        const isVisible = config.visible;
-        const isUnlocked = config.unlocked;
-        const attemptsNeeded = hint.unlockAt - attempts;
-        
-        const wasVisible = previousStates[hint.type]?.visible || false;
-        const isFirstReveal = isVisible && !wasVisible;
-        
-        return `
-            <div class="hint-button ${isVisible ? 'visible' : ''} ${isUnlocked ? 'unlocked' : ''} ${config.revealed ? 'active' : ''} ${isFirstReveal ? 'first-reveal' : ''}" 
-                 data-hint="${hint.type}"
-                 ${isUnlocked ? `onclick="toggleHintCitation('${hint.type}')"` : ''}>
-                <div class="hint-icon">${hint.icon}</div>
-                <div class="hint-label">${hint.label}</div>
-                ${!isUnlocked ? `
-                    <div class="hint-lock">
-                        🔒
-                        <span class="hint-unlock-text">
-                            ${attemptsNeeded > 0 ? `${attemptsNeeded} essai${attemptsNeeded > 1 ? 's' : ''}` : 'Bientôt...'}
-                        </span>
-                    </div>
-                ` : `
-                    <div class="hint-value ${config.revealed ? 'revealed' : ''}">
-                        ${hint.value}
-                    </div>
-                `}
-            </div>
-        `;
-    }).join('');
-    
-    setTimeout(() => {
-        container.querySelectorAll('.hint-button.first-reveal').forEach(btn => {
-            btn.classList.remove('first-reveal');
-        });
-    }, 500);
+    container.innerHTML = `
+        <div class="card-hints-intro">— Indices —</div>
+        ${hints.map(hint => {
+            const config = hintButtonsCitation[hint.type];
+            const isUnlocked = config.unlocked;
+            const isRevealed = config.revealed;
+            const attemptsNeeded = hint.unlockAt - attempts;
+            return `
+                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                     data-hint="${hint.type}"
+                     ${isUnlocked ? `onclick="toggleHintCitation('${hint.type}')"` : ''}>
+                    <span class="card-hint-icon">${hint.icon}</span>
+                    <span class="card-hint-label">${hint.label}</span>
+                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                    <span class="card-hint-value">${hint.value}</span>
+                </div>
+            `;
+        }).join('')}
+    `;
 }
 
 // ===== VICTOIRE =====
@@ -246,23 +221,30 @@ function showVictoryBoxCitation() {
             <div class="box">
                 <div class="title victory-title">🎉 VICTOIRE ! 🎉</div>
                 <div class="victory-content">
+                    <span class="victory-name-tag">Citation devinée</span>
+                    <br>
                     <img src="${getPersonnagePhotoUrlCitation(personnageDuJourCitation)}" 
                          alt="${personnageDuJourCitation.NOM}" 
                          class="victory-photo"
                          onerror="this.src='https://via.placeholder.com/150x150/FFD700/8B008B?text=${personnageDuJourCitation.NOM.charAt(0)}'">
                     <div class="victory-text">
-                        Bravo ! Cette citation appartient à <strong>${personnageDuJourCitation.NOM}</strong> !
+                        Bravo ! Cette citation appartient à<br>
+                        <strong>${personnageDuJourCitation.NOM}</strong>
                     </div>
                     <div class="victory-stats">
                         <div class="stat-item">
-                            <span class="stat-label">Nombre d'essais :</span>
+                            <span class="stat-label">Nombre d'essais</span>
                             <span class="stat-value">${personnagesSelectionnesCitation.length}</span>
                         </div>
                         <div class="stat-item countdown-item">
-                            <span class="stat-label">Citation suivante dans : </span>
+                            <span class="stat-label">Citation suivante dans</span>
                             <span class="stat-value" id="countdown-timer-citation">${getTimeUntilMidnightCitation()}</span>
                         </div>
                     </div>
+                    <button class="next-mode-btn" onclick="switchToMode('OST')">
+                        <span class="next-mode-icon">🎵</span>
+                        Mode suivant : OST
+                    </button>
                 </div>
             </div>
         </div>
