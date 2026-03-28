@@ -15,6 +15,8 @@
                 <img src="assets/autres/lg1.png" alt="JojoDLE Logo" class="logo">
             </div>
 
+            <div class="homepage-tagline"><span style="color: #ffffff;">Devine les personnages de</span> <span style="color: #EF48A0;">Jojo</span></div> <br>
+
             <div class="menu-container">
                 <button class="game-button classique-btn" onclick="showMode('classique')">
                     Classique
@@ -45,6 +47,8 @@
         <div class="promo-subtitle">Joue à nos autres jeux :</div>
         
         <div class="promo-games-container">
+            
+            <!-- PSGDLE -->
             <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
                 <div class="promo-game-card">
                     <img src="assets/autres/PSGDLE.png" 
@@ -53,6 +57,17 @@
                     <p class="promo-game-name">PSGDLE</p>
                 </div>
             </a>
+
+            <!-- DragonBallDLE -->
+            <a href="https://itsmattrijk.github.io/DragonBallDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="https://itsmattrijk.github.io/DragonBallDLE/assets/img/icon.png" 
+                         alt="DragonBallDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">DragonBallDLE</p>
+                </div>
+            </a>
+
         </div>
     </div>
 </div>
@@ -61,10 +76,34 @@
 
         <!-- Mode Classique -->
         <div id="classique-mode" class="game-mode">
-            <!-- Titre et description -->
+            <!-- Logo -->
             <div class="game-header">
-                <h1 class="game-title">MODE CLASSIQUE</h1>
-                <p class="game-subtitle" id="subtitle">Devinez le personnage de JoJo's Bizarre Adventure !</p>
+                <img src="assets/autres/lg1.png" alt="JojoDLE" class="mode-logo logo-home-btn" onclick="showHome()" title="Retour au menu">
+            </div>
+
+            <!-- Barre de navigation entre les modes -->
+            <div class="mode-switcher-bar">
+                <div class="mode-switcher-track">
+                    <button class="mode-switcher-btn active" onclick="switchToMode('classique')" title="Mode Classique">
+                        <span class="mode-switcher-icon">🎯</span>
+                        <span class="mode-switcher-label">Classique</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn" onclick="switchToMode('stand')" title="Mode Stand">
+                        <span class="mode-switcher-icon">⭐</span>
+                        <span class="mode-switcher-label">Stand</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn" onclick="switchToMode('Citation')" title="Mode Citation">
+                        <span class="mode-switcher-icon">💬</span>
+                        <span class="mode-switcher-label">Citation</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn" onclick="switchToMode('OST')" title="Mode OST">
+                        <span class="mode-switcher-icon">🎵</span>
+                        <span class="mode-switcher-label">OST</span>
+                    </button>
+                </div>
             </div>
 
         <!-- Menu de boutons -->
@@ -249,8 +288,18 @@
                 </div>
             </div>
 
-            <!-- Boutons d'indices -->
-            <div class="hint-buttons-container"></div>
+
+            <!-- Box personnage du jour classique -->
+            <div class="classique-display" id="classique-display">
+                <div class="classique-card">
+                    <div class="classique-card-header">
+                        <span class="classique-card-label">Devine le personnage de Jojo d'aujourd'hui !</span>
+                    </div>
+                    <!-- Indices intégrés dans la card -->
+                    <div class="card-hints-section" id="card-hints-classique"></div>
+                </div>
+            </div>
+
 
             <!-- Barre de recherche -->
             <div class="search-container">
@@ -262,45 +311,99 @@
             <!-- Zone d'affichage des personnages sélectionnés -->
             <div id="selectedPersonnagesClassique"></div>
 
-            <!-- Bouton retour -->
-            <button class="back-btn" onclick="showHome()">← Retour au menu</button>
 
-
-            <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
-            <div class="promo-section">
-                <div class="promo-box">
-                    <div class="promo-title">✨ Tu en veux plus ? ✨</div>
-                    <div class="promo-subtitle">Joue à nos autres jeux :</div>
-                    
-                    <div class="promo-games-container">
-                        <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
-                            <div class="promo-game-card">
-                                <img src="assets/autres/PSGDLE.png" 
-                                    alt="PSGDLE" 
-                                    class="promo-game-image">
-                                <p class="promo-game-name">PSGDLE</p>
-                            </div>
-                        </a>
+                        <!-- Box indicatrice de couleur -->
+            <div class="color-legend-box">
+                <h3 class="color-legend-title">Indicateurs de couleur</h3>
+                <div class="color-legend-items">
+                    <div class="color-legend-item">
+                        <div class="color-legend-square correct-square"></div>
+                        <span class="color-legend-label">Correct</span>
+                    </div>
+                    <div class="color-legend-item">
+                        <div class="color-legend-square incorrect-square"></div>
+                        <span class="color-legend-label">Incorrect</span>
+                    </div>
+                    <div class="color-legend-item">
+                        <div class="color-legend-square arrow-square arrow-up-square">
+                            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 4L4 14h16L12 4z"/></svg>
+                        </div>
+                        <span class="color-legend-label">Supérieur</span>
+                    </div>
+                    <div class="color-legend-item">
+                        <div class="color-legend-square arrow-square arrow-down-square">
+                            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 20L4 10h16L12 20z"/></svg>
+                        </div>
+                        <span class="color-legend-label">Inférieur</span>
                     </div>
                 </div>
             </div>
+
+
+
+<!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
+<div class="promo-section">
+    <div class="promo-box">
+        <div class="promo-title">✨ Tu en veux plus ? ✨</div>
+        <div class="promo-subtitle">Joue à nos autres jeux :</div>
+        
+        <div class="promo-games-container">
+            
+            <!-- PSGDLE -->
+            <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="assets/autres/PSGDLE.png" 
+                         alt="PSGDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">PSGDLE</p>
+                </div>
+            </a>
+
+            <!-- DragonBallDLE -->
+            <a href="https://itsmattrijk.github.io/DragonBallDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="https://itsmattrijk.github.io/DragonBallDLE/assets/img/icon.png" 
+                         alt="DragonBallDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">DragonBallDLE</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
 
         </div>
 
         <!-- Mode Stand -->
         <div id="stand-mode" class="game-mode">
-            <!-- Titre et description -->
+            <!-- Logo -->
             <div class="game-header">
-                <h1 class="game-title">⭐ MODE STAND ⭐</h1>
+                <img src="assets/autres/lg1.png" alt="JojoDLE" class="mode-logo logo-home-btn" onclick="showHome()" title="Retour au menu">
             </div>
 
-            <!-- Stand du jour -->
-            <div class="stand-display" id="stand-display">
-                <div class="stand-card">
-                    <div class="stand-card-header">
-                        <span class="stand-card-label">Quel personnage possède ce Stand ?</span>
-                    </div>
-                    <div class="stand-card-name" id="stand-name">Chargement...</div>
+            <!-- Barre de navigation entre les modes -->
+            <div class="mode-switcher-bar">
+                <div class="mode-switcher-track">
+                    <button class="mode-switcher-btn" onclick="switchToMode('classique')" title="Mode Classique">
+                        <span class="mode-switcher-icon">🎯</span>
+                        <span class="mode-switcher-label">Classique</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn active" onclick="switchToMode('stand')" title="Mode Stand">
+                        <span class="mode-switcher-icon">⭐</span>
+                        <span class="mode-switcher-label">Stand</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn" onclick="switchToMode('Citation')" title="Mode Citation">
+                        <span class="mode-switcher-icon">💬</span>
+                        <span class="mode-switcher-label">Citation</span>
+                    </button>
+                    <div class="mode-switcher-divider"></div>
+                    <button class="mode-switcher-btn" onclick="switchToMode('OST')" title="Mode OST">
+                        <span class="mode-switcher-icon">🎵</span>
+                        <span class="mode-switcher-label">OST</span>
+                    </button>
                 </div>
             </div>
 
@@ -335,6 +438,19 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Stand du jour -->
+            <div class="stand-display" id="stand-display">
+                <div class="stand-card">
+                    <div class="stand-card-header">
+                        <span class="stand-card-label">Quel personnage possède ce Stand ?</span>
+                    </div>
+                    <div class="stand-card-name" id="stand-name">Chargement...</div>
+                    <!-- Indices intégrés dans la card -->
+                    <div class="card-hints-section" id="card-hints-stand"></div>
+                </div>
+            </div>
+
 
             <!-- Modal Statistiques Stand -->
             <div id="stats-modal-stand" class="modal">
@@ -492,49 +608,74 @@
             <!-- Zone d'affichage des personnages sélectionnés -->
             <div id="selectedPersonnagesStand"></div>
 
-            <!-- Bouton retour -->
-            <button class="back-btn" onclick="showHome()">← Retour au menu</button>
-
-            <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
-            <div class="promo-section">
-                <div class="promo-box">
-                    <div class="promo-title">✨ Tu en veux plus ? ✨</div>
-                    <div class="promo-subtitle">Joue à nos autres jeux :</div>
-                    
-                    <div class="promo-games-container">
-                        <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
-                            <div class="promo-game-card">
-                                <img src="assets/autres/PSGDLE.png" 
-                                    alt="PSGDLE" 
-                                    class="promo-game-image">
-                                <p class="promo-game-name">PSGDLE</p>
-                            </div>
-                        </a>
-                    </div>
+<!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
+<div class="promo-section">
+    <div class="promo-box">
+        <div class="promo-title">✨ Tu en veux plus ? ✨</div>
+        <div class="promo-subtitle">Joue à nos autres jeux :</div>
+        
+        <div class="promo-games-container">
+            
+            <!-- PSGDLE -->
+            <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="assets/autres/PSGDLE.png" 
+                         alt="PSGDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">PSGDLE</p>
                 </div>
-            </div>
+            </a>
+
+            <!-- DragonBallDLE -->
+            <a href="https://itsmattrijk.github.io/DragonBallDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="https://itsmattrijk.github.io/DragonBallDLE/assets/img/icon.png" 
+                         alt="DragonBallDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">DragonBallDLE</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
 
         </div>
 
 
-        <!-- Mode Citation -->
+<!-- Mode Citation -->
 <div id="Citation-mode" class="game-mode">
-    <!-- Titre et description -->
+    <!-- Logo -->
     <div class="game-header">
-        <h1 class="game-title">💬 MODE CITATION 💬</h1>
+        <img src="assets/autres/lg1.png" alt="JojoDLE" class="mode-logo logo-home-btn" onclick="showHome()" title="Retour au menu">
     </div>
 
-    <!-- Citation du jour -->
-    <div class="citation-display" id="citation-display">
-        <div class="citation-card">
-            <div class="citation-card-header">
-                <span class="citation-card-label">Quel personnage a dit cette citation ?</span>
-            </div>
-            <div class="citation-card-text" id="citation-text">Chargement...</div>
+    <!-- Barre de navigation entre les modes -->
+    <div class="mode-switcher-bar">
+        <div class="mode-switcher-track">
+            <button class="mode-switcher-btn" onclick="switchToMode('classique')" title="Mode Classique">
+                <span class="mode-switcher-icon">🎯</span>
+                <span class="mode-switcher-label">Classique</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn" onclick="switchToMode('stand')" title="Mode Stand">
+                <span class="mode-switcher-icon">⭐</span>
+                <span class="mode-switcher-label">Stand</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn active" onclick="switchToMode('Citation')" title="Mode Citation">
+                <span class="mode-switcher-icon">💬</span>
+                <span class="mode-switcher-label">Citation</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn" onclick="switchToMode('OST')" title="Mode OST">
+                <span class="mode-switcher-icon">🎵</span>
+                <span class="mode-switcher-label">OST</span>
+            </button>
         </div>
     </div>
 
-    <!-- Menu de boutons -->
+        <!-- Menu de boutons -->
     <div class="game-menu-wrapper">
         <div class="game-menu">
             <button class="menu-btn" onclick="openStatsModalCitation()">
@@ -565,6 +706,20 @@
             </button>
         </div>
     </div>
+
+    <!-- Citation du jour -->
+    <div class="citation-display" id="citation-display">
+        <div class="citation-card">
+            <div class="citation-card-header">
+                <span class="citation-card-label">Quel personnage a dit cette citation ?</span>
+            </div>
+            <div class="citation-card-text" id="citation-text">Chargement...</div>
+            <!-- Indices intégrés dans la card -->
+            <div class="card-hints-section" id="card-hints-citation"></div>
+        </div>
+    </div>
+
+
 
     <!-- Modal Statistiques Citation -->
     <div id="stats-modal-citation" class="modal">
@@ -709,8 +864,8 @@
         </div>
     </div>
 
-    <!-- Boutons d'indices -->
-    <div class="hint-buttons-container"></div>
+    <!-- Boutons d'indices (conservé mais vide pour compat) -->
+    <div class="hint-buttons-container" style="display:none"></div>
 
     <!-- Barre de recherche -->
     <div class="search-container">
@@ -722,53 +877,74 @@
     <!-- Zone d'affichage des personnages sélectionnés -->
     <div id="selectedPersonnagesCitation"></div>
 
-    <!-- Bouton retour -->
-    <button class="back-btn" onclick="showHome()">← Retour au menu</button>
 
-    <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
-        <div class="promo-section">
-            <div class="promo-box">
-                <div class="promo-title">✨ Tu en veux plus ? ✨</div>
-                <div class="promo-subtitle">Joue à nos autres jeux :</div>
-                
-                <div class="promo-games-container">
-                    <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
-                        <div class="promo-game-card">
-                            <img src="assets/autres/PSGDLE.png" 
-                                alt="PSGDLE" 
-                                class="promo-game-image">
-                            <p class="promo-game-name">PSGDLE</p>
-                        </div>
-                    </a>
+<!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
+<div class="promo-section">
+    <div class="promo-box">
+        <div class="promo-title">✨ Tu en veux plus ? ✨</div>
+        <div class="promo-subtitle">Joue à nos autres jeux :</div>
+        
+        <div class="promo-games-container">
+            
+            <!-- PSGDLE -->
+            <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="assets/autres/PSGDLE.png" 
+                         alt="PSGDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">PSGDLE</p>
                 </div>
-            </div>
+            </a>
+
+            <!-- DragonBallDLE -->
+            <a href="https://itsmattrijk.github.io/DragonBallDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="https://itsmattrijk.github.io/DragonBallDLE/assets/img/icon.png" 
+                         alt="DragonBallDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">DragonBallDLE</p>
+                </div>
+            </a>
+
         </div>
+    </div>
+</div>
 
 </div>
 
 <!-- Mode OST -->
 <div id="OST-mode" class="game-mode">
-    <!-- Titre et description -->
+    <!-- Logo -->
     <div class="game-header">
-        <h1 class="game-title">🎵 MODE OST 🎵</h1>
+        <img src="assets/autres/lg1.png" alt="JojoDLE" class="mode-logo logo-home-btn" onclick="showHome()" title="Retour au menu">
     </div>
 
-    <!-- OST du jour -->
-    <div class="ost-display" id="ost-display">
-        <div class="ost-card">
-            <div class="ost-card-header">
-                <span class="ost-card-label">À quel personnage appartient cet OST ?</span>
-            </div>
-            <div class="ost-player" id="ost-player">
-                <audio id="ost-audio" controls>
-                    <source id="ost-source" src="" type="audio/mpeg">
-                    Votre navigateur ne supporte pas l'audio.
-                </audio>
-            </div>
+    <!-- Barre de navigation entre les modes -->
+    <div class="mode-switcher-bar">
+        <div class="mode-switcher-track">
+            <button class="mode-switcher-btn" onclick="switchToMode('classique')" title="Mode Classique">
+                <span class="mode-switcher-icon">🎯</span>
+                <span class="mode-switcher-label">Classique</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn" onclick="switchToMode('stand')" title="Mode Stand">
+                <span class="mode-switcher-icon">⭐</span>
+                <span class="mode-switcher-label">Stand</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn" onclick="switchToMode('Citation')" title="Mode Citation">
+                <span class="mode-switcher-icon">💬</span>
+                <span class="mode-switcher-label">Citation</span>
+            </button>
+            <div class="mode-switcher-divider"></div>
+            <button class="mode-switcher-btn active" onclick="switchToMode('OST')" title="Mode OST">
+                <span class="mode-switcher-icon">🎵</span>
+                <span class="mode-switcher-label">OST</span>
+            </button>
         </div>
     </div>
 
-    <!-- Menu de boutons -->
+        <!-- Menu de boutons -->
     <div class="game-menu-wrapper">
         <div class="game-menu">
             <button class="menu-btn" onclick="openStatsModalOST()">
@@ -799,6 +975,25 @@
             </button>
         </div>
     </div>
+
+    <!-- OST du jour -->
+    <div class="ost-display" id="ost-display">
+        <div class="ost-card">
+            <div class="ost-card-header">
+                <span class="ost-card-label">À quel personnage appartient cet OST ?</span>
+            </div>
+            <div class="ost-player" id="ost-player">
+                <audio id="ost-audio" controls>
+                    <source id="ost-source" src="" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+            </div>
+            <!-- Indices intégrés dans la card -->
+            <div class="card-hints-section" id="card-hints-ost"></div>
+        </div>
+    </div>
+
+
 
     <!-- Modal Statistiques OST -->
     <div id="stats-modal-ost" class="modal">
@@ -943,8 +1138,8 @@
         </div>
     </div>
 
-    <!-- Boutons d'indices -->
-    <div class="hint-buttons-container"></div>
+    <!-- Boutons d'indices (conservé mais vide pour compat) -->
+    <div class="hint-buttons-container" style="display:none"></div>
 
     <!-- Barre de recherche -->
     <div class="search-container">
@@ -956,16 +1151,15 @@
     <!-- Zone d'affichage des personnages sélectionnés -->
     <div id="selectedPersonnagesOST"></div>
 
-    <!-- Bouton retour -->
-    <button class="back-btn" onclick="showHome()">← Retour au menu</button>
-
-    <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
+<!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
 <div class="promo-section">
     <div class="promo-box">
         <div class="promo-title">✨ Tu en veux plus ? ✨</div>
         <div class="promo-subtitle">Joue à nos autres jeux :</div>
         
         <div class="promo-games-container">
+            
+            <!-- PSGDLE -->
             <a href="https://itsmattrijk.github.io/PSGDLE/" target="_blank" style="text-decoration: none;">
                 <div class="promo-game-card">
                     <img src="assets/autres/PSGDLE.png" 
@@ -974,6 +1168,17 @@
                     <p class="promo-game-name">PSGDLE</p>
                 </div>
             </a>
+
+            <!-- DragonBallDLE -->
+            <a href="https://itsmattrijk.github.io/DragonBallDLE/" target="_blank" style="text-decoration: none;">
+                <div class="promo-game-card">
+                    <img src="https://itsmattrijk.github.io/DragonBallDLE/assets/img/icon.png" 
+                         alt="DragonBallDLE" 
+                         class="promo-game-image">
+                    <p class="promo-game-name">DragonBallDLE</p>
+                </div>
+            </a>
+
         </div>
     </div>
 </div>
