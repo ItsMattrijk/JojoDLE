@@ -34,6 +34,17 @@
             justify-content: center;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem 0.25rem;
+            }
+        }
+
 
         .logo-container {
             margin-top: -1.5rem;
@@ -220,14 +231,25 @@
 
 
         @media (max-width: 768px) {
-            .logo { max-width: 320px; }
+            .logo { max-width: 260px; }
             .game-button { 
-                padding: 1.5rem 2rem; 
-                font-size: 1.6rem;
-                letter-spacing: 2px;
+                padding: 0.75rem 1.5rem; 
+                font-size: 1rem;
+                letter-spacing: 1px;
             }
-            .button-subtitle { font-size: 0.85rem; }
+            .button-subtitle { font-size: 0.7rem; }
             .game-button::after { display: none; }
+            .menu-container { gap: 0.6rem; max-width: 340px; }
+        }
+        @media (max-width: 480px) {
+            .logo { max-width: 210px; }
+            .game-button { 
+                padding: 0.65rem 1.2rem; 
+                font-size: 0.9rem;
+                letter-spacing: 0.5px;
+            }
+            .button-subtitle { font-size: 0.65rem; }
+            .menu-container { gap: 0.5rem; max-width: 300px; }
         }
 
         /* ===== STYLES GÉNÉRAUX DU MODE JEU ===== */
@@ -237,6 +259,17 @@
     padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .game-mode {
+        padding: 0.8rem 0.4rem;
+    }
+}
+@media (max-width: 480px) {
+    .game-mode {
+        padding: 0.4rem 0.1rem;
+    }
 }
 
 .game-mode.active {
@@ -771,57 +804,59 @@
 /* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 768px) {
     .hint-buttons-container {
-        gap: 1rem;
+        gap: 0.6rem;
         padding: 0 0.5rem;
+        margin: 1rem auto 1.5rem auto;
     }
 
     .hint-button {
-        min-width: 160px;
-        min-height: 160px;
-        max-height: 160px;
-        max-width: 160px;
-        padding: 1rem;
+        min-width: 110px;
+        min-height: 110px;
+        max-height: 110px;
+        max-width: 110px;
+        padding: 0.7rem;
     }
 
     .hint-icon {
-        font-size: 2rem;
-    }
-
-    .hint-label {
-        font-size: 0.85rem;
-    }
-
-    .hint-lock {
         font-size: 1.5rem;
     }
 
-    .hint-unlock-text {
+    .hint-label {
         font-size: 0.7rem;
     }
 
+    .hint-lock {
+        font-size: 1.1rem;
+    }
+
+    .hint-unlock-text {
+        font-size: 0.58rem;
+    }
+
     .hint-value {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
     }
 }
 
 @media (max-width: 480px) {
     .hint-button {
-        min-width: 140px;
-        min-height: 140px;
-        max-height: 140px;
-        max-width: 140px;
+        min-width: 95px;
+        min-height: 95px;
+        max-height: 95px;
+        max-width: 95px;
+        padding: 0.5rem;
     }
 
     .hint-icon {
-        font-size: 1.8rem;
+        font-size: 1.25rem;
     }
 
     .hint-label {
-        font-size: 0.8rem;
+        font-size: 0.62rem;
     }
 
     .hint-value {
-        font-size: 0.85rem;
+        font-size: 0.65rem;
     }
 }
 
@@ -1496,18 +1531,18 @@
     /* Headers */
     .categories-header {
         display: grid;
-        grid-template-columns: repeat(10, 100px);
-        gap: 0.25rem;
+        grid-template-columns: repeat(10, 78px);
+        gap: 0.2rem;
         margin-bottom: 0.5rem;
         width: fit-content;
         min-width: 100%;
     }
 
     .category-header-item {
-        width: 100px;
-        height: 50px;
-        font-size: 0.65rem;
-        padding: 0.25rem;
+        width: 78px;
+        height: 46px;
+        font-size: 0.58rem;
+        padding: 0.2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1519,7 +1554,7 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         white-space: normal;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     .category-header-item::after {
@@ -1535,8 +1570,8 @@
     /* Player categories */
     .player-categories {
         display: grid;
-        grid-template-columns: repeat(10, 100px);
-        gap: 0.25rem;
+        grid-template-columns: repeat(10, 78px);
+        gap: 0.2rem;
         width: fit-content;
         min-width: 100%;
         animation: slideInLeft 0.5s ease-out;
@@ -1547,15 +1582,15 @@
     }
 
     .category {
-        width: 100px;
-        height: 100px;
+        width: 78px;
+        height: 78px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         background: rgba(139, 0, 139, 0.3);
-        border-radius: 8px;
+        border-radius: 6px;
         border: 2px solid rgba(255, 215, 0, 0.3);
         position: relative;
         overflow: hidden;
@@ -1589,29 +1624,29 @@
     }
 
     .player-main-photo {
-        width: 90px;
-        height: 90px;
+        width: 68px;
+        height: 68px;
         object-fit: cover;
-        border-radius: 6px;
+        border-radius: 4px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .player-name-main {
         position: absolute;
-        bottom: 4px;
-        left: 4px;
-        right: 4px;
+        bottom: 2px;
+        left: 2px;
+        right: 2px;
         background: rgba(139, 0, 139, 0.95);
         backdrop-filter: blur(8px);
-        border-radius: 4px;
-        padding: 0.25rem;
+        border-radius: 3px;
+        padding: 0.15rem;
         border: 1px solid rgba(255, 215, 0, 0.3);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        font-size: 0.65rem;
+        font-size: 0.5rem;
         font-weight: 600;
         color: #ffffff;
         text-align: center;
-        line-height: 1.2;
+        line-height: 1.1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -1619,16 +1654,16 @@
     }
 
     .category-value {
-        font-size: 0.75rem;
+        font-size: 0.62rem;
         font-weight: bold;
         color: white;
         text-align: center;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         word-break: break-word;
         hyphens: auto;
-        line-height: 1.2;
-        max-width: 90px;
-        padding: 0 0.25rem;
+        line-height: 1.1;
+        max-width: 70px;
+        padding: 0 0.15rem;
     }
 
     .arrow-indicator {
@@ -1853,77 +1888,77 @@
 /* ===== AJUSTEMENTS POUR PETITS ÉCRANS MOBILES ===== */
 @media (max-width: 480px) {
     .categories-header {
-        grid-template-columns: repeat(9, 85px);
+        grid-template-columns: repeat(10, 64px);
     }
 
     .category-header-item {
-        width: 85px;
-        height: 45px;
-        font-size: 0.6rem;
+        width: 64px;
+        height: 40px;
+        font-size: 0.52rem;
     }
 
     .player-categories {
-        grid-template-columns: repeat(9, 85px);
+        grid-template-columns: repeat(10, 64px);
     }
 
     .category {
-        width: 85px;
-        height: 85px;
+        width: 64px;
+        height: 64px;
     }
 
     .player-main-photo {
-        width: 75px;
-        height: 75px;
+        width: 56px;
+        height: 56px;
     }
 
     .category-value {
-        font-size: 0.7rem;
-        max-width: 75px;
+        font-size: 0.55rem;
+        max-width: 58px;
     }
 
     .player-name-main {
-        font-size: 0.5rem !important;
+        font-size: 0.42rem !important;
     }
 
     .arrow-indicator {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
     }
 }
 
 /* ===== AJUSTEMENTS POUR TRÈS PETITS ÉCRANS ===== */
 @media (max-width: 360px) {
     .categories-header {
-        grid-template-columns: repeat(9, 75px);
+        grid-template-columns: repeat(10, 55px);
     }
 
     .category-header-item {
-        width: 75px;
-        height: 40px;
-        font-size: 0.55rem;
+        width: 55px;
+        height: 36px;
+        font-size: 0.46rem;
     }
 
     .player-categories {
-        grid-template-columns: repeat(9, 75px);
+        grid-template-columns: repeat(10, 55px);
     }
 
     .category {
-        width: 75px;
-        height: 75px;
+        width: 55px;
+        height: 55px;
     }
 
     .player-main-photo {
-        width: 65px;
-        height: 65px;
+        width: 48px;
+        height: 48px;
     }
 
     .category-value {
-        font-size: 0.65rem;
-        max-width: 65px;
+        font-size: 0.48rem;
+        max-width: 50px;
     }
 
     .player-name-main {
-        font-size: 0.5rem !important;
+        font-size: 0.4rem !important;
     }
 
     .carousel-scroll-hint {
@@ -2778,12 +2813,20 @@
 @media (max-width: 768px) {
     .stand-card {
         min-width: auto;
-        width: 90%;
-        padding: 1.5rem 2rem;
+        width: 92%;
+        padding: 0.8rem 1rem;
+        border-radius: 14px;
+        border-width: 3px;
     }
 
     .stand-card-name {
-        font-size: 2rem;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+    }
+
+    .stand-card-label {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
     }
 
     .stand-guesses-list {
@@ -2797,23 +2840,23 @@
     }
 
     .stand-guess-photo {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
 
     .stand-guess-name {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .stand-guess-status {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .stand-card-name {
-        font-size: 1.5rem;
-        letter-spacing: 2px;
+        font-size: 1.05rem;
+        letter-spacing: 1px;
     }
 
     .stand-guess {
@@ -2822,17 +2865,17 @@
     }
 
     .stand-guess-photo {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
     }
 
     .stand-guess-name {
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         letter-spacing: 0.3px;
     }
 
     .stand-guess-status {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }
 
@@ -3258,8 +3301,31 @@
 @media (max-width: 768px) {
     .classique-card {
         min-width: auto;
-        width: 90%;
-        padding: 1.5rem 2rem;
+        width: 92%;
+        padding: 0.8rem 1rem;
+        border-radius: 14px;
+        border-width: 3px;
+    }
+    .classique-card-label {
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+    }
+    .classique-display {
+        margin: 0.8rem auto 1rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .classique-card {
+        padding: 0.6rem 0.8rem;
+        border-radius: 12px;
+    }
+    .classique-card-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.5px;
+    }
+    .classique-display {
+        margin: 0.5rem auto 0.7rem auto;
     }
 }
 
@@ -3268,27 +3334,29 @@
     .citation-card,
     .ost-card {
         min-width: auto;
-        width: 90%;
-        padding: 1.5rem 2rem;
+        width: 92%;
+        padding: 0.8rem 1rem;
+        border-radius: 14px;
+        border-width: 3px;
     }
 
     .citation-card-text {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 
     .ost-card-name {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .citation-card-text {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         letter-spacing: 0.5px;
     }
 
     .ost-card-name {
-        font-size: 1.2rem;
+        font-size: 1rem;
         letter-spacing: 1px;
     }
 
@@ -3680,6 +3748,57 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
     letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .color-legend-box {
+        padding: 10px 12px 12px;
+        margin: 0 auto 12px auto;
+    }
+    .color-legend-title {
+        font-size: 0.78rem;
+        margin: 0 0 8px 0;
+        letter-spacing: 1px;
+    }
+    .color-legend-items {
+        gap: 8px;
+    }
+    .color-legend-square {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+    }
+    .color-legend-square svg {
+        width: 22px;
+        height: 22px;
+    }
+    .color-legend-item {
+        gap: 4px;
+    }
+    .color-legend-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-legend-box {
+        padding: 8px 8px 10px;
+    }
+    .color-legend-items {
+        gap: 6px;
+    }
+    .color-legend-square {
+        width: 34px;
+        height: 34px;
+    }
+    .color-legend-square svg {
+        width: 18px;
+        height: 18px;
+    }
+    .color-legend-label {
+        font-size: 0.55rem;
+    }
 }
 
 /* ===== RÉDUCTION POLICE VALEURS CASES (était trop grand) ===== */
