@@ -265,6 +265,7 @@
                             </ol>
                             <ul class="help-list">
                                 <li><span class="help-correct">🟩 Vert</span> = Information correcte</li>
+                                <li><span class="help-partial">🟧 Orange</span> = Information partiellement correcte</li>
                                 <li><span class="help-incorrect">🟥 Rouge</span> = Information incorrecte</li>
                                 <li><span class="help-arrow">⬆️ Flèche</span> = Le personnage à deviner a une valeur plus haute/basse</li>
                             </ul>
@@ -309,6 +310,8 @@
                 <button class="search-btn">🔍</button>
                 <div id="suggestionsClassique" class="suggestions"></div>
             </div>
+            <!-- Compteur de joueurs -->
+            <div class="players-found-counter" id="players-counter-classique"></div>
 
             <!-- Zone d'affichage des personnages sélectionnés -->
             <div id="selectedPersonnagesClassique"></div>
@@ -327,20 +330,26 @@
                         <span class="color-legend-label">Incorrect</span>
                     </div>
                     <div class="color-legend-item">
+                        <div class="color-legend-square partial-square"></div>
+                        <span class="color-legend-label">Partiel</span>
+                    </div>
+                    <div class="color-legend-item">
                         <div class="color-legend-square arrow-square arrow-up-square">
-                            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 4L4 14h16L12 4z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5L5 14H19L12 5Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round"/><rect x="10" y="13" width="4" height="6" rx="1" fill="white"/></svg>
                         </div>
                         <span class="color-legend-label">Supérieur</span>
                     </div>
                     <div class="color-legend-item">
                         <div class="color-legend-square arrow-square arrow-down-square">
-                            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 20L4 10h16L12 20z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="4" height="6" rx="1" fill="white"/><path d="M12 19L5 10H19L12 19Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round"/></svg>
                         </div>
                         <span class="color-legend-label">Inférieur</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Personnage d'hier -->
+            <div class="yesterday-banner" id="yesterday-classique"></div>
 
 
 <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
@@ -608,9 +617,14 @@
                 <button class="search-btn">🔍</button>
                 <div id="suggestionsStand" class="suggestions"></div>
             </div>
+            <!-- Compteur de joueurs -->
+            <div class="players-found-counter" id="players-counter-stand"></div>
 
             <!-- Zone d'affichage des personnages sélectionnés -->
             <div id="selectedPersonnagesStand"></div>
+
+            <!-- Personnage d'hier -->
+            <div class="yesterday-banner" id="yesterday-stand"></div>
 
 <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
 <div class="promo-section">
@@ -879,9 +893,14 @@
         <button class="search-btn">🔍</button>
         <div id="suggestionsCitation" class="suggestions"></div>
     </div>
+    <!-- Compteur de joueurs -->
+    <div class="players-found-counter" id="players-counter-citation"></div>
 
     <!-- Zone d'affichage des personnages sélectionnés -->
     <div id="selectedPersonnagesCitation"></div>
+
+    <!-- Personnage d'hier -->
+    <div class="yesterday-banner" id="yesterday-citation"></div>
 
 
 <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
@@ -1155,9 +1174,14 @@
         <button class="search-btn">🔍</button>
         <div id="suggestionsOST" class="suggestions"></div>
     </div>
+    <!-- Compteur de joueurs -->
+    <div class="players-found-counter" id="players-counter-ost"></div>
 
     <!-- Zone d'affichage des personnages sélectionnés -->
     <div id="selectedPersonnagesOST"></div>
+
+    <!-- Personnage d'hier -->
+    <div class="yesterday-banner" id="yesterday-ost"></div>
 
 <!-- ===== BOX PROMOTIONNELLE (EN DESSOUS) ===== -->
 <div class="promo-section">
@@ -1333,6 +1357,130 @@
             }
         }
         createSparkles();
+
+        // ===== COMPTEUR DE JOUEURS RÉEL (CounterAPI) & PERSONNAGE D'HIER =====
+
+        // -- CounterAPI setup --
+        // Workspace = ton domaine (ex: "jojodle" ou "itsmattrijk-jojodle"), clé par mode+jour
+        const COUNTER_WORKSPACE = 'https://itsmattrijk.github.io/JojoDLE/';
+
+        function getTodayKey(mode) {
+            const d = new Date();
+            return `${mode}-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        // Lire le compteur (sans incrémenter)
+        async function fetchCounter(mode) {
+            const key = getTodayKey(mode);
+            try {
+                const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_WORKSPACE}/${key}/get`);
+                if (!res.ok) return 0;
+                const data = await res.json();
+                return data.count ?? data.value ?? 0;
+            } catch { return 0; }
+        }
+
+        // Incrémenter le compteur (appeler quand le joueur trouve la bonne réponse)
+        async function incrementCounter(mode) {
+            const key = getTodayKey(mode);
+            try {
+                const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_WORKSPACE}/${key}/up`);
+                if (!res.ok) return 0;
+                const data = await res.json();
+                return data.count ?? data.value ?? 0;
+            } catch { return 0; }
+        }
+
+        // Fonction globale appelée par les JS de chaque mode quand le joueur gagne
+        // Usage dans classique.js / stand.js / etc : jojoIncrementCounter('classique')
+        window.jojoIncrementCounter = async function(mode) {
+            const wonKey = `jojoCounterWon_${mode}_${getTodayKey(mode)}`;
+            if (localStorage.getItem(wonKey)) return; // déjà incrémenté aujourd'hui
+            const newCount = await incrementCounter(mode);
+            localStorage.setItem(wonKey, '1');
+            // Mettre à jour l'affichage
+            const el = document.getElementById(`players-counter-${mode}`);
+            if (el && newCount > 0) {
+                el.innerHTML = `<span class="players-count-number">${newCount.toLocaleString('fr-FR')}</span> personnes ont déjà trouvé !`;
+            }
+        };
+
+        async function renderPlayersCounter(elementId, mode) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const count = await fetchCounter(mode);
+            if (count > 0) {
+                el.innerHTML = `<span class="players-count-number">${count.toLocaleString('fr-FR')}</span> personnes ont déjà trouvé !`;
+            } else {
+                el.innerHTML = `Sois le premier à trouver aujourd'hui !`;
+            }
+        }
+
+        // -- Personnage d'hier --
+        // Offset fixe par mode pour que chaque mode tire un personnage différent
+        const MODE_SEED_OFFSETS = {
+            classique: 0,
+            stand:     111111,
+            citation:  222222,
+            ost:       333333
+        };
+
+        function getYesterdaySeed(resetCounter, mode) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const baseSeed = yesterday.getFullYear() * 10000 + (yesterday.getMonth() + 1) * 100 + yesterday.getDate();
+            const modeOffset = MODE_SEED_OFFSETS[mode] || 0;
+            return baseSeed + (resetCounter * 123456) + modeOffset;
+        }
+
+        function seededRandom(seed) {
+            const x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function getYesterdayCharacter(charList, mode) {
+            if (!charList || charList.length === 0) return null;
+            const resetCounter = parseInt(localStorage.getItem(`jojoResetCounter_${mode}`) || '0');
+            const seed = getYesterdaySeed(resetCounter, mode);
+            const index = Math.floor(seededRandom(seed) * charList.length);
+            return charList[index];
+        }
+
+        function renderYesterdayBanner(elementId, charList, mode) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const perso = getYesterdayCharacter(charList, mode);
+            if (!perso) return;
+            const name = perso.NOM || '???';
+            const num = perso.Numero || perso.ID || '';
+            el.innerHTML = `Le personnage d'hier était ${num ? `<span class="yesterday-num">#${num}</span> ` : ''}<span class="yesterday-name">${name}</span>`;
+        }
+
+        // -- Init après chargement des données --
+        function initYesterdayAndCounters() {
+            const tryInit = setInterval(() => {
+                if (
+                    typeof personnages !== 'undefined' && personnages.length > 0 &&
+                    typeof personnagesStand !== 'undefined' && personnagesStand.length > 0 &&
+                    typeof personnagesCitation !== 'undefined' && personnagesCitation.length > 0 &&
+                    typeof personnagesOST !== 'undefined' && personnagesOST.length > 0
+                ) {
+                    clearInterval(tryInit);
+                    // Compteurs réels
+                    renderPlayersCounter('players-counter-classique', 'classique');
+                    renderPlayersCounter('players-counter-stand', 'stand');
+                    renderPlayersCounter('players-counter-citation', 'citation');
+                    renderPlayersCounter('players-counter-ost', 'ost');
+                    // Personnage d'hier
+                    renderYesterdayBanner('yesterday-classique', personnages, 'classique');
+                    renderYesterdayBanner('yesterday-stand', personnagesStand, 'stand');
+                    renderYesterdayBanner('yesterday-citation', personnagesCitation, 'citation');
+                    renderYesterdayBanner('yesterday-ost', personnagesOST, 'ost');
+                }
+            }, 300);
+        }
+
+        initYesterdayAndCounters();
     </script>
 
 
