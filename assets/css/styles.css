@@ -29,7 +29,7 @@
             z-index: 1;
             text-align: center;
             padding: 2rem;
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
             justify-content: center;
         }
@@ -276,7 +276,7 @@
 .search-container {
     position: relative;
     max-width: 600px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 1rem auto;
     animation: fadeInUp 0.7s ease-out;
     z-index: 10; /* AUGMENTÉ pour être au-dessus du menu */
 }
@@ -840,7 +840,7 @@
 
 #selectedPersonnagesClassique {
     margin: 2rem auto;
-    max-width: 95%;
+    max-width: 100%;
 }
 
 .player-categories{
@@ -876,7 +876,7 @@
 
 .categories-header {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(11, 1fr);
     gap: 6px;
     margin-bottom: 3px;
     align-items: end;
@@ -886,7 +886,7 @@
 .categories-header,
 .player-categories {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(11, 1fr);
     text-align: center;
     width: 100%;
     gap: 6px;
@@ -895,12 +895,12 @@
 .category-header-item {
     text-align: center;
     font-size: 11px;
-    font-weight: 700;
-    color: #ffffff;
+    font-weight: 900;
+    color: #FFD700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     transition: all 0.3s ease;
-    height: 60px;
+    height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -910,17 +910,25 @@
     overflow-wrap: break-word;
     white-space: normal !important;
     hyphens: auto;
+    /* Contour noir style manga */
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    font-family: 'Arial Black', Impact, sans-serif;
 }
 
-/* Barre décorative sous chaque en-tête */
+/* Barre décorative sous chaque en-tête — trait gras manga */
 .category-header-item::after {
     content: '';
     display: block;
-    width: 50%;
+    width: 60%;
     height: 3px;
-    background-color: #ffffff;
-    margin: 8px auto 0;
-    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    margin: 6px auto 0;
+    border-radius: 0;
+    box-shadow: 0 1px 0 #000;
 }
 
 /* Ajustement dynamique de la taille selon la longueur */
@@ -959,41 +967,81 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    height: 75px;
-    background: rgba(139, 0, 139, 0.3);
-    border-radius: 5px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    height: 100px;
+    /* Default state: dark panel JoJo style */
+    background: linear-gradient(160deg, #1a0030 0%, #0d001a 100%);
+    border-radius: 4px;
+    border: 3px solid #111;
+    box-shadow:
+        4px 4px 0px #000,
+        inset 0 1px 0 rgba(255,215,0,0.08);
     position: relative;
     overflow: hidden;
-    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    /* Clip-path: coin taillé bas-droite style manga */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
 
+/* Ligne décorative en haut style speed lines manga */
 .category::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    border-radius: 12px 12px 0 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.4) 40%, rgba(255,215,0,0.8) 50%, rgba(255,215,0,0.4) 60%, transparent 100%);
+    z-index: 2;
+}
+
+/* Effet halftone en fond */
+.category::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 6px 6px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .category:hover {
-    transform: translateY(-3px);
-    box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 215, 0, 0.4);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000;
 }
 
+/* CORRECT : vert manga avec bordure noire épaisse */
 .category.correct {
-    background: linear-gradient(135deg, #069B4E, #016901);
-    border-color: #069B4E;
+    background: linear-gradient(160deg, #0d5c2e 0%, #052e16 100%);
+    border: 3px solid #000;
+    box-shadow:
+        4px 4px 0px #000,
+        inset 0 0 20px rgba(0,255,80,0.08);
+}
+.category.correct::before {
+    background: linear-gradient(90deg, transparent, #00e054, transparent);
 }
 
+/* INCORRECT : rouge manga percutant */
 .category.incorrect {
-    background: linear-gradient(135deg, #B93F44, #CC0000);
-    border-color: #B93F44;
+    background: linear-gradient(160deg, #7a0000 0%, #3d0000 100%);
+    border: 3px solid #000;
+    box-shadow:
+        4px 4px 0px #000,
+        inset 0 0 20px rgba(255,0,0,0.1);
+}
+.category.incorrect::before {
+    background: linear-gradient(90deg, transparent, #ff2020, transparent);
+}
+
+/* PARTIAL : orange */
+.category.partial {
+    background: linear-gradient(160deg, #7a3d00 0%, #3d1e00 100%);
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+}
+.category.partial::before {
+    background: linear-gradient(90deg, transparent, #ff8c00, transparent);
 }
 
 @keyframes correctPulse {
@@ -1043,6 +1091,8 @@
 .selected-player.new-player .category:nth-child(7) { animation-delay: 1.8s; }
 .selected-player.new-player .category:nth-child(8) { animation-delay: 2.1s; }
 .selected-player.new-player .category:nth-child(9) { animation-delay: 2.4s; }
+.selected-player.new-player .category:nth-child(10) { animation-delay: 2.7s; }
+.selected-player.new-player .category:nth-child(10) { animation-delay: 2.7s; }
 
 @keyframes categoryReveal {
     0% {
@@ -1058,9 +1108,22 @@
     }
 }
 
+/* Flash manga au moment de la révélation */
+@keyframes mangaFlash {
+    0%   { filter: brightness(1); }
+    20%  { filter: brightness(3) saturate(0); }
+    40%  { filter: brightness(1.5); }
+    60%  { filter: brightness(2) saturate(0); }
+    100% { filter: brightness(1); }
+}
+
+.selected-player.new-player .category {
+    animation: categoryReveal 0.4s ease-out forwards, mangaFlash 0.5s ease-out forwards;
+}
+
 .player-main-photo {
-    width: 75px;  /* adapte à la taille de la case */
-    height: 75px; /* adapte à la taille de la case */
+    width: 100px;  /* adapte à la taille de la case */
+    height: 100px; /* adapte à la taille de la case */
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
@@ -1072,8 +1135,10 @@
     bottom: 4px;
     left: 2px;
     right: 2px;
-    opacity: 0; 
-    transition: opacity 0.3s ease;
+    opacity: 0;
+    transform: scale(1) !important;
+    transform-origin: center bottom;
+    transition: opacity 0.25s ease;
     z-index: 10;
     background: rgba(139, 0, 139, 0.95); 
     backdrop-filter: blur(8px);
@@ -1083,14 +1148,17 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
     pointer-events: none;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-    font-size: 0.75rem;
+    font-size: 0.65rem !important;
     font-weight: 600;
     color: #ffffff;
     text-align: center;
     line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: visible;
+    white-space: normal;
+    word-break: break-word;
+    hyphens: auto;
+    will-change: opacity;
+    padding: 3px 5px;
 }
 
 .category:hover .player-name-main,
@@ -1103,7 +1171,7 @@
 @media (hover: none) and (pointer: coarse) {
     .player-name-main {
         opacity: 0.85 !important;
-        font-size: 0.7rem;
+        font-size: 0.5rem !important;
     }
 }
 
@@ -1118,22 +1186,61 @@
     line-height: 1.2;
     max-width: 100%;
     padding: 0 0.2rem;
-    
+    position: relative;
+    z-index: 1;
     /* Ajustement automatique selon longueur */
     font-size: clamp(0.65rem, calc(1rem - (var(--text-length, 0) * 0.02rem)), 1.1rem);
 }
 
 
 .arrow-indicator {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.arrow-indicator.arrow-up {
+    background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.25), transparent 60%),
+                linear-gradient(145deg, #22e86b, #0aab44);
+    box-shadow:
+        0 0 10px rgba(34, 232, 107, 0.9),
+        0 0 20px rgba(34, 232, 107, 0.5),
+        inset 0 1px 2px rgba(255,255,255,0.4),
+        inset 0 -2px 4px rgba(0,0,0,0.3);
+    animation: arrowPulseUp 1.4s ease-in-out infinite;
+}
+
+.arrow-indicator.arrow-down {
+    background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.25), transparent 60%),
+                linear-gradient(145deg, #ff5f5f, #cc0000);
+    box-shadow:
+        0 0 10px rgba(255, 60, 60, 0.9),
+        0 0 20px rgba(255, 60, 60, 0.5),
+        inset 0 1px 2px rgba(255,255,255,0.4),
+        inset 0 -2px 4px rgba(0,0,0,0.3);
+    animation: arrowPulseDown 1.4s ease-in-out infinite;
 }
 
 .arrow-indicator svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+}
+
+@keyframes arrowPulseUp {
+    0%, 100% { transform: translateY(0); box-shadow: 0 0 10px rgba(34,232,107,0.9), 0 0 20px rgba(34,232,107,0.5), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.3); }
+    50% { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(34,232,107,1), 0 0 28px rgba(34,232,107,0.7), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.3); }
+}
+
+@keyframes arrowPulseDown {
+    0%, 100% { transform: translateY(0); box-shadow: 0 0 10px rgba(255,60,60,0.9), 0 0 20px rgba(255,60,60,0.5), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.3); }
+    50% { transform: translateY(3px); box-shadow: 0 -4px 16px rgba(255,60,60,1), 0 0 28px rgba(255,60,60,0.7), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.3); }
 }
 
 /* ===== VICTORY BOX ===== */
@@ -1389,7 +1496,7 @@
     /* Headers */
     .categories-header {
         display: grid;
-        grid-template-columns: repeat(9, 100px);
+        grid-template-columns: repeat(10, 100px);
         gap: 0.25rem;
         margin-bottom: 0.5rem;
         width: fit-content;
@@ -1428,7 +1535,7 @@
     /* Player categories */
     .player-categories {
         display: grid;
-        grid-template-columns: repeat(9, 100px);
+        grid-template-columns: repeat(10, 100px);
         gap: 0.25rem;
         width: fit-content;
         min-width: 100%;
@@ -1463,6 +1570,11 @@
     .category.incorrect {
         background: linear-gradient(135deg, #B93F44, #CC0000);
         border-color: #B93F44;
+    }
+
+    .category.partial {
+        background: linear-gradient(135deg, #CC7700, #994400);
+        border-color: #CC7700;
     }
 
     .category-content {
@@ -1520,16 +1632,14 @@
     }
 
     .arrow-indicator {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-bottom: 0.25rem;
+        width: 24px;
+        height: 24px;
+        margin-bottom: 0.2rem;
     }
 
     .arrow-indicator svg {
-        width: 100%;
-        height: 100%;
-        filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+        width: 14px;
+        height: 14px;
     }
 
     /* Scrollbar personnalisée */
@@ -1564,8 +1674,8 @@
 
     .categories-header {
         display: grid;
-        grid-template-columns: repeat(9, 1fr);
-        gap: 6px;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 3px;
         margin-bottom: 3px;
         align-items: end;
         width: 100%;
@@ -1579,7 +1689,7 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         transition: all 0.3s ease;
-        height: 60px;
+        height: 70px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1603,9 +1713,9 @@
 
     .player-categories {
         display: grid;
-        grid-template-columns: repeat(9, 1fr);
-        gap: 6px;
-        margin-top: 1rem;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 3px;
+        margin-top: 0.4rem;
         width: 100%;
     }
 
@@ -1624,7 +1734,7 @@
         justify-content: center;
         text-align: center;
         width: 100%;
-        height: 75px;
+        height: 100px;
         background: rgba(139, 0, 139, 0.3);
         border-radius: 5px;
         border: 1px solid rgba(255, 215, 0, 0.2);
@@ -1651,6 +1761,11 @@
         border-color: #B93F44;
     }
 
+    .category.partial {
+        background: linear-gradient(135deg, #CC7700, #994400);
+        border-color: #CC7700;
+    }
+
     .category-content {
         display: flex;
         flex-direction: column;
@@ -1662,8 +1777,8 @@
     }
 
     .player-main-photo {
-        width: 75px;
-        height: 75px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         flex-shrink: 0;
@@ -1676,7 +1791,8 @@
         left: 2px;
         right: 2px;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transform: scale(1) !important;
+        transition: opacity 0.25s ease;
         z-index: 10;
         background: rgba(139, 0, 139, 0.95);
         backdrop-filter: blur(8px);
@@ -1686,19 +1802,21 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         pointer-events: none;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-        font-size: 0.75rem;
+        font-size: 0.6rem;
         font-weight: 600;
         color: #ffffff;
         text-align: center;
         line-height: 1.2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        overflow: visible;
+        white-space: normal;
+        word-break: break-word;
+        hyphens: auto;
+        will-change: opacity;
+        padding: 3px 5px;
     }
 
     .category:hover .player-name-main {
         opacity: 1;
-        font-size: 8px;
     }
 
     .category-value {
@@ -1715,15 +1833,13 @@
     }
 
     .arrow-indicator {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
     }
 
     .arrow-indicator svg {
-        width: 100%;
-        height: 100%;
-        filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+        width: 13px;
+        height: 13px;
     }
 
     /* Masquer les éléments du carrousel sur desktop */
@@ -1766,7 +1882,7 @@
     }
 
     .player-name-main {
-        font-size: 0.6rem;
+        font-size: 0.5rem !important;
     }
 
     .arrow-indicator {
@@ -1807,7 +1923,7 @@
     }
 
     .player-name-main {
-        font-size: 0.55rem;
+        font-size: 0.5rem !important;
     }
 
     .carousel-scroll-hint {
@@ -2522,21 +2638,7 @@
     text-align: center;
 }
 
-.stand-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: standShine 3s ease-in-out infinite;
-}
+
 
 @keyframes standShine {
     0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
@@ -2825,21 +2927,7 @@
     text-align: center;
 }
 
-.citation-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: standShine 3s ease-in-out infinite;
-}
+
 
 .citation-card-header {
     margin-bottom: 1rem;
@@ -2910,21 +2998,6 @@
     text-align: center;
 }
 
-.ost-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: standShine 3s ease-in-out infinite;
-}
 
 .ost-card-header {
     margin-bottom: 1rem;
@@ -3120,22 +3193,6 @@
     text-align: center;
 }
 
-.classique-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: standShine 3s ease-in-out infinite;
-    pointer-events: none;
-}
 
 .classique-card-header {
     margin-bottom: 0.5rem;
@@ -3592,14 +3649,21 @@
     border-color: #B93F44;
 }
 
+.partial-square {
+    background: linear-gradient(135deg, #cc6600, #994d00);
+    border-color: #ff8c00;
+}
+
 .arrow-up-square {
-    background: linear-gradient(135deg, #B93F44, #CC0000);
-    border-color: #B93F44;
+    background: linear-gradient(135deg, #22e86b, #0aab44);
+    border-color: #22e86b;
+    box-shadow: 0 0 12px rgba(34, 232, 107, 0.6);
 }
 
 .arrow-down-square {
-    background: linear-gradient(135deg, #B93F44, #CC0000);
-    border-color: #B93F44;
+    background: linear-gradient(135deg, #ff5f5f, #cc0000);
+    border-color: #ff5f5f;
+    box-shadow: 0 0 12px rgba(255, 60, 60, 0.6);
 }
 
 .color-legend-square svg {
@@ -3733,4 +3797,46 @@
     .mode-switcher-divider {
         width: 18px;
     }
+}
+/* ===== COMPTEUR DE JOUEURS ===== */
+.players-found-counter {
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 6px auto 4px;
+    letter-spacing: 0.3px;
+}
+
+.players-count-number {
+    color: #EF48A0;
+    font-weight: 900;
+}
+
+/* ===== BANNIÈRE PERSONNAGE D'HIER ===== */
+.yesterday-banner {
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin: 12px auto 6px;
+    max-width: 480px;
+    letter-spacing: 0.2px;
+}
+
+.yesterday-banner:empty {
+    display: none;
+}
+
+.yesterday-num {
+    color: #EF48A0;
+    font-weight: 900;
+}
+
+.yesterday-name {
+    color: #EF48A0;
+    font-weight: 900;
+    font-size: 1rem;
 }

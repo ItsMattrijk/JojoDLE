@@ -14,7 +14,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 1 SC / Chapitre 114",
     "EtatVital": "Vivant",
-    "NomStand": 1
+    "NomStand": 1,
+    "Affiliation": "Stardust Crusaders"
   },
   {
     "ID": 2,
@@ -31,7 +32,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
-    "NomStand": 2
+    "NomStand": 2,
+    "Affiliation": "Vampire, Partisans de Dio"
   },
   {
     "ID": 3,
@@ -48,7 +50,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 1 DU / Chapitre 266",
     "EtatVital": "Vivant",
-    "NomStand": 3
+    "NomStand": 3,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 4,
@@ -65,7 +68,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 1 GW / Chapitre 440",
     "EtatVital": "Vivant",
-    "NomStand": 4
+    "NomStand": 4,
+    "Affiliation": "Groupe de Bucciarati"
   },
   {
     "ID": 5,
@@ -82,7 +86,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 10 BT / Chapitre 45",
     "EtatVital": "Vivant",
-    "NomStand": 5
+    "NomStand": 5,
+    "Affiliation": "Groupe de Lisa Lisa, Stardust Crusaders"
   },
   {
     "ID": 6,
@@ -99,7 +104,8 @@
     "PartieNumero": 6,
     "Apparition": "Épisode 1 SO / Chapitre 595",
     "EtatVital": "Mort",
-    "NomStand": 6
+    "NomStand": 6,
+    "Affiliation": "Prison de Green Dolphin"
   },
   {
     "ID": 7,
@@ -116,7 +122,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 7 SC / Chapitre 124",
     "EtatVital": "Vivant",
-    "NomStand": 7
+    "NomStand": 7,
+    "Affiliation": "Stardust Crusaders"
   },
   {
     "ID": 8,
@@ -133,7 +140,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 2 SC / Chapitre 117",
     "EtatVital": "Mort",
-    "NomStand": 8
+    "NomStand": 8,
+    "Affiliation": "Stardust Crusaders"
   },
   {
     "ID": 9,
@@ -150,7 +158,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 12 DU / Chapitre 319",
     "EtatVital": "Mort",
-    "NomStand": 9
+    "NomStand": 9,
+    "Affiliation": "Ennemis de Morioh"
   },
   {
     "ID": 10,
@@ -167,7 +176,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 2 GW / Chapitre 443",
     "EtatVital": "Mort",
-    "NomStand": 10
+    "NomStand": 10,
+    "Affiliation": "Groupe de Bucciarati"
   },
   {
     "ID": 11,
@@ -184,7 +194,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 11 DU / Chapitre 314",
     "EtatVital": "Vivant",
-    "NomStand": 11
+    "NomStand": 11,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 12,
@@ -201,7 +212,8 @@
     "PartieNumero": 9,
     "Apparition": "Chapitre 1 JL",
     "EtatVital": "Vivant",
-    "NomStand": 12
+    "NomStand": 12,
+    "Affiliation": "Gang de Jodio"
   },
   {
     "ID": 13,
@@ -218,7 +230,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Alliés de Jonathan"
   },
   {
     "ID": 14,
@@ -235,7 +248,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 3 PB / Chapitre 5",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Alliés de Jonathan"
   },
   {
     "ID": 15,
@@ -252,7 +266,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 10 BT / Chapitre 46",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Groupe de Lisa Lisa"
   },
   {
     "ID": 16,
@@ -269,7 +284,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 7 PB / Chapitre 19",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Alliés de Jonathan, Vampire"
   },
 {
  "ID": 17,
@@ -286,7 +302,8 @@
  "PartieNumero": 3,
  "Apparition": "Épisode 1 SC / Chapitre 115",
  "EtatVital": "Mort",
- "NomStand": 13
+ "NomStand": 13,
+ "Affiliation": "Stardust Crusaders"
 },
  {
  "ID": 18,
@@ -303,7 +320,8 @@
  "PartieNumero": 5,
  "Apparition": "Épisode 4 GW / Chapitre 456",
  "EtatVital": "Vivant",
- "NomStand": 14
+ "NomStand": 14,
+ "Affiliation": "Groupe de Bucciarati"
  },
  {
  "ID": 19,
@@ -320,7 +338,8 @@
  "PartieNumero": 4,
  "Apparition": "Épisode 1 DU / Chapitre 266",
  "EtatVital": "Vivant",
- "NomStand": 15
+ "NomStand": 15,
+ "Affiliation": "Groupe de Morioh"
  },
  {
  "ID": 20,
@@ -337,7 +356,8 @@
  "PartieNumero": 5,
  "Apparition": "Épisode 4 GW / Chapitre 456",
  "EtatVital": "Mort",
- "NomStand": 16
+ "NomStand": 16,
+ "Affiliation": "Groupe de Bucciarati"
 },
 {
  "ID": 21,
@@ -354,7 +374,8 @@
  "PartieNumero": 5,
  "Apparition": "Épisode 18 GW / Chapitre 510",
  "EtatVital": "Mort",
- "NomStand": 17
+ "NomStand": 17,
+  "Affiliation": "Passione" 
  },
  {
  "ID": 22,
@@ -371,7 +392,8 @@
  "PartieNumero": 6,
  "Apparition": "Épisode 8 SO / Chapitre 627",
  "EtatVital": "Mort",
- "NomStand": 18
+ "NomStand": 18,
+ "Affiliation": "Partisans de Dio, Prison de Green Dolphin"
  },
  {
  "ID": 23,
@@ -388,7 +410,8 @@
  "PartieNumero": 7,
  "Apparition": "Chapitre 754",
  "EtatVital": "Mort",
- "NomStand": 19
+ "NomStand": 19,
+ "Affiliation": "Coureurs SBR"
  },
  {
  "ID": 24,
@@ -405,7 +428,8 @@
  "PartieNumero": 7,
  "Apparition": "Chapitre 753",
  "EtatVital": "Mort",
- "NomStand": "N/A"
+ "NomStand": "N/A",
+ "Affiliation": "Coureurs SBR"
  },
  {
  "ID": 25,
@@ -422,7 +446,8 @@
  "PartieNumero": 7,
  "Apparition": "Chapitre 777",
  "EtatVital": "Mort",
- "NomStand": 20
+ "NomStand": 20,
+ "Affiliation": "Armée de Valentine"
 },
 {
   "ID": 26,
@@ -439,7 +464,8 @@
   "PartieNumero": 8,
   "Apparition": "Chapitre 848",
   "EtatVital": "Vivant",
-  "NomStand": 21
+  "NomStand": 21,
+  "Affiliation": "Famille Higashikata"
 },
 {
   "ID": 27,
@@ -456,7 +482,8 @@
   "PartieNumero": 8,
   "Apparition": "Chapitre 848",
   "EtatVital": "Vivant",
-  "NomStand": 22
+  "NomStand": 22,
+  "Affiliation": "Alliés de la Famille Higashikata"
 },
 {
   "ID": 28,
@@ -473,7 +500,8 @@
   "PartieNumero": 7,
   "Apparition": "Chapitre 784",
   "EtatVital": "Mort",
-  "NomStand": 23
+  "NomStand": 23,
+  "Affiliation": "Coureurs SBR"
 },
   {
     "ID": 29,
@@ -490,7 +518,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 24 SC / Chapitre 183",
     "EtatVital": "Mort",
-    "NomStand": 25
+    "NomStand": 25,
+    "Affiliation": "Stardust Crusaders"
   },
   {
     "ID": 30,
@@ -507,7 +536,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 2 SC / Chapitre 238",
     "EtatVital": "Mort",
-    "NomStand": 26
+    "NomStand": 26,
+    "Affiliation": "Partisans de Dio"
   },
   {
     "ID": 31,
@@ -524,7 +554,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 4 PB / Chapitre 35",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Alliés de Jonathan"
   },
   {
     "ID": 32,
@@ -541,7 +572,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 11 BT / Chapitre 52",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Nazi, Groupe de Lisa Lisa"
   },
   {
     "ID": 33,
@@ -558,7 +590,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 14 BT / Chapitre 64",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Homme du Pilier"
   },
   {
     "ID": 34,
@@ -575,7 +608,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 14 BT / Chapitre 57",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Homme du Pilier"
   },
   {
     "ID": 35,
@@ -592,7 +626,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 14 BT / Chapitre 61",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Homme du Pilier"
   },
   {
     "ID": 36,
@@ -609,7 +644,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 9 BT / Chapitre 43",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Groupe de Lisa Lisa"
   },
   {
     "ID": 37,
@@ -626,7 +662,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Aucun"
   },
   {
     "ID": 38,
@@ -643,7 +680,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Aucun"
   },
   {
     "ID": 39,
@@ -660,7 +698,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 12 PB / Chapitre 46",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Homme du Pilier"
   },
   {
     "ID": 40,
@@ -677,7 +716,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 5 PB / Chapitre 26",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Vampire"
   },
   {
     "ID": 41,
@@ -694,7 +734,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 2 PB / Chapitre 7",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Vampire"
   },
   {
     "ID": 42,
@@ -711,7 +752,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 1 PB / Chapitre 1",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Aucun"
   },
   {
     "ID": 43,
@@ -728,7 +770,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 10 PB / Chapitre 45",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Aucun"
   },
   {
     "ID": 44,
@@ -745,7 +788,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 16 PB / Chapitre 77",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Groupe de Lisa Lisa"
   },
   {
     "ID": 45,
@@ -762,7 +806,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 17 BT / Chapitre 81",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Groupe de Lisa Lisa"
   },
     {
     "ID": 46,
@@ -779,7 +824,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 5 PB / Chapitre 26",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Vampire"
   },
   {
     "ID": 47,
@@ -796,7 +842,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 1 DU / Chapitre 274",
     "EtatVital": "Vivant",
-    "NomStand": 27
+    "NomStand": 27,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 48,
@@ -813,7 +860,8 @@
     "PartieNumero": 6,
     "Apparition": "Épisode 10 SO / Chapitre 618",
     "EtatVital": "Mort",
-    "NomStand": 28
+    "NomStand": 28,
+    "Affiliation": "Prison de Green Dolphin"
   },
   {
     "ID": 49,
@@ -830,7 +878,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 9 GW / Chapitre 468",
     "EtatVital": "Vivant",
-    "NomStand": 29
+    "NomStand": 29,
+    "Affiliation": "Groupe de Bucciarati"
   },
   {
     "ID": 50,
@@ -847,7 +896,8 @@
     "PartieNumero": 6,
     "Apparition": "Épisode 7 SO / Chapitre 620",
     "EtatVital": "Mort",
-    "NomStand": 30
+    "NomStand": 30,
+    "Affiliation": "Prison de Green Dolphin"
   },
   {
     "ID": 51,
@@ -864,7 +914,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 4 GW / Chapitre 456",
     "EtatVital": "Mort",
-    "NomStand": 31
+    "NomStand": 31,
+    "Affiliation": "Groupe de Bucciarati"
   },
   {
     "ID": 52,
@@ -881,7 +932,8 @@
     "PartieNumero": 7,
     "Apparition": "Épisode 4 SBR / Chapitre 753",
     "EtatVital": "Mort",
-    "NomStand": 32
+    "NomStand": 32,
+    "Affiliation": "Coureurs SBR"
   },
   {
     "ID": 53,
@@ -898,7 +950,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 10 SC / Chapitre 141",
     "EtatVital": "Vivant",
-    "NomStand": 33
+    "NomStand": 33,
+    "Affiliation": "Partisans de Dio"
   },
   {
     "ID": 54,
@@ -915,7 +968,8 @@
     "PartieNumero": 6,
     "Apparition": "Épisode 10 SO / Chapitre 618",
     "EtatVital": "Mort",
-    "NomStand": 34
+    "NomStand": 34,
+    "Affiliation": "Prison de Green Dolphin"
   },
   {
     "ID": 55,
@@ -932,7 +986,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 18 DU / Chapitre 335",
     "EtatVital": "Mort",
-    "NomStand": 35
+    "NomStand": 35,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 56,
@@ -949,7 +1004,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 10 DU / Chapitre 303",
     "EtatVital": "Vivant",
-    "NomStand": 36
+    "NomStand": 36,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 57,
@@ -966,7 +1022,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 9 GW / Chapitre 542",
     "EtatVital": "Mort",
-    "NomStand": 37
+    "NomStand": 37,
+    "Affiliation": "Passione"
   },
   {
     "ID": 58,
@@ -983,7 +1040,8 @@
     "PartieNumero": 8,
     "Apparition": "Chapitre 853",
     "EtatVital": "Mort",
-    "NomStand": 38
+    "NomStand": 38,
+    "Affiliation": "Famille Higashikata"
   },
   {
     "ID": 59,
@@ -1000,7 +1058,8 @@
     "PartieNumero": 6,
     "Apparition": "Épisode 1 SO / Chapitre 595",
     "EtatVital": "Mort",
-    "NomStand": 39
+    "NomStand": 39,
+    "Affiliation": "Prison de Green Dolphin"
   },
   {
     "ID": 60,
@@ -1017,7 +1076,8 @@
     "PartieNumero": 5,
     "Apparition": "Épisode 4 GW / Chapitre 456",
     "EtatVital": "Vivant",
-    "NomStand": 40
+    "NomStand": 40,
+    "Affiliation": "Groupe de Bucciarati"
   },
   {
     "ID": 61,
@@ -1034,7 +1094,8 @@
     "PartieNumero": 4,
     "Apparition": "Épisode 7 DU / Chapitre 294",
     "EtatVital": "Vivant",
-    "NomStand": 41
+    "NomStand": 41,
+    "Affiliation": "Groupe de Morioh"
   },
   {
     "ID": 62,
@@ -1051,7 +1112,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 8 SC / Chapitre 136",
     "EtatVital": "Vivant",
-    "NomStand": 46
+    "NomStand": 46,
+    "Affiliation": "Partisans de Dio"
   },
   {
     "ID": 63,
@@ -1068,7 +1130,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 7 PB / Chapitre 32",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Temple du Tibet"
   },
   {
     "ID": 64,
@@ -1085,7 +1148,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 1 SC / Chapitre 114",
     "EtatVital": "Vivant",
-    "NomStand": 42
+    "NomStand": 42,
+    "Affiliation": "Aucun"
   },
   {
     "ID": 65,
@@ -1102,7 +1166,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 2 SC / Chapitre 130",
     "EtatVital": "Mort",
-    "NomStand": 43
+    "NomStand": 43,
+    "Affiliation": "Partisans de Dio"
   },
   {
     "ID": 66,
@@ -1119,7 +1184,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 16 BT / Chapitre 75",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Groupe de Lisa Lisa"
   },
   {
     "ID": 67,
@@ -1136,7 +1202,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 6 PB / Chapitre 32",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Temple du Tibet"
   },
   {
     "ID": 68,
@@ -1153,7 +1220,8 @@
     "PartieNumero": 1,
     "Apparition": "Épisode 5 PB / Chapitre 24",
     "EtatVital": "Vivant",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Alliés de Jonathan"
   },
   {
     "ID": 69,
@@ -1170,7 +1238,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 5 SC / Chapitre 222",
     "EtatVital": "Mort",
-    "NomStand": 44
+    "NomStand": 44,
+    "Affiliation": "Partisans de Dio"
   },
   {
     "ID": 70,
@@ -1187,7 +1256,8 @@
     "PartieNumero": 2,
     "Apparition": "Épisode 10 BT / Chapitre 89",
     "EtatVital": "Mort",
-    "NomStand": "N/A"
+    "NomStand": "N/A",
+    "Affiliation": "Aucun"
   },
   {
     "ID": 71,
@@ -1204,7 +1274,8 @@
     "PartieNumero": 3,
     "Apparition": "Épisode 25 SC / Chapitre 183",
     "EtatVital": "Mort",
-    "NomStand": 45
+    "NomStand": 45,
+    "Affiliation": "Partisans de Dio"
   }
 
 

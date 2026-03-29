@@ -213,6 +213,10 @@ function renderHintButtonsOST() {
 // ===== VICTOIRE =====
 function showVictoryBoxOST() {
     if (document.getElementById('victory-box-ost')) return;
+
+    if (typeof window.jojoIncrementCounter === 'function') {
+        window.jojoIncrementCounter('ost');
+    }
     
     const searchInput = document.getElementById('searchInputOST');
     searchInput.disabled = true;

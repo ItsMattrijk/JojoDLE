@@ -212,6 +212,10 @@ function renderHintButtonsStand() {
 // ===== VICTOIRE =====
 function showVictoryBoxStand() {
     if (document.getElementById('victory-box-stand')) return;
+
+    if (typeof window.jojoIncrementCounter === 'function') {
+        window.jojoIncrementCounter('stand');
+    }
     
     const searchInput = document.getElementById('searchInputStand');
     searchInput.disabled = true;

@@ -211,6 +211,10 @@ function renderHintButtonsCitation() {
 // ===== VICTOIRE =====
 function showVictoryBoxCitation() {
     if (document.getElementById('victory-box-citation')) return;
+
+    if (typeof window.jojoIncrementCounter === 'function') {
+        window.jojoIncrementCounter('citation');
+    }
     
     const searchInput = document.getElementById('searchInputCitation');
     searchInput.disabled = true;

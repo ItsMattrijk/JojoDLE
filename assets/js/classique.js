@@ -103,10 +103,19 @@ function updateCountdown() {
 
 function getArrowIcon(direction) {
     if (!direction) return '';
-    const path = direction === 'up' 
-        ? 'M12 5L12 19M12 5L6 11M12 5L18 11' 
-        : 'M12 19L12 5M12 19L18 13M12 19L6 13';
-    return `<span class="arrow-indicator"><svg viewBox="0 0 24 24" fill="none"><path d="${path}" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+    if (direction === 'up') {
+        return `<span class="arrow-indicator arrow-up">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L5 13H10V21H14V13H19L12 3Z" fill="white" stroke="rgba(255,255,255,0.4)" stroke-width="0.5" stroke-linejoin="round"/>
+            </svg>
+        </span>`;
+    } else {
+        return `<span class="arrow-indicator arrow-down">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21L19 11H14V3H10V11H5L12 21Z" fill="white" stroke="rgba(255,255,255,0.4)" stroke-width="0.5" stroke-linejoin="round"/>
+            </svg>
+        </span>`;
+    }
 }
 
 function removeAccents(str) {
@@ -170,6 +179,17 @@ function compareWithDailyPersonnage(perso) {
         };
     };
     
+    // Comparaison affiliation (partial si au moins un groupe en commun)
+    const compareAffiliation = (aff1, aff2) => {
+        if (!aff1 || !aff2) return 'incorrect';
+        if (aff1 === aff2) return 'correct';
+        // Découper par virgule et nettoyer les espaces
+        const list1 = aff1.split(',').map(s => s.trim().toLowerCase());
+        const list2 = aff2.split(',').map(s => s.trim().toLowerCase());
+        const hasCommon = list1.some(a => list2.includes(a));
+        return hasCommon ? 'partial' : 'incorrect';
+    };
+
     return {
         genre: perso.Genre === personnageDuJour.Genre ? 'correct' : 'incorrect',
         origine: perso.Origine === personnageDuJour.Origine ? 'correct' : 'incorrect',
@@ -179,6 +199,7 @@ function compareWithDailyPersonnage(perso) {
         taille: compareValue(perso.Taille, personnageDuJour.Taille),
         lieu_apparition: perso["Lieu d'apparition"] === personnageDuJour["Lieu d'apparition"] ? 'correct' : 'incorrect',
         partie: perso.Partie === personnageDuJour.Partie ? 'correct' : 'incorrect',
+        affiliation: compareAffiliation(perso.Affiliation, personnageDuJour.Affiliation),
         isCorrectPersonnage: perso.ID === personnageDuJour.ID
     };
 }
@@ -329,6 +350,11 @@ function renderHintButtonsClassique() {
 // ===== VICTOIRE =====
 function showVictoryBoxClassique() {
     if (document.getElementById('victory-box-classique')) return;
+
+    // Incrémenter le compteur réel de joueurs
+    if (typeof window.jojoIncrementCounter === 'function') {
+        window.jojoIncrementCounter('classique');
+    }
     
     const searchInput = document.getElementById('searchInputClassique');
     searchInput.disabled = true;
@@ -487,6 +513,7 @@ function displaySelectedPersonnages() {
             <div class="category-header-item">Taille</div>
             <div class="category-header-item">Apparition</div>
             <div class="category-header-item">Partie</div>
+            <div class="category-header-item">Affiliation</div>
         </div>
         <div id="personnages-list">
     `;
@@ -548,6 +575,11 @@ function displaySelectedPersonnages() {
                             <span class="category-value">${perso.Partie}</span>
                         </div>
                     </div>
+                    <div class="category ${c.affiliation}">
+                        <div class="category-content">
+                            <span class="category-value">${perso.Affiliation || '—'}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -569,7 +601,7 @@ setTimeout(() => {
     if (newPersoEl) {
         setTimeout(() => {
             newPersoEl.classList.remove('new-player');
-        }, 2600); // 1 seconde = temps pour que toutes les catégories apparaissent
+        }, 3200); // mis à jour pour 10 catégories (2700ms delay + 400ms animation)
     }
 }, 50);
 }
@@ -621,6 +653,7 @@ function displaySelectedPersonnagesMobile() {
               <div class="category-header-item">Taille</div>
               <div class="category-header-item">Lieu</div>
               <div class="category-header-item">Partie</div>
+              <div class="category-header-item">Affiliation</div>
             </div>
     `;
 
@@ -686,6 +719,12 @@ function displaySelectedPersonnagesMobile() {
             <div class="category ${c.partie ?? ''}">
               <div class="category-content">
                 <span class="category-value">${perso.Partie ?? '—'}</span>
+              </div>
+            </div>
+
+            <div class="category ${c.affiliation ?? ''}">
+              <div class="category-content">
+                <span class="category-value">${perso.Affiliation ?? '—'}</span>
               </div>
             </div>
           </div>
