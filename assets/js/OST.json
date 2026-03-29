@@ -94,5 +94,77 @@
     "PersonnageID": 31,
     "Partie": "Phantom Blood",
     "PartieNumero": 1
+  },
+    {
+    "ID": 13,
+    "Nom": "Johnny Joestar Theme",
+    "Fichier": "assets/ost/JohnnyTheme.mp3",
+    "PersonnageID": 23,
+    "Partie": "Steel Ball Run",
+    "PartieNumero": 7
+  },
+      {
+    "ID": 14,
+    "Nom": "Rudol von Stroheim Theme",
+    "Fichier": "assets/ost/RudolTheme.mp3",
+    "PersonnageID": 32,
+    "Partie": "Battle Tendency",
+    "PartieNumero": 2
+  },
+  {
+    "ID": 15,
+    "Nom": "Mohammed Abdul Theme",
+    "Fichier": "assets/ost/AvdolTheme.mp3",
+    "PersonnageID": 17,
+    "Partie": "Stardust Crusaders",
+    "PartieNumero": 3
+  },
+    {
+    "ID": 16,
+    "Nom": "Noriaki Kakyoin Theme",
+    "Fichier": "assets/ost/KakyoinTheme.mp3",
+    "PersonnageID": 8,
+    "Partie": "Stardust Crusaders",
+    "PartieNumero": 3
+  },
+  {
+    "ID": 17,
+    "Nom": "Iggy Theme",
+    "Fichier": "assets/ost/IggyTheme.mp3",
+    "PersonnageID": 29,
+    "Partie": "Stardust Crusaders",
+    "PartieNumero": 3
+  },
+  {
+    "ID": 18,
+    "Nom": "Okuyasu Nijimura Theme",
+    "Fichier": "assets/ost/OkuyasuTheme.mp3",
+    "PersonnageID": 47,
+    "Partie": "Diamond is Unbreakable",
+    "PartieNumero": 4
+  },
+  {
+    "ID": 19,
+    "Nom": "Koichi Hirose Theme",
+    "Fichier": "assets/ost/KoichiTheme.mp3",
+    "PersonnageID": 19,
+    "Partie": "Diamond is Unbreakable",
+    "PartieNumero": 4
+  },
+  {
+    "ID": 20,
+    "Nom": "Rohan Kishibe Theme",
+    "Fichier": "assets/ost/RohanTheme.mp3",
+    "PersonnageID": 11,
+    "Partie": "Diamond is Unbreakable",
+    "PartieNumero": 4
+  },
+  {
+    "ID": 21,
+    "Nom": "Trish Una Theme",
+    "Fichier": "assets/ost/TrishTheme.mp3",
+    "PersonnageID": 49,
+    "Partie": "Golden Wind",
+    "PartieNumero": 5
   }
 ]
