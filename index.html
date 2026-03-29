@@ -1331,6 +1331,9 @@
                 document.getElementById('stand-name').textContent = window.standDuJour.Nom;
             }, 50);
         }
+
+        // Charger compteur + hier uniquement pour ce mode
+        setTimeout(() => initCounterForMode(mode), 500);
 }
         
         function showHome() {
@@ -1363,7 +1366,7 @@
 
         // -- CounterAPI setup --
         // Workspace = ton domaine (ex: "jojodle" ou "itsmattrijk-jojodle"), clé par mode+jour
-        const COUNTER_WORKSPACE = 'https://itsmattrijk.github.io/JojoDLE/';
+        const COUNTER_WORKSPACE = 'mf5s-team-3511';
 
         function getTodayKey(mode) {
             const d = new Date();
@@ -1457,31 +1460,36 @@
             el.innerHTML = `Le personnage d'hier était ${num ? `<span class="yesterday-num">#${num}</span> ` : ''}<span class="yesterday-name">${name}</span>`;
         }
 
-        // -- Init après chargement des données --
-        function initYesterdayAndCounters() {
+        // -- Init compteur + hier pour UN seul mode quand il est ouvert --
+        const _counterInitDone = {};
+        function initCounterForMode(mode) {
+            if (_counterInitDone[mode]) return; // déjà chargé
+            _counterInitDone[mode] = true;
+
+            const listReady = {
+                classique: () => typeof personnages !== 'undefined' && personnages.length > 0,
+                stand:     () => typeof personnagesStand !== 'undefined' && personnagesStand.length > 0,
+                Citation:  () => typeof personnagesCitation !== 'undefined' && personnagesCitation.length > 0,
+                OST:       () => typeof personnagesOST !== 'undefined' && personnagesOST.length > 0
+            };
+
+            const keyMap  = { classique: 'classique', stand: 'stand', Citation: 'citation', OST: 'ost' };
+            const listMap = () => ({
+                classique: personnages,
+                stand:     personnagesStand,
+                Citation:  personnagesCitation,
+                OST:       personnagesOST
+            });
+
+            const modeKey = keyMap[mode];
+
             const tryInit = setInterval(() => {
-                if (
-                    typeof personnages !== 'undefined' && personnages.length > 0 &&
-                    typeof personnagesStand !== 'undefined' && personnagesStand.length > 0 &&
-                    typeof personnagesCitation !== 'undefined' && personnagesCitation.length > 0 &&
-                    typeof personnagesOST !== 'undefined' && personnagesOST.length > 0
-                ) {
-                    clearInterval(tryInit);
-                    // Compteurs réels
-                    renderPlayersCounter('players-counter-classique', 'classique');
-                    renderPlayersCounter('players-counter-stand', 'stand');
-                    renderPlayersCounter('players-counter-citation', 'citation');
-                    renderPlayersCounter('players-counter-ost', 'ost');
-                    // Personnage d'hier
-                    renderYesterdayBanner('yesterday-classique', personnages, 'classique');
-                    renderYesterdayBanner('yesterday-stand', personnagesStand, 'stand');
-                    renderYesterdayBanner('yesterday-citation', personnagesCitation, 'citation');
-                    renderYesterdayBanner('yesterday-ost', personnagesOST, 'ost');
-                }
+                if (!listReady[mode]?.()) return;
+                clearInterval(tryInit);
+                renderPlayersCounter(`players-counter-${modeKey}`, modeKey);
+                renderYesterdayBanner(`yesterday-${modeKey}`, listMap()[mode], modeKey);
             }, 300);
         }
-
-        initYesterdayAndCounters();
     </script>
 
 
