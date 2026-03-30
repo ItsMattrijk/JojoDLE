@@ -188,24 +188,30 @@ function renderHintButtonsCitation() {
     
     container.innerHTML = `
         <div class="card-hints-intro">— Indices —</div>
-        ${hints.map(hint => {
-            const config = hintButtonsCitation[hint.type];
-            const isUnlocked = config.unlocked;
-            const isRevealed = config.revealed;
-            const attemptsNeeded = hint.unlockAt - attempts;
-            return `
-                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
-                     data-hint="${hint.type}"
-                     ${isUnlocked ? `onclick="toggleHintCitation('${hint.type}')"` : ''}>
-                    <span class="card-hint-icon">${hint.icon}</span>
-                    <span class="card-hint-label">${hint.label}</span>
-                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
-                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
-                    <span class="card-hint-value">${hint.value}</span>
-                </div>
-            `;
-        }).join('')}
+        <div class="hints-carousel-wrapper">
+            <div class="hints-carousel-track">
+                ${hints.map(hint => {
+                    const config = hintButtonsCitation[hint.type];
+                    const isUnlocked = config.unlocked;
+                    const isRevealed = config.revealed;
+                    const attemptsNeeded = hint.unlockAt - attempts;
+                    return `
+                        <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                             data-hint="${hint.type}"
+                             ${isUnlocked ? `onclick="toggleHintCitation('${hint.type}')"` : ''}>
+                            <span class="card-hint-icon">${hint.icon}</span>
+                            <span class="card-hint-label">${hint.label}</span>
+                            <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                            ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                            <span class="card-hint-value">${hint.value}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            <div class="hints-carousel-dots"></div>
+        </div>
     `;
+    if (typeof buildHintsDots === 'function') buildHintsDots(container);
 }
 
 // ===== VICTOIRE =====

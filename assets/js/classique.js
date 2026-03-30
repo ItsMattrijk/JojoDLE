@@ -61,6 +61,32 @@ async function loadPersonnages() {
     }
 }
 
+// ===== CARROUSEL DES INDICES =====
+function buildHintsDots(container) {
+    const track = container.querySelector('.hints-carousel-track');
+    const dotsEl = container.querySelector('.hints-carousel-dots');
+    if (!track || !dotsEl) return;
+    const items = track.querySelectorAll('.card-hint-item');
+    if (items.length <= 1) { dotsEl.style.display = 'none'; return; }
+    dotsEl.innerHTML = '';
+    items.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'hints-carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => {
+            items[i].scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        };
+        dotsEl.appendChild(dot);
+    });
+    track.addEventListener('scroll', () => {
+        const scrollLeft = track.scrollLeft;
+        const itemWidth = items[0].offsetWidth + 10;
+        const active = Math.round(scrollLeft / itemWidth);
+        dotsEl.querySelectorAll('.hints-carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === active);
+        });
+    }, { passive: true });
+}
+
 // ===== UTILITAIRES =====
 function getPersonnagePhotoUrl(perso) {
     if (perso.Photo && perso.Photo.startsWith('http')) return perso.Photo;
@@ -74,7 +100,8 @@ function getDailySeed() {
     
     // Ajouter le compteur de reset pour avoir un seed différent à chaque reset
     const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_classique') || '0');
-    return baseSeed + (resetCounter * 123456); // Multiplier par un grand nombre pour bien changer le seed
+    // Offset fixe pour différencier le mode classique du mode stand (qui utilise +777777)
+    return baseSeed + 111111 + (resetCounter * 123456);
 }
 
 function seededRandom(seed) {
@@ -291,8 +318,14 @@ function renderHintButtonsClassique() {
         if (attempts >= 1) cardContainer.classList.add('visible');
         cardContainer.innerHTML = `
             <div class="card-hints-intro">— Indices —</div>
-            ${buildCardHTML()}
+            <div class="hints-carousel-wrapper">
+                <div class="hints-carousel-track">
+                    ${buildCardHTML()}
+                </div>
+                <div class="hints-carousel-dots"></div>
+            </div>
         `;
+        buildHintsDots(cardContainer);
     }
 
     // Garder aussi l'ancien rendu des boutons pour compatibilité (masqué)
@@ -644,14 +677,14 @@ function displaySelectedPersonnagesMobile() {
         <div class="carousel-container">
           <div class="carousel-track">
             <div class="categories-header">
-              <div class="category-header-item">Personnage</div>
+              <div class="category-header-item">Perso-<br>nnage</div>
               <div class="category-header-item">Genre</div>
               <div class="category-header-item">Origine</div>
               <div class="category-header-item">Stand</div>
               <div class="category-header-item">Naissance</div>
               <div class="category-header-item">Poids</div>
               <div class="category-header-item">Taille</div>
-              <div class="category-header-item">Lieu</div>
+              <div class="category-header-item">Apparition</div>
               <div class="category-header-item">Partie</div>
               <div class="category-header-item">Affiliation</div>
             </div>

@@ -113,13 +113,24 @@ function selectDailyOST() {
     }
     
     const seed = getDailySeedOST();
+    const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_ost') || '0');
     const randomValue = seededRandomOST(seed);
     const index = Math.floor(randomValue * filteredOSTs.length);
     ostDuJour = filteredOSTs[index];
     
     personnageDuJourOST = personnagesOST.find(p => p.ID === ostDuJour.PersonnageID);
     
-    console.log('✅ OST du jour:', ostDuJour.Nom, '- Utilisateur:', personnageDuJourOST?.NOM);
+    console.log('🎵 [OST DEBUG] =============================');
+    console.log('📅 Date:', new Date().toLocaleDateString('fr-FR'));
+    console.log('🔢 Seed brute (date):', new Date().getFullYear() * 10000 + (new Date().getMonth() + 1) * 100 + new Date().getDate());
+    console.log('🔄 Reset counter:', resetCounter);
+    console.log('🔢 Seed finale:', seed);
+    console.log('🎲 Valeur aléatoire:', randomValue);
+    console.log('📋 Pool filtré (' + filteredOSTs.length + ' OSTs):', filteredOSTs.map(o => o.Nom).join(', '));
+    console.log('📍 Index choisi:', index);
+    console.log('✅ OST du jour:', ostDuJour.Nom, '(ID:', ostDuJour.ID, ')');
+    console.log('👤 PersonnageID:', ostDuJour.PersonnageID, '- Trouvé:', personnageDuJourOST?.NOM ?? '❌ INTROUVABLE dans perso.json');
+    console.log('🎵 [OST DEBUG] =============================');
     return ostDuJour;
 }
 
@@ -189,24 +200,30 @@ function renderHintButtonsOST() {
 
     container.innerHTML = `
         <div class="card-hints-intro">— Indices —</div>
-        ${hints.map(hint => {
-            const config = hintButtonsOST[hint.type];
-            const isUnlocked = config.unlocked;
-            const isRevealed = config.revealed;
-            const attemptsNeeded = hint.unlockAt - attempts;
-            return `
-                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
-                     data-hint="${hint.type}"
-                     ${isUnlocked ? `onclick="toggleHintOST('${hint.type}')"` : ''}>
-                    <span class="card-hint-icon">${hint.icon}</span>
-                    <span class="card-hint-label">${hint.label}</span>
-                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
-                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
-                    <span class="card-hint-value">${hint.value}</span>
-                </div>
-            `;
-        }).join('')}
+        <div class="hints-carousel-wrapper">
+            <div class="hints-carousel-track">
+                ${hints.map(hint => {
+                    const config = hintButtonsOST[hint.type];
+                    const isUnlocked = config.unlocked;
+                    const isRevealed = config.revealed;
+                    const attemptsNeeded = hint.unlockAt - attempts;
+                    return `
+                        <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                             data-hint="${hint.type}"
+                             ${isUnlocked ? `onclick="toggleHintOST('${hint.type}')"` : ''}>
+                            <span class="card-hint-icon">${hint.icon}</span>
+                            <span class="card-hint-label">${hint.label}</span>
+                            <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                            ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                            <span class="card-hint-value">${hint.value}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            <div class="hints-carousel-dots"></div>
+        </div>
     `;
+    if (typeof buildHintsDots === 'function') buildHintsDots(container);
 }
 
 

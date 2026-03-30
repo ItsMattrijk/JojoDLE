@@ -58,7 +58,8 @@ function getDailySeedStand() {
     const baseSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     
     const resetCounter = parseInt(localStorage.getItem('jojoResetCounter_stand') || '0');
-    return baseSeed + (resetCounter * 123456);
+    // Offset fixe pour différencier le mode stand du mode classique (qui utilise +111111)
+    return baseSeed + 777777 + (resetCounter * 123456);
 }
 function seededRandomStand(seed) {
     const x = Math.sin(seed) * 10000;
@@ -188,24 +189,30 @@ function renderHintButtonsStand() {
 
     container.innerHTML = `
         <div class="card-hints-intro">— Indices —</div>
-        ${hints.map(hint => {
-            const config = hintButtonsStand[hint.type];
-            const isUnlocked = config.unlocked;
-            const isRevealed = config.revealed;
-            const attemptsNeeded = hint.unlockAt - attempts;
-            return `
-                <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
-                     data-hint="${hint.type}"
-                     ${isUnlocked ? `onclick="toggleHintStand('${hint.type}')"` : ''}>
-                    <span class="card-hint-icon">${hint.icon}</span>
-                    <span class="card-hint-label">${hint.label}</span>
-                    <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
-                    ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
-                    <span class="card-hint-value">${hint.value}</span>
-                </div>
-            `;
-        }).join('')}
+        <div class="hints-carousel-wrapper">
+            <div class="hints-carousel-track">
+                ${hints.map(hint => {
+                    const config = hintButtonsStand[hint.type];
+                    const isUnlocked = config.unlocked;
+                    const isRevealed = config.revealed;
+                    const attemptsNeeded = hint.unlockAt - attempts;
+                    return `
+                        <div class="card-hint-item ${isUnlocked ? 'unlocked' : ''} ${isRevealed ? 'revealed' : ''}"
+                             data-hint="${hint.type}"
+                             ${isUnlocked ? `onclick="toggleHintStand('${hint.type}')"` : ''}>
+                            <span class="card-hint-icon">${hint.icon}</span>
+                            <span class="card-hint-label">${hint.label}</span>
+                            <span class="card-hint-lock">${isUnlocked ? '🔓' : '🔒'}</span>
+                            ${!isUnlocked ? `<span class="card-hint-unlock-count">${attemptsNeeded > 0 ? attemptsNeeded + ' essai' + (attemptsNeeded > 1 ? 's' : '') : 'Bientôt...'}</span>` : ''}
+                            <span class="card-hint-value">${hint.value}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            <div class="hints-carousel-dots"></div>
+        </div>
     `;
+    if (typeof buildHintsDots === 'function') buildHintsDots(container);
 }
 
 

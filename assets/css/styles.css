@@ -34,17 +34,6 @@
             justify-content: center;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem 0.5rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.5rem 0.25rem;
-            }
-        }
-
 
         .logo-container {
             margin-top: -1.5rem;
@@ -231,25 +220,14 @@
 
 
         @media (max-width: 768px) {
-            .logo { max-width: 260px; }
+            .logo { max-width: 320px; }
             .game-button { 
-                padding: 0.75rem 1.5rem; 
-                font-size: 1rem;
-                letter-spacing: 1px;
+                padding: 1.5rem 2rem; 
+                font-size: 1.6rem;
+                letter-spacing: 2px;
             }
-            .button-subtitle { font-size: 0.7rem; }
+            .button-subtitle { font-size: 0.85rem; }
             .game-button::after { display: none; }
-            .menu-container { gap: 0.6rem; max-width: 340px; }
-        }
-        @media (max-width: 480px) {
-            .logo { max-width: 210px; }
-            .game-button { 
-                padding: 0.65rem 1.2rem; 
-                font-size: 0.9rem;
-                letter-spacing: 0.5px;
-            }
-            .button-subtitle { font-size: 0.65rem; }
-            .menu-container { gap: 0.5rem; max-width: 300px; }
         }
 
         /* ===== STYLES GÉNÉRAUX DU MODE JEU ===== */
@@ -259,17 +237,6 @@
     padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .game-mode {
-        padding: 0.8rem 0.4rem;
-    }
-}
-@media (max-width: 480px) {
-    .game-mode {
-        padding: 0.4rem 0.1rem;
-    }
 }
 
 .game-mode.active {
@@ -804,59 +771,57 @@
 /* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 768px) {
     .hint-buttons-container {
-        gap: 0.6rem;
+        gap: 1rem;
         padding: 0 0.5rem;
-        margin: 1rem auto 1.5rem auto;
     }
 
     .hint-button {
-        min-width: 110px;
-        min-height: 110px;
-        max-height: 110px;
-        max-width: 110px;
-        padding: 0.7rem;
+        min-width: 160px;
+        min-height: 160px;
+        max-height: 160px;
+        max-width: 160px;
+        padding: 1rem;
     }
 
     .hint-icon {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .hint-label {
-        font-size: 0.7rem;
+        font-size: 0.85rem;
     }
 
     .hint-lock {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
     }
 
     .hint-unlock-text {
-        font-size: 0.58rem;
+        font-size: 0.7rem;
     }
 
     .hint-value {
-        font-size: 0.75rem;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
     .hint-button {
-        min-width: 95px;
-        min-height: 95px;
-        max-height: 95px;
-        max-width: 95px;
-        padding: 0.5rem;
+        min-width: 140px;
+        min-height: 140px;
+        max-height: 140px;
+        max-width: 140px;
     }
 
     .hint-icon {
-        font-size: 1.25rem;
+        font-size: 1.8rem;
     }
 
     .hint-label {
-        font-size: 0.62rem;
+        font-size: 0.8rem;
     }
 
     .hint-value {
-        font-size: 0.65rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -1492,7 +1457,6 @@
         width: 100%;
         position: relative;
         overflow: hidden;
-        min-width: 370px;
     }
 
     .carousel-scroll-hint {
@@ -1531,18 +1495,18 @@
     /* Headers */
     .categories-header {
         display: grid;
-        grid-template-columns: repeat(10, 78px);
-        gap: 0.2rem;
+        grid-template-columns: repeat(10, 90px);
+        gap: 0.25rem;
         margin-bottom: 0.5rem;
         width: fit-content;
         min-width: 100%;
     }
 
     .category-header-item {
-        width: 78px;
-        height: 46px;
-        font-size: 0.58rem;
-        padding: 0.2rem;
+        width: 90px;
+        height: 50px;
+        font-size: 0.65rem;
+        padding: 0.25rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1554,7 +1518,7 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         white-space: normal;
-        line-height: 1.1;
+        line-height: 1.2;
     }
 
     .category-header-item::after {
@@ -1570,8 +1534,8 @@
     /* Player categories */
     .player-categories {
         display: grid;
-        grid-template-columns: repeat(10, 78px);
-        gap: 0.2rem;
+        grid-template-columns: repeat(10, 90px);
+        gap: 0.25rem;
         width: fit-content;
         min-width: 100%;
         animation: slideInLeft 0.5s ease-out;
@@ -1582,15 +1546,15 @@
     }
 
     .category {
-        width: 78px;
-        height: 78px;
+        width: 100px;
+        height: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         background: rgba(139, 0, 139, 0.3);
-        border-radius: 6px;
+        border-radius: 8px;
         border: 2px solid rgba(255, 215, 0, 0.3);
         position: relative;
         overflow: hidden;
@@ -1624,29 +1588,29 @@
     }
 
     .player-main-photo {
-        width: 68px;
-        height: 68px;
+        width: 90px;
+        height: 90px;
         object-fit: cover;
-        border-radius: 4px;
+        border-radius: 6px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .player-name-main {
         position: absolute;
-        bottom: 2px;
-        left: 2px;
-        right: 2px;
+        bottom: 4px;
+        left: 4px;
+        right: 4px;
         background: rgba(139, 0, 139, 0.95);
         backdrop-filter: blur(8px);
-        border-radius: 3px;
-        padding: 0.15rem;
+        border-radius: 4px;
+        padding: 0.25rem;
         border: 1px solid rgba(255, 215, 0, 0.3);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        font-size: 0.5rem;
+        font-size: 0.65rem;
         font-weight: 600;
         color: #ffffff;
         text-align: center;
-        line-height: 1.1;
+        line-height: 1.2;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -1654,16 +1618,16 @@
     }
 
     .category-value {
-        font-size: 0.62rem;
+        font-size: 0.75rem;
         font-weight: bold;
         color: white;
         text-align: center;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         word-break: break-word;
         hyphens: auto;
-        line-height: 1.1;
-        max-width: 70px;
-        padding: 0 0.15rem;
+        line-height: 1.2;
+        max-width: 90px;
+        padding: 0 0.25rem;
     }
 
     .arrow-indicator {
@@ -1888,77 +1852,77 @@
 /* ===== AJUSTEMENTS POUR PETITS ÉCRANS MOBILES ===== */
 @media (max-width: 480px) {
     .categories-header {
-        grid-template-columns: repeat(10, 64px);
+        grid-template-columns: repeat(10, 76px);
     }
 
     .category-header-item {
-        width: 64px;
-        height: 40px;
-        font-size: 0.52rem;
+        width: 76px;
+        height: 45px;
+        font-size: 0.58rem;
     }
 
     .player-categories {
-        grid-template-columns: repeat(10, 64px);
+        grid-template-columns: repeat(10, 76px);
     }
 
     .category {
-        width: 64px;
-        height: 64px;
+        width: 76px;
+        height: 76px;
     }
 
     .player-main-photo {
-        width: 56px;
-        height: 56px;
+        width: 66px;
+        height: 66px;
     }
 
     .category-value {
-        font-size: 0.55rem;
-        max-width: 58px;
+        font-size: 0.65rem;
+        max-width: 68px;
     }
 
     .player-name-main {
-        font-size: 0.42rem !important;
+        font-size: 0.5rem !important;
     }
 
     .arrow-indicator {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
     }
 }
 
 /* ===== AJUSTEMENTS POUR TRÈS PETITS ÉCRANS ===== */
 @media (max-width: 360px) {
     .categories-header {
-        grid-template-columns: repeat(10, 55px);
+        grid-template-columns: repeat(10, 67px);
     }
 
     .category-header-item {
-        width: 55px;
-        height: 36px;
-        font-size: 0.46rem;
+        width: 67px;
+        height: 40px;
+        font-size: 0.52rem;
     }
 
     .player-categories {
-        grid-template-columns: repeat(10, 55px);
+        grid-template-columns: repeat(10, 67px);
     }
 
     .category {
-        width: 55px;
-        height: 55px;
+        width: 67px;
+        height: 67px;
     }
 
     .player-main-photo {
-        width: 48px;
-        height: 48px;
+        width: 57px;
+        height: 57px;
     }
 
     .category-value {
-        font-size: 0.48rem;
-        max-width: 50px;
+        font-size: 0.58rem;
+        max-width: 58px;
     }
 
     .player-name-main {
-        font-size: 0.4rem !important;
+        font-size: 0.5rem !important;
     }
 
     .carousel-scroll-hint {
@@ -2509,68 +2473,91 @@
 /* ===== RESPONSIVE MOBILE (< 768px) ===== */
 @media (max-width: 768px) {
     .game-menu-wrapper {
-        margin: 1rem auto 2rem auto;
+        margin: 0.5rem auto 1rem auto;
         padding: 0 0.5rem;
+        position: static;
     }
 
     .game-menu {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.4rem;
-        padding: 0.6rem;
-        border-radius: 14px;
-        border-width: 3px;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        gap: 0;
+        padding: 0.3rem 0.2rem;
+        border-radius: 50px;
+        border-width: 2px;
+        background: linear-gradient(135deg, rgba(139, 0, 139, 0.95), rgba(75, 0, 130, 0.95));
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        overflow: visible;
     }
 
     .menu-btn {
-        padding: 0.7rem 0.9rem;
-        min-width: auto;
-        flex: 0 0 calc(33.333% - 0.3rem);
-        max-width: 110px;
+        padding: 0.45rem 0.2rem;
+        min-width: 0;
+        flex: 1;
+        max-width: none;
+        border-radius: 50px;
+        gap: 0.15rem;
     }
 
     .menu-icon {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .menu-text {
-        font-size: 0.65rem;
-        letter-spacing: 0.3px;
+        display: none;
     }
 
-    /* Dropdown adapté pour mobile */
+    /* Dropdown s'ouvre vers le bas normalement */
     .modes-dropdown {
+        top: calc(100% + 8px);
+        bottom: auto;
         left: 50%;
         transform: translateX(-50%);
-        min-width: 180px;
+        min-width: 190px;
         width: max-content;
+    }
+
+    .modes-dropdown::before {
+        top: -10px;
+        bottom: auto;
+        border-top: none;
+        border-bottom: 10px solid #FFD700;
+    }
+
+    @keyframes dropdownSlide {
+        from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+        to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
     .mode-option {
         padding: 0.9rem 1rem;
         font-size: 0.9rem;
     }
+
+    .game-mode.active {
+        padding-bottom: 0;
+    }
 }
 
 /* ===== RESPONSIVE PETIT MOBILE (< 480px) ===== */
 @media (max-width: 480px) {
     .game-menu {
-        gap: 0.3rem;
-        padding: 0.5rem;
+        gap: 0;
+        padding: 0.25rem 0.1rem;
     }
 
     .menu-btn {
-        padding: 0.6rem 0.7rem;
-        flex: 0 0 calc(50% - 0.2rem);
+        padding: 0.4rem 0.15rem;
+        flex: 1;
         max-width: none;
     }
 
     .menu-icon {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
 
     .menu-text {
-        font-size: 0.6rem;
+        font-size: 0.48rem;
     }
 
     .modes-dropdown {
@@ -2813,20 +2800,12 @@
 @media (max-width: 768px) {
     .stand-card {
         min-width: auto;
-        width: 92%;
-        padding: 0.8rem 1rem;
-        border-radius: 14px;
-        border-width: 3px;
+        width: 90%;
+        padding: 1.5rem 2rem;
     }
 
     .stand-card-name {
-        font-size: 1.3rem;
-        letter-spacing: 2px;
-    }
-
-    .stand-card-label {
-        font-size: 0.75rem;
-        letter-spacing: 1px;
+        font-size: 2rem;
     }
 
     .stand-guesses-list {
@@ -2840,23 +2819,23 @@
     }
 
     .stand-guess-photo {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
     }
 
     .stand-guess-name {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 
     .stand-guess-status {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 }
 
 @media (max-width: 480px) {
     .stand-card-name {
-        font-size: 1.05rem;
-        letter-spacing: 1px;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
     }
 
     .stand-guess {
@@ -2865,17 +2844,17 @@
     }
 
     .stand-guess-photo {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
     }
 
     .stand-guess-name {
-        font-size: 0.78rem;
+        font-size: 0.85rem;
         letter-spacing: 0.3px;
     }
 
     .stand-guess-status {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
 
@@ -3301,31 +3280,8 @@
 @media (max-width: 768px) {
     .classique-card {
         min-width: auto;
-        width: 92%;
-        padding: 0.8rem 1rem;
-        border-radius: 14px;
-        border-width: 3px;
-    }
-    .classique-card-label {
-        font-size: 0.78rem;
-        letter-spacing: 1px;
-    }
-    .classique-display {
-        margin: 0.8rem auto 1rem auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .classique-card {
-        padding: 0.6rem 0.8rem;
-        border-radius: 12px;
-    }
-    .classique-card-label {
-        font-size: 0.68rem;
-        letter-spacing: 0.5px;
-    }
-    .classique-display {
-        margin: 0.5rem auto 0.7rem auto;
+        width: 90%;
+        padding: 1.5rem 2rem;
     }
 }
 
@@ -3334,29 +3290,27 @@
     .citation-card,
     .ost-card {
         min-width: auto;
-        width: 92%;
-        padding: 0.8rem 1rem;
-        border-radius: 14px;
-        border-width: 3px;
+        width: 90%;
+        padding: 1.5rem 2rem;
     }
 
     .citation-card-text {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .ost-card-name {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .citation-card-text {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         letter-spacing: 0.5px;
     }
 
     .ost-card-name {
-        font-size: 1rem;
+        font-size: 1.2rem;
         letter-spacing: 1px;
     }
 
@@ -3750,61 +3704,34 @@
     text-transform: uppercase;
 }
 
-@media (max-width: 768px) {
-    .color-legend-box {
-        padding: 10px 12px 12px;
-        margin: 0 auto 12px auto;
-    }
-    .color-legend-title {
-        font-size: 0.78rem;
-        margin: 0 0 8px 0;
-        letter-spacing: 1px;
-    }
-    .color-legend-items {
-        gap: 8px;
-    }
-    .color-legend-square {
-        width: 40px;
-        height: 40px;
-        border-radius: 6px;
-    }
-    .color-legend-square svg {
-        width: 22px;
-        height: 22px;
-    }
-    .color-legend-item {
-        gap: 4px;
-    }
-    .color-legend-label {
-        font-size: 0.62rem;
-        letter-spacing: 0.3px;
-    }
-}
-
-@media (max-width: 480px) {
-    .color-legend-box {
-        padding: 8px 8px 10px;
-    }
-    .color-legend-items {
-        gap: 6px;
-    }
-    .color-legend-square {
-        width: 34px;
-        height: 34px;
-    }
-    .color-legend-square svg {
-        width: 18px;
-        height: 18px;
-    }
-    .color-legend-label {
-        font-size: 0.55rem;
-    }
-}
-
 /* ===== RÉDUCTION POLICE VALEURS CASES (était trop grand) ===== */
 .category-value {
     font-size: clamp(0.7rem, calc(0.2rem - (var(--text-length, 0) * 0.02rem)), 1rem) !important;
     font-weight: 800 !important;
+}
+
+/* ===== INDICE DESCRIPTION STAND : limite la hauteur et scrollable ===== */
+.card-hint-item[data-hint="explication"] .card-hint-value,
+.card-hint-item[data-hint="stand_info"] .card-hint-value {
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4;
+    max-height: 90px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 2px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,215,0,0.5) transparent;
+}
+
+.card-hint-item[data-hint="explication"] .card-hint-value::-webkit-scrollbar,
+.card-hint-item[data-hint="stand_info"] .card-hint-value::-webkit-scrollbar {
+    width: 4px;
+}
+.card-hint-item[data-hint="explication"] .card-hint-value::-webkit-scrollbar-thumb,
+.card-hint-item[data-hint="stand_info"] .card-hint-value::-webkit-scrollbar-thumb {
+    background: rgba(255,215,0,0.5);
+    border-radius: 4px;
 }
 /* ===== BARRE DE NAVIGATION ENTRE LES MODES ===== */
 .mode-switcher-bar {
@@ -3958,4 +3885,84 @@
     color: #EF48A0;
     font-weight: 900;
     font-size: 1rem;
+}
+
+/* ===== CARROUSEL DES INDICES (MOBILE) ===== */
+@media (max-width: 768px) {
+    /* La section des indices devient un carrousel horizontal */
+    .card-hints-section.visible {
+        display: block;
+        padding-top: 0.7rem;
+    }
+
+    .hints-carousel-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .hints-carousel-track {
+        display: flex;
+        gap: 0.6rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 0.3rem 0.2rem 0.5rem;
+    }
+
+    .hints-carousel-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Les card-hint-item dans le carrousel */
+    .hints-carousel-track .card-hint-item {
+        flex: 0 0 120px;
+        min-width: 120px;
+        max-width: 120px;
+    }
+
+    /* Dots de navigation des indices */
+    .hints-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 0.4rem;
+    }
+
+    .hints-carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transition: background 0.3s;
+        cursor: pointer;
+    }
+
+    .hints-carousel-dot.active {
+        background: #FFD700;
+    }
+
+    /* L'intro du carrousel (— INDICES —) reste en pleine largeur */
+    .card-hints-intro {
+        width: 100%;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Sur desktop, on garde le flex normal wrap */
+@media (min-width: 769px) {
+    .hints-carousel-wrapper {
+        display: contents; /* transparent, les enfants remontent dans le flex parent */
+    }
+
+    .hints-carousel-track {
+        display: contents;
+    }
+
+    .hints-carousel-dots {
+        display: none;
+    }
 }
