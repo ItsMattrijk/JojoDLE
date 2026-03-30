@@ -1259,6 +1259,205 @@
         
     </div>
     
+    <!-- ===== EASTER EGG NETFLIX SCREAMER ===== -->
+    <div id="netflix-screamer" onclick="closeNetflixScreamer()" style="
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 99999;
+        cursor: pointer;
+        overflow: hidden;
+        background: #000;
+    ">
+        <img id="nfdp-img" src="assets/autres/netflixfdp.jpg" style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        ">
+        <div id="nfdp-redflash" style="
+            position: absolute;
+            top:0;left:0;width:100%;height:100%;
+            background: #ff0000;
+            opacity: 0;
+            pointer-events: none;
+        "></div>
+    </div>
+
+    <style>
+        @keyframes nfdpShake {
+            0%   { transform: translate(0,0)      rotate(0deg)    scale(1.05); }
+            10%  { transform: translate(-8px,5px)  rotate(-0.4deg) scale(1.07); }
+            20%  { transform: translate(9px,-6px)  rotate(0.5deg)  scale(1.05); }
+            30%  { transform: translate(-7px,8px)  rotate(-0.3deg) scale(1.08); }
+            40%  { transform: translate(8px,-5px)  rotate(0.4deg)  scale(1.05); }
+            50%  { transform: translate(-9px,4px)  rotate(-0.5deg) scale(1.07); }
+            60%  { transform: translate(7px,-8px)  rotate(0.3deg)  scale(1.06); }
+            70%  { transform: translate(-6px,7px)  rotate(-0.4deg) scale(1.08); }
+            80%  { transform: translate(9px,-4px)  rotate(0.5deg)  scale(1.05); }
+            90%  { transform: translate(-8px,6px)  rotate(-0.3deg) scale(1.07); }
+            100% { transform: translate(5px,-5px)  rotate(0.2deg)  scale(1.05); }
+        }
+        #nfdp-img.shaking {
+            animation: nfdpShake 0.06s infinite;
+        }
+    </style>
+
+    <script>
+    (function() {
+        const SEQ = ['N','e','t','f','l','i','x'];
+        const IMGS = [
+            'assets/autres/netflixfdp.jpg',
+            'assets/autres/netflixfdp2.jpg',
+            'assets/autres/netflixfdp3.jpg'
+        ];
+        let buf = [];
+        let imgInterval = null;
+        let flashInterval = null;
+        let imgIdx = 0;
+
+        function triggerScreamer() {
+            buf = [];
+            if (navigator.vibrate) navigator.vibrate([300,30,300,30,300,30,600]);
+
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const master = ctx.createGain();
+                master.gain.setValueAtTime(4.5, ctx.currentTime);
+                master.connect(ctx.destination);
+
+                // BOOM grave
+                const sub = ctx.createOscillator();
+                sub.type = 'sine';
+                sub.frequency.setValueAtTime(100, ctx.currentTime);
+                sub.frequency.exponentialRampToValueAtTime(12, ctx.currentTime + 0.5);
+                const subG = ctx.createGain();
+                subG.gain.setValueAtTime(5.0, ctx.currentTime);
+                subG.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+                sub.connect(subG); subG.connect(master);
+                sub.start(); sub.stop(ctx.currentTime + 0.5);
+
+                // Bruit blanc stéréo
+                const len = ctx.sampleRate * 5;
+                const nbuf = ctx.createBuffer(2, len, ctx.sampleRate);
+                for (let c = 0; c < 2; c++) {
+                    const d = nbuf.getChannelData(c);
+                    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+                }
+                const noise = ctx.createBufferSource();
+                noise.buffer = nbuf;
+                const hp = ctx.createBiquadFilter();
+                hp.type = 'highpass'; hp.frequency.value = 500; hp.Q.value = 3;
+                const peak = ctx.createBiquadFilter();
+                peak.type = 'peaking'; peak.frequency.value = 3800; peak.gain.value = 22; peak.Q.value = 1;
+                const noiseG = ctx.createGain();
+                noiseG.gain.setValueAtTime(0, ctx.currentTime);
+                noiseG.gain.linearRampToValueAtTime(3.5, ctx.currentTime + 0.015);
+                noiseG.gain.setValueAtTime(3.5, ctx.currentTime + 3.5);
+                noiseG.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+                noise.connect(hp); hp.connect(peak); peak.connect(noiseG); noiseG.connect(master);
+                noise.start(); noise.stop(ctx.currentTime + 5.0);
+
+                // OSC 1 sawtooth - montée horrifique
+                const o1 = ctx.createOscillator();
+                o1.type = 'sawtooth';
+                o1.frequency.setValueAtTime(100, ctx.currentTime);
+                o1.frequency.exponentialRampToValueAtTime(6000, ctx.currentTime + 0.3);
+                o1.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 1.0);
+                o1.frequency.exponentialRampToValueAtTime(5000, ctx.currentTime + 2.0);
+                o1.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 3.0);
+                o1.frequency.exponentialRampToValueAtTime(4500, ctx.currentTime + 4.5);
+                const o1G = ctx.createGain();
+                o1G.gain.setValueAtTime(2.0, ctx.currentTime);
+                o1G.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+                o1.connect(o1G); o1G.connect(master);
+                o1.start(); o1.stop(ctx.currentTime + 5.0);
+
+                // OSC 2 square désaccordé
+                const o2 = ctx.createOscillator();
+                o2.type = 'square';
+                o2.frequency.setValueAtTime(108, ctx.currentTime);
+                o2.frequency.exponentialRampToValueAtTime(5700, ctx.currentTime + 0.3);
+                o2.frequency.exponentialRampToValueAtTime(530, ctx.currentTime + 1.0);
+                o2.frequency.exponentialRampToValueAtTime(4800, ctx.currentTime + 2.0);
+                o2.frequency.exponentialRampToValueAtTime(210, ctx.currentTime + 3.0);
+                o2.frequency.exponentialRampToValueAtTime(4200, ctx.currentTime + 4.5);
+                const o2G = ctx.createGain();
+                o2G.gain.setValueAtTime(1.2, ctx.currentTime);
+                o2G.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+                o2.connect(o2G); o2G.connect(master);
+                o2.start(); o2.stop(ctx.currentTime + 5.0);
+
+                // OSC 3 grondement grave dissonant
+                const o3 = ctx.createOscillator();
+                o3.type = 'sawtooth';
+                o3.frequency.setValueAtTime(55, ctx.currentTime);
+                o3.frequency.setValueAtTime(58, ctx.currentTime + 0.5);
+                o3.frequency.setValueAtTime(52, ctx.currentTime + 1.5);
+                o3.frequency.setValueAtTime(60, ctx.currentTime + 2.5);
+                const o3G = ctx.createGain();
+                o3G.gain.setValueAtTime(1.5, ctx.currentTime);
+                o3G.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+                o3.connect(o3G); o3G.connect(master);
+                o3.start(); o3.stop(ctx.currentTime + 5.0);
+
+                // LFO tremolo haché ralentissant
+                const lfo = ctx.createOscillator();
+                lfo.type = 'square';
+                lfo.frequency.setValueAtTime(22, ctx.currentTime);
+                lfo.frequency.linearRampToValueAtTime(8, ctx.currentTime + 5.0);
+                const lfoG = ctx.createGain();
+                lfoG.gain.value = 1.2;
+                lfo.connect(lfoG); lfoG.connect(master.gain);
+                lfo.start(); lfo.stop(ctx.currentTime + 5.0);
+
+            } catch(e) { console.warn('Audio:', e); }
+
+            // Affichage
+            const el = document.getElementById('netflix-screamer');
+            const img = document.getElementById('nfdp-img');
+            const flash = document.getElementById('nfdp-redflash');
+            imgIdx = 0;
+            img.src = IMGS[0];
+            img.classList.add('shaking');
+            el.style.display = 'block';
+
+            // Cycle 3 images toutes les 120ms
+            if (imgInterval) clearInterval(imgInterval);
+            imgInterval = setInterval(() => {
+                imgIdx = (imgIdx + 1) % IMGS.length;
+                img.src = IMGS[imgIdx];
+            }, 120);
+
+            // Flash rouge aléatoire
+            if (flashInterval) clearInterval(flashInterval);
+            let flashOn = false;
+            flashInterval = setInterval(() => {
+                flashOn = !flashOn;
+                flash.style.opacity = flashOn ? (Math.random() * 0.35 + 0.1) : '0';
+            }, 80);
+        }
+
+        window.closeNetflixScreamer = function() {
+            if (imgInterval) { clearInterval(imgInterval); imgInterval = null; }
+            if (flashInterval) { clearInterval(flashInterval); flashInterval = null; }
+            const img = document.getElementById('nfdp-img');
+            img.classList.remove('shaking');
+            document.getElementById('netflix-screamer').style.display = 'none';
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') { closeNetflixScreamer(); return; }
+            if (e.key === SEQ[buf.length]) {
+                buf.push(e.key);
+                if (buf.length === SEQ.length) triggerScreamer();
+            } else {
+                buf = e.key === SEQ[0] ? [e.key] : [];
+            }
+        });
+    })();
+    </script>
     <!-- Chargement des scripts -->
     <script src="assets/js/classique.js"></script>
     <script src="assets/js/stand.js"></script>
