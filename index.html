@@ -1377,11 +1377,9 @@
         async function fetchCounter(mode) {
             const key = getTodayKey(mode);
             try {
-                const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_WORKSPACE}/${key}/up`);
+                const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_WORKSPACE}/${key}/get`);
                 if (!res.ok) return 0;
                 const data = await res.json();
-                // On redescend immédiatement pour ne pas fausser le compteur
-                await fetch(`https://api.counterapi.dev/v1/${COUNTER_WORKSPACE}/${key}/down`);
                 return data.count ?? data.value ?? 0;
             } catch { return 0; }
         }
